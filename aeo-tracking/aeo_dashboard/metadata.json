@@ -1,0 +1,5 @@
+{
+  "name": "E-commerce Merchant Dashboard",
+  "description": "An analytics dashboard for e-commerce merchants to visualize user engagement and conversion funnels, inspired by the Supabase UI theme.",
+  "requestFramePermissions": []
+}

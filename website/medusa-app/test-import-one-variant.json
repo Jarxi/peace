@@ -1,0 +1,302 @@
+{
+  "data": {
+    "products": {
+      "edges": [
+        {
+          "node": {
+            "id": "gid://shopify/Product/1649836458058",
+            "title": "ROCKROOSTER Kimberly Tan 7 inch Zip-sided Steel Toe Leather Work Boots AK232Z",
+            "description": "ROCKROOSTER Men's Work Boots, Steel Toe, Antistatic, Safety Leather Shoes",
+            "descriptionHtml": "<div><strong>ROCKROOSTER Men's Work Boots, Steel Toe, Antistatic, Safety Leather Shoes, Side Zipper, ASTM 2413-11 </strong></div>",
+            "handle": "rockrooster-mens-work-boots-steel-toe-antistatic-safety-leather-shoes-pull-on-water-resistant",
+            "productType": "work boots",
+            "tags": [
+              "AK",
+              "steel toe",
+              "work boots"
+            ],
+            "totalInventory": 9996,
+            "featuredImage": {
+              "url": "https://cdn.shopify.com/s/files/1/0048/9845/5626/products/IMG_0271.jpg?v=1594289967",
+              "altText": "boys work boots"
+            },
+            "images": {
+              "edges": [
+                {
+                  "node": {
+                    "url": "https://cdn.shopify.com/s/files/1/0048/9845/5626/products/IMG_0271.jpg?v=1594289967",
+                    "altText": "boys work boots"
+                  }
+                }
+              ]
+            },
+            "variants": {
+              "edges": [
+                {
+                  "node": {
+                    "barcode": "",
+                    "id": "gid://shopify/ProductVariant/39934272208970",
+                    "inventoryItem": {
+                      "id": "gid://shopify/InventoryItem/42029463896138",
+                      "tracked": true,
+                      "inventoryLevels": {
+                        "edges": [
+                          {
+                            "node": {
+                              "location": {
+                                "address": {
+                                  "zip": "08816"
+                                },
+                                "name": "NJ TSI WAREHOUSE"
+                              },
+                              "quantities": [
+                                {
+                                  "name": "on_hand",
+                                  "quantity": 9996
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "measurement": {
+                        "weight": {
+                          "unit": "POUNDS",
+                          "value": 4.0
+                        }
+                      }
+                    },
+                    "inventoryQuantity": 9996,
+                    "price": "119.99",
+                    "selectedOptions": [
+                      {
+                        "name": "Size",
+                        "value": "Select Correct Size to Proceed Checkout"
+                      },
+                      {
+                        "name": "Width",
+                        "value": "EE"
+                      }
+                    ],
+                    "sku": "AK232Z",
+                    "title": "Select Correct Size to Proceed Checkout / EE"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "shop": {
+      "contactEmail": "service@rockroosterfootwear.com",
+      "currencyCode": "USD",
+      "id": "gid://shopify/Shop/4898455626",
+      "myshopifyDomain": "rock-rooster-footwear-inc.myshopify.com",
+      "name": "Rock Rooster Footwear Inc",
+      "policyUrls": {
+        "Cancellations": "https://rockroosterfootwear.com/4898455626/policies/24650973258",
+        "Contact": "https://rockroosterfootwear.com/4898455626/policies/24650940490",
+        "Privacy policy": "https://rockroosterfootwear.com/4898455626/policies/11961663562",
+        "Refund policy": "https://rockroosterfootwear.com/4898455626/policies/11961630794",
+        "Shipping": "https://rockroosterfootwear.com/4898455626/policies/11961729098",
+        "Terms of service": "https://rockroosterfootwear.com/4898455626/policies/11961696330"
+      },
+      "primaryDomain": {
+        "host": "rockroosterfootwear.com",
+        "url": "https://rockroosterfootwear.com"
+      },
+      "shippingRates": [
+        "US:AL:Free Standard Shipping:0.00 USD",
+        "US:AS:Free Standard Shipping:0.00 USD",
+        "US:AZ:Free Standard Shipping:0.00 USD",
+        "US:AR:Free Standard Shipping:0.00 USD",
+        "US:AA:Free Standard Shipping:0.00 USD",
+        "US:AE:Free Standard Shipping:0.00 USD",
+        "US:AP:Free Standard Shipping:0.00 USD",
+        "US:CA:Free Standard Shipping:0.00 USD",
+        "US:CO:Free Standard Shipping:0.00 USD",
+        "US:CT:Free Standard Shipping:0.00 USD",
+        "US:DE:Free Standard Shipping:0.00 USD",
+        "US:DC:Free Standard Shipping:0.00 USD",
+        "US:FL:Free Standard Shipping:0.00 USD",
+        "US:GA:Free Standard Shipping:0.00 USD",
+        "US:ID:Free Standard Shipping:0.00 USD",
+        "US:IL:Free Standard Shipping:0.00 USD",
+        "US:IN:Free Standard Shipping:0.00 USD",
+        "US:IA:Free Standard Shipping:0.00 USD",
+        "US:KS:Free Standard Shipping:0.00 USD",
+        "US:KY:Free Standard Shipping:0.00 USD",
+        "US:LA:Free Standard Shipping:0.00 USD",
+        "US:ME:Free Standard Shipping:0.00 USD",
+        "US:MD:Free Standard Shipping:0.00 USD",
+        "US:MA:Free Standard Shipping:0.00 USD",
+        "US:MI:Free Standard Shipping:0.00 USD",
+        "US:MN:Free Standard Shipping:0.00 USD",
+        "US:MS:Free Standard Shipping:0.00 USD",
+        "US:MO:Free Standard Shipping:0.00 USD",
+        "US:MT:Free Standard Shipping:0.00 USD",
+        "US:NE:Free Standard Shipping:0.00 USD",
+        "US:NV:Free Standard Shipping:0.00 USD",
+        "US:NH:Free Standard Shipping:0.00 USD",
+        "US:NJ:Free Standard Shipping:0.00 USD",
+        "US:NM:Free Standard Shipping:0.00 USD",
+        "US:NY:Free Standard Shipping:0.00 USD",
+        "US:NC:Free Standard Shipping:0.00 USD",
+        "US:ND:Free Standard Shipping:0.00 USD",
+        "US:OH:Free Standard Shipping:0.00 USD",
+        "US:OK:Free Standard Shipping:0.00 USD",
+        "US:OR:Free Standard Shipping:0.00 USD",
+        "US:PA:Free Standard Shipping:0.00 USD",
+        "US:RI:Free Standard Shipping:0.00 USD",
+        "US:SC:Free Standard Shipping:0.00 USD",
+        "US:SD:Free Standard Shipping:0.00 USD",
+        "US:TN:Free Standard Shipping:0.00 USD",
+        "US:TX:Free Standard Shipping:0.00 USD",
+        "US:UT:Free Standard Shipping:0.00 USD",
+        "US:VT:Free Standard Shipping:0.00 USD",
+        "US:VA:Free Standard Shipping:0.00 USD",
+        "US:WA:Free Standard Shipping:0.00 USD",
+        "US:WV:Free Standard Shipping:0.00 USD",
+        "US:WI:Free Standard Shipping:0.00 USD",
+        "US:WY:Free Standard Shipping:0.00 USD",
+        "US:AL:Expedited (Continental USA 48states):30.00 USD",
+        "US:AS:Expedited (Continental USA 48states):30.00 USD",
+        "US:AZ:Expedited (Continental USA 48states):30.00 USD",
+        "US:AR:Expedited (Continental USA 48states):30.00 USD",
+        "US:AA:Expedited (Continental USA 48states):30.00 USD",
+        "US:AE:Expedited (Continental USA 48states):30.00 USD",
+        "US:AP:Expedited (Continental USA 48states):30.00 USD",
+        "US:CA:Expedited (Continental USA 48states):30.00 USD",
+        "US:CO:Expedited (Continental USA 48states):30.00 USD",
+        "US:CT:Expedited (Continental USA 48states):30.00 USD",
+        "US:DE:Expedited (Continental USA 48states):30.00 USD",
+        "US:DC:Expedited (Continental USA 48states):30.00 USD",
+        "US:FL:Expedited (Continental USA 48states):30.00 USD",
+        "US:GA:Expedited (Continental USA 48states):30.00 USD",
+        "US:ID:Expedited (Continental USA 48states):30.00 USD",
+        "US:IL:Expedited (Continental USA 48states):30.00 USD",
+        "US:IN:Expedited (Continental USA 48states):30.00 USD",
+        "US:IA:Expedited (Continental USA 48states):30.00 USD",
+        "US:KS:Expedited (Continental USA 48states):30.00 USD",
+        "US:KY:Expedited (Continental USA 48states):30.00 USD",
+        "US:LA:Expedited (Continental USA 48states):30.00 USD",
+        "US:ME:Expedited (Continental USA 48states):30.00 USD",
+        "US:MD:Expedited (Continental USA 48states):30.00 USD",
+        "US:MA:Expedited (Continental USA 48states):30.00 USD",
+        "US:MI:Expedited (Continental USA 48states):30.00 USD",
+        "US:MN:Expedited (Continental USA 48states):30.00 USD",
+        "US:MS:Expedited (Continental USA 48states):30.00 USD",
+        "US:MO:Expedited (Continental USA 48states):30.00 USD",
+        "US:MT:Expedited (Continental USA 48states):30.00 USD",
+        "US:NE:Expedited (Continental USA 48states):30.00 USD",
+        "US:NV:Expedited (Continental USA 48states):30.00 USD",
+        "US:NH:Expedited (Continental USA 48states):30.00 USD",
+        "US:NJ:Expedited (Continental USA 48states):30.00 USD",
+        "US:NM:Expedited (Continental USA 48states):30.00 USD",
+        "US:NY:Expedited (Continental USA 48states):30.00 USD",
+        "US:NC:Expedited (Continental USA 48states):30.00 USD",
+        "US:ND:Expedited (Continental USA 48states):30.00 USD",
+        "US:OH:Expedited (Continental USA 48states):30.00 USD",
+        "US:OK:Expedited (Continental USA 48states):30.00 USD",
+        "US:OR:Expedited (Continental USA 48states):30.00 USD",
+        "US:PA:Expedited (Continental USA 48states):30.00 USD",
+        "US:RI:Expedited (Continental USA 48states):30.00 USD",
+        "US:SC:Expedited (Continental USA 48states):30.00 USD",
+        "US:SD:Expedited (Continental USA 48states):30.00 USD",
+        "US:TN:Expedited (Continental USA 48states):30.00 USD",
+        "US:TX:Expedited (Continental USA 48states):30.00 USD",
+        "US:UT:Expedited (Continental USA 48states):30.00 USD",
+        "US:VT:Expedited (Continental USA 48states):30.00 USD",
+        "US:VA:Expedited (Continental USA 48states):30.00 USD",
+        "US:WA:Expedited (Continental USA 48states):30.00 USD",
+        "US:WV:Expedited (Continental USA 48states):30.00 USD",
+        "US:WI:Expedited (Continental USA 48states):30.00 USD",
+        "US:WY:Expedited (Continental USA 48states):30.00 USD",
+        "US:AL:Expedited (Continental USA 48states):65.00 USD",
+        "US:AS:Expedited (Continental USA 48states):65.00 USD",
+        "US:AZ:Expedited (Continental USA 48states):65.00 USD",
+        "US:AR:Expedited (Continental USA 48states):65.00 USD",
+        "US:AA:Expedited (Continental USA 48states):65.00 USD",
+        "US:AE:Expedited (Continental USA 48states):65.00 USD",
+        "US:AP:Expedited (Continental USA 48states):65.00 USD",
+        "US:CA:Expedited (Continental USA 48states):65.00 USD",
+        "US:CO:Expedited (Continental USA 48states):65.00 USD",
+        "US:CT:Expedited (Continental USA 48states):65.00 USD",
+        "US:DE:Expedited (Continental USA 48states):65.00 USD",
+        "US:DC:Expedited (Continental USA 48states):65.00 USD",
+        "US:FL:Expedited (Continental USA 48states):65.00 USD",
+        "US:GA:Expedited (Continental USA 48states):65.00 USD",
+        "US:ID:Expedited (Continental USA 48states):65.00 USD",
+        "US:IL:Expedited (Continental USA 48states):65.00 USD",
+        "US:IN:Expedited (Continental USA 48states):65.00 USD",
+        "US:IA:Expedited (Continental USA 48states):65.00 USD",
+        "US:KS:Expedited (Continental USA 48states):65.00 USD",
+        "US:KY:Expedited (Continental USA 48states):65.00 USD",
+        "US:LA:Expedited (Continental USA 48states):65.00 USD",
+        "US:ME:Expedited (Continental USA 48states):65.00 USD",
+        "US:MD:Expedited (Continental USA 48states):65.00 USD",
+        "US:MA:Expedited (Continental USA 48states):65.00 USD",
+        "US:MI:Expedited (Continental USA 48states):65.00 USD",
+        "US:MN:Expedited (Continental USA 48states):65.00 USD",
+        "US:MS:Expedited (Continental USA 48states):65.00 USD",
+        "US:MO:Expedited (Continental USA 48states):65.00 USD",
+        "US:MT:Expedited (Continental USA 48states):65.00 USD",
+        "US:NE:Expedited (Continental USA 48states):65.00 USD",
+        "US:NV:Expedited (Continental USA 48states):65.00 USD",
+        "US:NH:Expedited (Continental USA 48states):65.00 USD",
+        "US:NJ:Expedited (Continental USA 48states):65.00 USD",
+        "US:NM:Expedited (Continental USA 48states):65.00 USD",
+        "US:NY:Expedited (Continental USA 48states):65.00 USD",
+        "US:NC:Expedited (Continental USA 48states):65.00 USD",
+        "US:ND:Expedited (Continental USA 48states):65.00 USD",
+        "US:OH:Expedited (Continental USA 48states):65.00 USD",
+        "US:OK:Expedited (Continental USA 48states):65.00 USD",
+        "US:OR:Expedited (Continental USA 48states):65.00 USD",
+        "US:PA:Expedited (Continental USA 48states):65.00 USD",
+        "US:RI:Expedited (Continental USA 48states):65.00 USD",
+        "US:SC:Expedited (Continental USA 48states):65.00 USD",
+        "US:SD:Expedited (Continental USA 48states):65.00 USD",
+        "US:TN:Expedited (Continental USA 48states):65.00 USD",
+        "US:TX:Expedited (Continental USA 48states):65.00 USD",
+        "US:UT:Expedited (Continental USA 48states):65.00 USD",
+        "US:VT:Expedited (Continental USA 48states):65.00 USD",
+        "US:VA:Expedited (Continental USA 48states):65.00 USD",
+        "US:WA:Expedited (Continental USA 48states):65.00 USD",
+        "US:WV:Expedited (Continental USA 48states):65.00 USD",
+        "US:WI:Expedited (Continental USA 48states):65.00 USD",
+        "US:WY:Expedited (Continental USA 48states):65.00 USD",
+        "US:FM:Other USA:15.00 USD",
+        "US:GU:Other USA:15.00 USD",
+        "US:MH:Other USA:15.00 USD",
+        "US:MP:Other USA:15.00 USD",
+        "US:PW:Other USA:15.00 USD",
+        "US:VI:Other USA:15.00 USD",
+        "UM:*:Other USA:15.00 USD",
+        "US:FM:Other USA:30.00 USD",
+        "US:GU:Other USA:30.00 USD",
+        "US:MH:Other USA:30.00 USD",
+        "US:MP:Other USA:30.00 USD",
+        "US:PW:Other USA:30.00 USD",
+        "US:VI:Other USA:30.00 USD",
+        "UM:*:Other USA:30.00 USD",
+        "US:FM:Other USA:45.00 USD",
+        "US:GU:Other USA:45.00 USD",
+        "US:MH:Other USA:45.00 USD",
+        "US:MP:Other USA:45.00 USD",
+        "US:PW:Other USA:45.00 USD",
+        "US:VI:Other USA:45.00 USD",
+        "UM:*:Other USA:45.00 USD",
+        "US:PR:PR, Hawaii, Alaska:10.00 USD",
+        "US:AK:PR, Hawaii, Alaska:10.00 USD",
+        "US:HI:PR, Hawaii, Alaska:10.00 USD",
+        "US:PR:PR, Hawaii, Alaska:20.00 USD",
+        "US:AK:PR, Hawaii, Alaska:20.00 USD",
+        "US:HI:PR, Hawaii, Alaska:20.00 USD",
+        "US:PR:PR, Hawaii, Alaska:30.00 USD",
+        "US:AK:PR, Hawaii, Alaska:30.00 USD",
+        "US:HI:PR, Hawaii, Alaska:30.00 USD"
+      ]
+    }
+  }
+}

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AEO Tracker for Shopify — Peace</title>
+    <meta
+      name="description"
+      content="Real-time track how many shoppers are coming from ChatGPT to your Shopify store without code or installation. Analyze ChatGPT referrals, Buy Button, and Agentic Commerce Protocols—and optimize conversions."
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --ink: #101114;
+        --muted: #60646c;
+        --line: #e6e8eb;
+        --brand: #111827;
+        --accent: #0ea5e9;
+        --accent-ink: #003247;
+        --chip: #f3f4f6;
+        --ok: #16a34a;
+        --warn: #f59e0b;
+        --shadow: 0 1px 2px rgba(16, 17, 20, 0.06),
+          0 6px 24px rgba(16, 17, 20, 0.06);
+        --radius: 14px;
+        --radius-sm: 10px;
+        --radius-lg: 20px;
+        --max: 1100px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font: 16px/1.6 ui-sans-serif, -apple-system, Segoe UI, Roboto, Inter,
+          'Helvetica Neue', Arial, system-ui;
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .container {
+        max-width: var(--max);
+        margin-inline: auto;
+        padding: 28px 20px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.85rem 1.15rem;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: #111827;
+        color: #fff;
+        font-weight: 600;
+        box-shadow: var(--shadow);
+      }
+      .btn.secondary {
+        background: #fff;
+        color: var(--ink);
+      }
+      .btn:hover {
+        opacity: 0.96;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.25rem 0.6rem;
+        border-radius: 999px;
+        background: var(--chip);
+        border: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      .kicker {
+        font-size: 0.85rem;
+        color: var(--muted);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .h1 {
+        font-size: clamp(28px, 4vw, 44px);
+        line-height: 1.15;
+        margin: 0.35rem 0 0.6rem;
+      }
+      .h2 {
+        font-size: clamp(22px, 3vw, 30px);
+        margin: 0 0 0.75rem;
+      }
+      .h3 {
+        font-size: 18px;
+        margin: 0 0 0.25rem;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .hero {
+        padding-top: 30px;
+        padding-bottom: 10px;
+      }
+      .hero-card {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 28px;
+        align-items: center;
+      }
+      .hero-box {
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        padding: 26px;
+        box-shadow: var(--shadow);
+        background: #fff;
+      }
+      .list {
+        display: grid;
+        gap: 10px;
+        margin: 16px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+      .list li {
+        display: grid;
+        grid-template-columns: 28px 1fr;
+        gap: 12px;
+        align-items: start;
+      }
+      .tick {
+        width: 20px;
+        height: 20px;
+        display: grid;
+        place-items: center;
+        border-radius: 6px;
+        background: #ecfeff;
+        border: 1px solid #c7f3ff;
+        font-size: 14px;
+        color: #0369a1;
+      }
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 18px;
+        background: #fff;
+        box-shadow: var(--shadow);
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .chip {
+        padding: 0.45rem 0.7rem;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--chip);
+        font-size: 0.9rem;
+        color: var(--ink);
+      }
+      .section {
+        padding: 28px 0;
+      }
+      .pricing {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .price-tag {
+        font-size: 28px;
+        font-weight: 800;
+      }
+      .strike {
+        color: var(--muted);
+        text-decoration: line-through;
+      }
+      .lang-grid {
+        columns: 2;
+        column-gap: 18px;
+      }
+      .lang-grid span {
+        break-inside: avoid;
+        display: block;
+        padding: 0.25rem 0;
+        color: var(--muted);
+      }
+      .footer {
+        border-top: 1px solid var(--line);
+        margin-top: 28px;
+        padding: 22px 0;
+        color: var(--muted);
+      }
+      .note {
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+      @media (max-width: 960px) {
+        .hero-card {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+        .grid-3,
+        .pricing {
+          grid-template-columns: 1fr;
+        }
+        .lang-grid {
+          columns: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Bar -->
+    <div class="container" style="padding-top: 18px; padding-bottom: 0">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+        "
+      >
+        <div style="display: flex; align-items: center; gap: 10px">
+          <div
+            style="
+              width: 34px;
+              height: 34px;
+              border-radius: 8px;
+              background: #111827;
+              display: grid;
+              place-items: center;
+              color: #fff;
+              font-weight: 800;
+              letter-spacing: 0.5px;
+            "
+          >
+            C2
+          </div>
+          <strong>Peace</strong>
+          <span class="badge">Built for Shopify</span>
+        </div>
+        <nav style="display: flex; gap: 14px; align-items: center">
+          <a href="#features">Features</a>
+          <a href="#how">How it works</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#languages">Languages</a>
+          <a href="#support">Support</a>
+          <a class="btn secondary" href="#get-started">Get started</a>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <header class="container hero">
+      <div class="hero-card">
+        <div>
+          <div class="kicker">AEO Tracker for Shopify</div>
+          <h1 class="h1">
+            Real-time AI&nbsp;traffic & conversion tracking — no code, no
+            install.
+          </h1>
+          <p class="muted" style="max-width: 60ch">
+            Peace AEO Tracker gives merchants full visibility into AI-driven
+            traffic and sales. It automatically tracks visitors coming from
+            ChatGPT, LLM Buy Button embeds, and future Agentic Commerce
+            Protocols (ACPs), showing where shoppers originate and what they
+            buy. Merchants can monitor real-time clicks, identify top-converting
+            products, and uncover how AI-driven discovery impacts store
+            performance—all without code or installation. Key Features Real-Time
+            Tracking: Monitor visits, carts, and purchases from ChatGPT, Buy
+            Button, and ACP sources. Product Insights: See which products
+            attract AI shoppers and drive conversion lift. Unified Analytics:
+            View all AI traffic channels in one dashboard with instant updates.
+            Easy Setup: Copy your Link Code, paste at Peace.ai, and start
+            tracking—no developer needed. Conversion Optimization: Use
+            data-driven insights to refine prompts, offers, and product
+            placement.
+          </p>
+          <div style="display: flex; gap: 12px; margin-top: 16px">
+            <a id="get-started" class="btn" href="#">Add to Shopify</a>
+            <a class="btn secondary" href="#pricing">See pricing</a>
+          </div>
+          <div class="chips" style="margin-top: 14px">
+            <span class="chip">No code</span>
+            <span class="chip">Instant setup</span>
+            <span class="chip">Real-time dashboards</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Highlights -->
+    <section class="container section" id="features">
+      <div class="grid-3">
+        <div class="card">
+          <div class="badge">Real-Time Tracking</div>
+          <h3 class="h3">See visits, carts, and purchases — live</h3>
+          <p class="muted">
+            Track ChatGPT, Buy Button, and ACP sources as they happen.
+          </p>
+        </div>
+        <div class="card">
+          <div class="badge">Product Insights</div>
+          <h3 class="h3">Know which products AI shoppers love</h3>
+          <p class="muted">
+            Identify top-converting SKUs and where discovery starts.
+          </p>
+        </div>
+        <div class="card">
+          <div class="badge">Unified Analytics</div>
+          <h3 class="h3">All AI channels in one dashboard</h3>
+          <p class="muted">
+            Instant updates, zero dev work, one clear source of truth.
+          </p>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 18px">
+        <div class="h3">Easy setup</div>
+        <ul class="list">
+          <li>
+            <div class="tick">1</div>
+            <div><strong>Copy your Link Code</strong> from the app.</div>
+          </li>
+          <li>
+            <div class="tick">2</div>
+            <div><strong>Paste at Peace.ai</strong> to activate tracking.</div>
+          </li>
+          <li>
+            <div class="tick">3</div>
+            <div>
+              <strong>Start measuring</strong> ChatGPT → Shopify traffic
+              immediately.
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="container section" id="pricing">
+      <h2 class="h2">Pricing</h2>
+      <p class="muted">
+        All charges are billed in USD. Recurring and usage-based charges are
+        billed every 30 days.
+      </p>
+      <div class="pricing" style="margin-top: 12px">
+        <div class="card">
+          <div class="badge">Free</div>
+          <div class="price-tag" style="margin: 0.4rem 0">
+            $0<span class="muted" style="font-size: 14px"> / month</span>
+          </div>
+          <p class="muted">
+            Everything you need to measure ChatGPT → Shopify traffic.
+          </p>
+          <ul class="list" style="margin-top: 8px">
+            <li>
+              <div class="tick">✓</div>
+              <div>Real-time dashboards</div>
+            </li>
+            <li>
+              <div class="tick">✓</div>
+              <div>Unlimited tracked clicks</div>
+            </li>
+            <li>
+              <div class="tick">✓</div>
+              <div>Product insights</div>
+            </li>
+          </ul>
+          <div style="margin-top: 14px">
+            <a class="btn" href="#">Start Free</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="badge">Pro (under development)</div>
+          <div class="price-tag" style="margin: 0.4rem 0">
+            $29.99<span class="muted" style="font-size: 14px"> / month</span>
+          </div>
+          <p class="muted">For growing stores needing deeper analysis.</p>
+          <ul class="list" style="margin-top: 8px">
+            <li>
+              <div class="tick">✓</div>
+              <div>Everything in free</div>
+            </li>
+            <li>
+              <div class="tick">✓</div>
+              <div>Detailed traffic analysis</div>
+            </li>
+            <li>
+              <div class="tick">✓</div>
+              <div>Historical data export</div>
+            </li>
+          </ul>
+          <div style="margin-top: 14px">
+            <a class="btn secondary" href="#">Notify Me</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="badge">Premium (under development)</div>
+          <div class="price-tag" style="margin: 0.4rem 0">
+            $79.99<span class="muted" style="font-size: 14px"> / month</span>
+          </div>
+          <p class="muted">Advanced optimization for AI-native commerce.</p>
+          <ul class="list" style="margin-top: 8px">
+            <li>
+              <div class="tick">✓</div>
+              <div>Everything in Pro</div>
+            </li>
+            <li>
+              <div class="tick">✓</div>
+              <div>Best-in-class AEO services</div>
+            </li>
+          </ul>
+          <div style="margin-top: 14px">
+            <a class="btn secondary" href="#">Notify Me</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Languages -->
+    <section class="container section" id="languages">
+      <h2 class="h2">Languages</h2>
+      <div class="lang-grid">
+        <span>English</span>
+        <span>Chinese (Simplified)</span>
+        <span>Portuguese (Brazil)</span>
+        <span>French</span>
+        <span>German</span>
+        <span>Italian</span>
+        <span>Spanish</span>
+        <span>Dutch</span>
+        <span>Hindi</span>
+        <span>Czech</span>
+        <span>Danish</span>
+        <span>Finnish</span>
+        <span>Japanese</span>
+        <span>Korean</span>
+        <span>Norwegian (Bokmål)</span>
+        <span>Norwegian</span>
+        <span>Polish</span>
+        <span>Romanian</span>
+        <span>Turkish</span>
+        <span>Thai</span>
+        <span>Chinese (Traditional)</span>
+      </div>
+    </section>
+
+    <!-- Support / Built By -->
+    <section class="container section" id="support">
+      <div class="grid-3">
+        <div class="card">
+          <div class="badge">Built by</div>
+          <h3 class="h3">Peace</h3>
+          <p class="muted">
+            Agentic commerce tools to connect AI discovery with checkout.
+          </p>
+        </div>
+        <div class="card">
+          <div class="badge">Support</div>
+          <ul class="list" style="margin-top: 8px">
+            <li>
+              <div class="tick">?</div>
+              <div>
+                Email: <a href="mailto:support@Peace.ai">contact@Peace.ai</a>
+              </div>
+            </li>
+            <li>
+              <div class="tick">📘</div>
+              <div>Docs: <a href="#">Getting started</a></div>
+            </li>
+            <li>
+              <div class="tick">🔒</div>
+              <div>Privacy &amp; Security: <a href="#">Learn more</a></div>
+            </li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="badge">Compliance</div>
+          <p class="muted">
+            Attribution-only; no customer PII stored by default. Compatible with
+            Shopify data protection guidelines.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="container footer">
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          gap: 12px;
+          flex-wrap: wrap;
+        "
+      >
+        <div>© <span id="y"></span> Peace. All rights reserved.</div>
+        <div><a href="#">Terms</a> · <a href="#">Privacy</a></div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('y').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,3 @@
+[submodule "apis/acp-gateway"]
+	path = apis/acp-gateway
+	url = https://github.com/dako2/acp-gateway.git

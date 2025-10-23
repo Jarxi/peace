@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AEO Tracker | Peace</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        background-color: #f9fafb;
+        color: #111827;
+        margin: 0;
+        padding: 2rem;
+        display: flex;
+        justify-content: center;
+      }
+      .page-shell {
+        background: #fff;
+        border-radius: 1rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        max-width: 700px;
+        width: 100%;
+        padding: 2rem;
+      }
+      .header-strip {
+        display: flex;
+        align-items: center;
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-bottom: 1.5rem;
+      }
+      .divider-dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: #9ca3af;
+        margin: 0 8px;
+      }
+      h1 {
+        font-size: 1.75rem;
+        margin: 0;
+      }
+      p {
+        color: #374151;
+        margin: 0.5rem 0 1rem;
+      }
+      .step-card {
+        background: #f3f4f6;
+        border-radius: 0.75rem;
+        padding: 1rem 1.25rem;
+        margin-top: 1rem;
+      }
+      .step-title {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+      .step-copy li {
+        margin: 0.25rem 0;
+      }
+      .code-container {
+        margin-top: 1.5rem;
+      }
+      .code-label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+      .code-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .code-box {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.5rem;
+        padding: 0.75rem 1rem;
+        flex: 1;
+        overflow-x: auto;
+      }
+      .code-text {
+        font-family: monospace;
+        font-size: 0.875rem;
+      }
+      .copy-button {
+        padding: 0.5rem 1rem;
+        background: #111827;
+        color: #fff;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .copy-button:hover {
+        background: #1f2937;
+      }
+      .primary-cta {
+        display: inline-block;
+        background: #2563eb;
+        color: white;
+        text-decoration: none;
+        text-align: center;
+        font-weight: 600;
+        border-radius: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        margin-top: 1.5rem;
+      }
+      .hero-cta-caption {
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-top: 0.5rem;
+      }
+      .help-strip {
+        text-align: center;
+        margin-top: 2rem;
+        font-size: 0.875rem;
+      }
+      .help-link {
+        color: #2563eb;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell">
+      <div class="header-strip">
+        <span>Auto AEO Tracking</span>
+        <span class="divider-dot" aria-hidden="true"></span>
+        <span>Connect your store to Peace</span>
+      </div>
+
+      <section aria-label="Connect Shopify & track ChatGPT clicks">
+        <header>
+          <h1>AEO Tracker for Shopify</h1>
+          <p>
+            Real-time track how many shoppers coming from ChatGPT to your
+            Shopify store (<strong>limited-time free</strong>).
+          </p>
+        </header>
+
+        <article class="step-card" aria-labelledby="how-it-works">
+          <h3 class="step-title" id="how-it-works">Instructions:</h3>
+          <ol class="step-copy">
+            <li>Copy your <em>link code</em> below.</li>
+            <li>
+              Open
+              <a
+                href="https://Peace.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Peace.ai</a
+              >, register, and log in.
+            </li>
+            <li>Paste the code when prompted—tracking starts immediately.</li>
+          </ol>
+          <p style="opacity: 0.8">
+            No additional installation or theme changes required.
+          </p>
+        </article>
+
+        <div class="code-container">
+          <label class="code-label" for="integration-code"
+            >Use this during registration. Don’t see a <em>link code</em>?
+            <a href="#" class="help-link" id="refreshLink">Refresh</a>.</label
+          >
+          <div class="code-row">
+            <div class="code-box">
+              <code id="integration-code" class="code-text"
+                >shopify-GIDSHOPIFYSHOP66996240461-6TRTWLQFHJ3NZBGK</code
+              >
+            </div>
+            <button class="copy-button" id="copyBtn">Copy</button>
+          </div>
+        </div>
+
+        <a
+          class="primary-cta"
+          href="https://Peace.ai"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Go to Peace.ai to activate</a
+        >
+        <p class="hero-cta-caption">
+          Free during beta. No developer changes required.
+        </p>
+      </section>
+
+      <footer class="help-strip">
+        Need a hand?
+        <a href="https://www.Peace.ai/contact" class="help-link"
+          >Contact support</a
+        >.
+      </footer>
+    </main>
+
+    <script>
+      const copyBtn = document.getElementById('copyBtn');
+      const codeElement = document.getElementById('integration-code');
+      copyBtn.addEventListener('click', async () => {
+        const code = codeElement.innerText.trim();
+        try {
+          await navigator.clipboard.writeText(code);
+          copyBtn.textContent = 'Copied!';
+          setTimeout(() => (copyBtn.textContent = 'Copy'), 1500);
+        } catch (err) {
+          alert('Copy failed. Please copy manually.');
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+name = "event-tracking-private"
+type = "web_pixel_extension"
+uid = "3e794a93-4677-467a-9b7c-2d2e9e367d197980032f"
+
+runtime_context = "strict"
+
+[settings]
+type = "object"
+
+[settings.fields.accountID]
+name = "Account ID"
+description = "Account ID"
+type = "single_line_text_field"
+validations =  [
+  { name = "min", value = "1" }
+]

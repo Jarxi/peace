@@ -1,0 +1,6 @@
+# Local Shopify credentials
+shops.json
+tokens
+__pycache__
+data
+*.env

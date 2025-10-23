@@ -1,0 +1,334 @@
+{
+	"info": {
+		"_postman_id": "acp-checkout-protocol",
+		"name": "OpenAI Agentic Checkout Protocol (ACP)",
+		"description": "Complete set of ACP endpoints for Medusa checkout sessions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Create Checkout Session",
+			"item": [
+				{
+					"name": "Create with items only",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"items\": [\n    {\"id\": \"variant_123\", \"quantity\": 2},\n    {\"id\": \"variant_456\", \"quantity\": 1}\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/checkout_sessions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"checkout_sessions"
+							]
+						},
+						"description": "Creates a new checkout session with items only. Status will be 'not_ready_for_payment'."
+					},
+					"response": []
+				},
+				{
+					"name": "Create with buyer and address",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"items\": [\n    {\"id\": \"variant_123\", \"quantity\": 2}\n  ],\n  \"buyer\": {\n    \"email\": \"customer@example.com\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"phone_number\": \"+1234567890\"\n  },\n  \"fulfillment_address\": {\n    \"name\": \"John Doe\",\n    \"line_one\": \"123 Main St\",\n    \"line_two\": \"Apt 4B\",\n    \"city\": \"San Francisco\",\n    \"state\": \"CA\",\n    \"country\": \"US\",\n    \"postal_code\": \"94102\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/checkout_sessions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"checkout_sessions"
+							]
+						},
+						"description": "Creates a checkout session with buyer info and fulfillment address. Status will be 'ready_for_payment'. Tax will be calculated and fulfillment options will be available."
+					},
+					"response": []
+				},
+				{
+					"name": "Create with idempotency key",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "unique-key-{{$timestamp}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"items\": [\n    {\"id\": \"variant_123\", \"quantity\": 1}\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/checkout_sessions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"checkout_sessions"
+							]
+						},
+						"description": "Creates a checkout session with idempotency key to prevent duplicate sessions."
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoint to create new checkout sessions"
+		},
+		{
+			"name": "2. Retrieve Checkout Session",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/checkout_sessions/{{session_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"checkout_sessions",
+						"{{session_id}}"
+					]
+				},
+				"description": "Retrieves the current state of a checkout session including line items, totals, fulfillment options, and status."
+			},
+			"response": []
+		},
+		{
+			"name": "3. Update Checkout Session",
+			"item": [
+				{
+					"name": "Add fulfillment address",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fulfillment_address\": {\n    \"name\": \"John Doe\",\n    \"line_one\": \"123 Main St\",\n    \"city\": \"San Francisco\",\n    \"state\": \"CA\",\n    \"country\": \"US\",\n    \"postal_code\": \"94102\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/checkout_sessions/{{session_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"checkout_sessions",
+								"{{session_id}}"
+							]
+						},
+						"description": "Adds fulfillment address to session. This transitions status from 'not_ready_for_payment' to 'ready_for_payment'."
+					},
+					"response": []
+				},
+				{
+					"name": "Update buyer information",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"buyer\": {\n    \"email\": \"newemail@example.com\",\n    \"first_name\": \"Jane\",\n    \"last_name\": \"Smith\",\n    \"phone_number\": \"+1987654321\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/checkout_sessions/{{session_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"checkout_sessions",
+								"{{session_id}}"
+							]
+						},
+						"description": "Updates buyer information for the checkout session."
+					},
+					"response": []
+				},
+				{
+					"name": "Select fulfillment option",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fulfillment_option_id\": \"so_01JXXXXXXXXXXXXXX\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/checkout_sessions/{{session_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"checkout_sessions",
+								"{{session_id}}"
+							]
+						},
+						"description": "Selects a specific fulfillment (shipping) option from the available options."
+					},
+					"response": []
+				},
+				{
+					"name": "Update multiple fields",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"buyer\": {\n    \"email\": \"customer@example.com\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\"\n  },\n  \"fulfillment_address\": {\n    \"name\": \"John Doe\",\n    \"line_one\": \"123 Main St\",\n    \"city\": \"San Francisco\",\n    \"state\": \"CA\",\n    \"country\": \"US\",\n    \"postal_code\": \"94102\"\n  },\n  \"fulfillment_option_id\": \"so_01JXXXXXXXXXXXXXX\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/checkout_sessions/{{session_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"checkout_sessions",
+								"{{session_id}}"
+							]
+						},
+						"description": "Updates buyer, address, and fulfillment option in a single request."
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints to update checkout session details"
+		},
+		{
+			"name": "4. Cancel Checkout Session",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/checkout_sessions/{{session_id}}/cancel",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"checkout_sessions",
+						"{{session_id}}",
+						"cancel"
+					]
+				},
+				"description": "Cancels an active checkout session. Cannot cancel sessions that are already 'completed' or 'canceled' (returns HTTP 405)."
+			},
+			"response": []
+		},
+		{
+			"name": "5. Complete Checkout Session",
+			"item": [
+				{
+					"name": "Complete with payment data only",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"payment_data\": {\n    \"token\": \"tok_visa\",\n    \"provider\": \"stripe\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/checkout_sessions/{{session_id}}/complete",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"checkout_sessions",
+								"{{session_id}}",
+								"complete"
+							]
+						},
+						"description": "Completes the checkout and creates a real order. Session must be in 'ready_for_payment' status. Returns order with real Medusa order ID."
+					},
+					"response": []
+				},
+				{
+					"name": "Complete with buyer and billing address",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"buyer\": {\n    \"email\": \"customer@example.com\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\"\n  },\n  \"payment_data\": {\n    \"token\": \"tok_visa\",\n    \"provider\": \"stripe\",\n    \"billing_address\": {\n      \"name\": \"John Doe\",\n      \"line_one\": \"456 Billing St\",\n      \"city\": \"New York\",\n      \"state\": \"NY\",\n      \"country\": \"US\",\n      \"postal_code\": \"10001\"\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/checkout_sessions/{{session_id}}/complete",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"checkout_sessions",
+								"{{session_id}}",
+								"complete"
+							]
+						},
+						"description": "Completes checkout with buyer and separate billing address. Creates real order using Medusa's completeCartWorkflow."
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints to complete checkout and create orders"
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:9000",
+			"type": "string"
+		},
+		{
+			"key": "session_id",
+			"value": "acp_01JXXXXXXXXXXXXXX",
+			"type": "string"
+		}
+	]
+}

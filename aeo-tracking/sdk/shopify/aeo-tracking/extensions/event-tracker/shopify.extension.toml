@@ -1,0 +1,19 @@
+name = "event-tracker"
+type = "web_pixel_extension"
+uid = "f903f153-585c-cb39-988c-fdedcc43d6521c338226"
+
+runtime_context = "strict"
+
+[customer_privacy]
+analytics = true
+marketing = true
+preferences = false
+sale_of_data = "enabled"
+
+[settings]
+type = "object"
+
+[settings.fields.shopId]
+name = "Shop ID"
+description = "Shop ID"
+type = "single_line_text_field"

@@ -1,0 +1,221 @@
+.pageShell {
+  background: #ffffff;
+  border-radius: 1.25rem;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+  max-width: 720px;
+  width: 100%;
+  padding: 2.25rem 2.5rem;
+  margin: 0 auto;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.headerStrip {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #4338ca;
+  margin-bottom: 1.5rem;
+  gap: 0.6rem;
+}
+
+.headerTag {
+  font-weight: 600;
+  background: rgba(99, 102, 241, 0.15);
+  color: #312e81;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.dividerDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+}
+
+.headerCopy {
+  /* No specific styles needed */
+}
+
+.heroCard {
+  /* No specific container styles needed */
+}
+
+.heroHeader h1 {
+  font-size: 1.85rem;
+  margin: 0;
+  color: #1e1b4b;
+}
+
+.heroHeader p {
+  color: #4338ca;
+  margin: 0.6rem 0 1.1rem;
+  font-weight: 500;
+}
+
+.stepCard {
+  background: rgba(99, 102, 241, 0.08);
+  border-radius: 1rem;
+  padding: 1.1rem 1.35rem;
+  margin-top: 1rem;
+  border: 1px solid rgba(129, 140, 248, 0.2);
+}
+
+.stepTitle {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #312e81;
+}
+
+.stepCopy li {
+  margin: 0.25rem 0;
+}
+
+.codeContainer {
+  margin-top: 1.75rem;
+}
+
+.codeLabel {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #312e81;
+}
+
+.codeRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.codeBox {
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(79, 70, 229, 0.3);
+  border-radius: 0.75rem;
+  padding: 0.85rem 1.1rem;
+  flex: 1;
+  overflow-x: auto;
+  color: #1e1b4b;
+  box-shadow: inset 0 0 0 1px rgba(129, 140, 248, 0.15);
+}
+
+.codeText {
+  font-family: monospace;
+  font-size: 0.875rem;
+  color: #1e1b4b;
+}
+
+.copyButton {
+  padding: 0.55rem 1.1rem;
+  background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
+  color: #fff;
+  border: none;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.copyButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 22px rgba(99, 102, 241, 0.25);
+}
+
+.copyButton:disabled {
+  background: rgba(148, 163, 184, 0.6);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.refreshLink {
+  background: none;
+  border: none;
+  color: #5b21b6;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.primaryCta {
+  display: inline-block;
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 600;
+  border-radius: 0.65rem;
+  padding: 0.85rem 1.6rem;
+  margin-top: 1.65rem;
+  box-shadow: 0 18px 28px rgba(99, 102, 241, 0.25);
+}
+
+.heroCtaCaption {
+  font-size: 0.9rem;
+  color: #4c1d95;
+  margin-top: 0.6rem;
+}
+
+.screenshotSection {
+  margin-top: 2.75rem;
+  padding: 2.1rem 2.4rem;
+  background: #ffffff;
+  border-radius: 1.1rem;
+  color: #1e1b4b;
+  text-align: center;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow: 0 18px 32px rgba(15, 23, 42, 0.12);
+}
+
+.screenshotTitle {
+  font-size: 1.55rem;
+  font-weight: 600;
+  margin-bottom: 0.55rem;
+}
+
+.screenshotCaption {
+  margin-bottom: 1.45rem;
+  color: #475569;
+}
+
+.screenshotFrame {
+  display: inline-block;
+  max-width: min(720px, 100%);
+  width: 100%;
+  border-radius: 0.9rem;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: #ffffff;
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.16);
+}
+
+.screenshotFrame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.helpStrip {
+  text-align: center;
+  margin-top: 2.2rem;
+  font-size: 0.9rem;
+  color: #4338ca;
+}
+
+.helpLink {
+  color: #5b21b6;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 40rem) {
+  .codeRow {
+    flex-direction: column;
+  }
+
+  .copyButton {
+    width: 100%;
+  }
+}
