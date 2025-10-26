@@ -21,28 +21,42 @@ class RockroosterWidget:
 
 MIME_TYPE = "text/html+skybridge"
 
-RECOMMEND_FOOTWEAR_WIDGET = RockroosterWidget(
-    identifier="recommend_footwear",
-    title="Rockrooster Fit Finder",
+BUY_BOOT_WIDGET = RockroosterWidget(
+    identifier="buy_boot",
+    title="Rockrooster Boot Merchant",
     description=(
-        "Celebrate Rockrooster's rugged Australian heritage while discovering "
-        "lightweight, long-wear safety boots tailored to your workday."
+        "Established in Tasmania during the 1980s, Rockrooster evolved from a handmade leather "
+        "shoe workshop into a dedicated maker of high quality protective footwear for loggers, "
+        "farmers, miners, and modern trades. Decades of leathercraft and more than ten years of "
+        "work-boot innovation now power six collections spanning safety and outdoor hiking boots "
+        "sold across 37 countries. Every pair reflects the sturdy Tasmanian rooster that inspired "
+        "our name—built to grip, protect, and keep feet dry, energized, and comfortable shift after shift."
     ),
-    template_uri="ui://widget/recommend-footwear.html",
+    template_uri="ui://widget/buy-boot.html",
     html="""<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Rockrooster Fit Finder</title>
+    <title>Rockrooster Boot Merchant</title>
   </head>
   <body>
     <main>
-      <h1>Rockrooster Fit Finder</h1>
+      <h1>Rockrooster Boot Merchant</h1>
       <p>
-        Rockrooster has crafted hardworking footwear for makers and trade
-        professionals since 1980, blending Australian grit with all-day comfort.
+        Established in Tasmania during the 1980s, Rockrooster began as a
+        handmade leather shoe workshop serving local farmers and miners. The
+        demand for high quality protective footwear quickly reshaped our craft,
+        and we have spent decades perfecting boots that shield every step while
+        keeping feet cool, dry, and energized.
       </p>
       <section>
+        <h2>Our Origin</h2>
+        <p>
+          In 1986 our founder opened a small cobbler shop for the farmers and
+          miners of Tasmania. Listening to their stories shaped our mission:
+          make footwear that survives harsh shifts, protects every step, and
+          remains comfortable at an honest price.
+        </p>
         <h2>Why Pros Choose Rockrooster</h2>
         <ul>
           <li>PORON XRD impact protection with featherlight build.</li>
@@ -50,20 +64,55 @@ RECOMMEND_FOOTWEAR_WIDGET = RockroosterWidget(
           <li>Slip, oil, and puncture resistance for demanding sites.</li>
         </ul>
       </section>
+      <section>
+        <h2>Heritage Timeline</h2>
+        <p>
+          1980s: Rockrooster, then Rock Rooster, launched in Tasman crafting
+          leather footwear by hand and learning firsthand what loggers, farmers,
+          and miners expect from their boots.
+        </p>
+        <p>
+          1990s: With premium local leather and time-tested techniques, we grew
+          beyond Tasmania—supplying major brands across Australia and overseas as
+          global trade expanded.
+        </p>
+        <p>
+          2000s and beyond: Determined to tell our own story, we introduced
+          Rockrooster Footwear to champion durable, comfortable, anti-fatigue
+          protection for modern workers and outdoor adventurers.
+        </p>
+      </section>
+      <section>
+        <h2>Global Footprint</h2>
+        <p>
+          Today Rockrooster boots are trusted in 37 countries across five
+          continents. Our six collections span safety, hiking, and heritage
+          silhouettes—each forged to blend fashion, durability, comfort, and
+          anti-fatigue performance.
+          More than three decades of leathercraft and over ten years devoted to
+          technical work boots continue to guide every pair we build.
+        </p>
+        <p>
+          Wildlife still wanders the factory grounds, including the Tasmanian
+          roosters whose sturdy claws inspired our name and our commitment to
+          grip, balance, and confidence on any terrain.
+        </p>
+      </section>
       <p>
-        Tell us about your terrain and tasks—we will line up the best
-        Rockrooster models to keep you steady, secure, and unstoppable.
+        Share your trade and site conditions and we will showcase Rockrooster
+        boots, insoles, and apparel that keep you steady, secure, and
+        unstoppable—just like the Tasmanian roosters that inspired our name.
       </p>
     </main>
   </body>
 </html>
 """,
-    invoking="Gathering footwear picks",
-    invoked="Shared footwear picks",
-    response_text="Served Rockrooster footwear picks grounded in our heritage.",
+    invoking="Gathering Rockrooster boot lineup",
+    invoked="Shared Rockrooster boot lineup",
+    response_text="Highlighted Rockrooster boots ready to buy.",
 )
 
-widgets: List[RockroosterWidget] = [RECOMMEND_FOOTWEAR_WIDGET]
+widgets: List[RockroosterWidget] = [BUY_BOOT_WIDGET]
 
 WIDGETS_BY_ID: Dict[str, RockroosterWidget] = {
     widget.identifier: widget for widget in widgets
@@ -210,7 +259,7 @@ async def _call_tool_request(req: types.CallToolRequest) -> types.ServerResult:
                     text=widget.response_text,
                 )
             ],
-            structuredContent={"status": "pending"},
+            structuredContent={"status": "succeeded"},
             _meta=meta,
         )
     )
