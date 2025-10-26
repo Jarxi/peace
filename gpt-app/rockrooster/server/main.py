@@ -11,6 +11,7 @@ from mcp.server.fastmcp import FastMCP
 class RockroosterWidget:
     identifier: str
     title: str
+    description: str
     template_uri: str
     html: str
     invoking: str
@@ -22,24 +23,44 @@ MIME_TYPE = "text/html+skybridge"
 
 RECOMMEND_FOOTWEAR_WIDGET = RockroosterWidget(
     identifier="recommend_footwear",
-    title="Recommend Footwear",
+    title="Rockrooster Fit Finder",
+    description=(
+        "Celebrate Rockrooster's rugged Australian heritage while discovering "
+        "lightweight, long-wear safety boots tailored to your workday."
+    ),
     template_uri="ui://widget/recommend-footwear.html",
     html="""<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Rockrooster Footwear</title>
+    <title>Rockrooster Fit Finder</title>
   </head>
   <body>
     <main>
-      <h1>Footwear recommendations are coming soon.</h1>
+      <h1>Rockrooster Fit Finder</h1>
+      <p>
+        Rockrooster has crafted hardworking footwear for makers and trade
+        professionals since 1980, blending Australian grit with all-day comfort.
+      </p>
+      <section>
+        <h2>Why Pros Choose Rockrooster</h2>
+        <ul>
+          <li>PORON XRD impact protection with featherlight build.</li>
+          <li>CoolMax lining keeps every shift dry and cool.</li>
+          <li>Slip, oil, and puncture resistance for demanding sites.</li>
+        </ul>
+      </section>
+      <p>
+        Tell us about your terrain and tasks—we will line up the best
+        Rockrooster models to keep you steady, secure, and unstoppable.
+      </p>
     </main>
   </body>
 </html>
 """,
     invoking="Gathering footwear picks",
     invoked="Shared footwear picks",
-    response_text="Placeholder footwear recommendations.",
+    response_text="Served Rockrooster footwear picks grounded in our heritage.",
 )
 
 widgets: List[RockroosterWidget] = [RECOMMEND_FOOTWEAR_WIDGET]
@@ -92,7 +113,7 @@ async def _list_tools() -> List[types.Tool]:
         types.Tool(
             name=widget.identifier,
             title=widget.title,
-            description=widget.title,
+            description=widget.description,
             inputSchema=TOOL_INPUT_SCHEMA,
             _meta=_tool_meta(widget),
             annotations={
