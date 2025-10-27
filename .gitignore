@@ -19,3 +19,6 @@ sandbox/chatgpt_mock/openai_server/node_modules
 */AGENTS.md
 sandbox/chatgpt_mock/chat-ui/node_modules
 
+gpt-app/rockrooster/ui/node_modules
+gpt-app/rockrooster/ui/dist
+gpt-app/rockrooster/server/assets/
