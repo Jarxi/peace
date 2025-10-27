@@ -118,12 +118,14 @@ function App() {
 
   return (
     <div className={`boot-app ${isLoading ? 'is-loading' : ''}`}>
-      <header className="boot-header">
-        <h1>Rockrooster Boot Merchant</h1>
-        <p className="boot-lede">
-          {widgetData.summary || 'Popular Rockrooster boots curated for protection, comfort, and lasting grit.'}
-        </p>
-      </header>
+      {!isLoading ? (
+        <header className="boot-header">
+          <h1>Rockrooster Boot Merchant</h1>
+          <p className="boot-lede">
+            {widgetData.summary || 'Popular Rockrooster boots curated for protection, comfort, and lasting grit.'}
+          </p>
+        </header>
+      ) : null}
 
       <section aria-label="Featured Rockrooster boots">
         <div className="boot-carousel-frame">
@@ -156,16 +158,10 @@ function App() {
             className={`boot-carousel ${isLoading ? 'boot-carousel--loading' : ''}`}
           >
             {isLoading ? (
-              <article
-                className="boot-card boot-card--loading"
-                role="status"
-                aria-live="polite"
-              >
-                <div className="boot-card-image boot-card-image--loading">
-                  <div className="boot-loading-spinner" aria-hidden="true" />
-                </div>
-                <p>Finding the strongest Rockrooster boots …</p>
-              </article>
+              <div className="boot-loading-inline" role="status" aria-live="polite">
+                <div className="boot-loading-spinner" aria-hidden="true" />
+                <span>Rockrooster is picking the right boots…</span>
+              </div>
             ) : null}
             {displayProducts.map((product) => {
               const {
