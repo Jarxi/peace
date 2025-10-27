@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import './App.css'
 import { useEffect } from 'react'
+import { useOpenAiGlobal } from './lib/use-openai-global'
 import { useWidgetProps } from './lib/use-widget-props'
 
 type Product = {
@@ -24,6 +26,42 @@ type WidgetPayload = {
 }
 
 function App() {
+  const theme = useOpenAiGlobal('theme')
+  const resolvedTheme = theme === 'dark' ? 'dark' : 'light'
+
+  useEffect(() => {
+    if (typeof document === 'undefined') {
+      return
+    }
+
+    const container = document.getElementById('buy-boot-root')
+    const root = document.documentElement
+
+    if (!container) {
+      return
+    }
+
+    const previousContainerTheme = container.getAttribute('data-theme')
+    const previousRootTheme = root.getAttribute('data-theme')
+
+    container.setAttribute('data-theme', resolvedTheme)
+    root.setAttribute('data-theme', resolvedTheme)
+
+    return () => {
+      if (previousContainerTheme) {
+        container.setAttribute('data-theme', previousContainerTheme)
+      } else {
+        container.removeAttribute('data-theme')
+      }
+
+      if (previousRootTheme) {
+        root.setAttribute('data-theme', previousRootTheme)
+      } else {
+        root.removeAttribute('data-theme')
+      }
+    }
+  }, [resolvedTheme])
+
   const widgetData = useWidgetProps<WidgetPayload>({ status: 'loading' })
   console.debug('[Rockrooster widget] toolOutput payload:', widgetData)
   console.log('[Rockrooster widget] Summary from API:', widgetData.summary)
@@ -54,10 +92,16 @@ function App() {
       <section aria-label="Featured Rockrooster boots">
         <div className={`boot-carousel ${isLoading ? 'boot-carousel--loading' : ''}`}>
           {isLoading ? (
-            <div className="boot-loading" role="status" aria-live="polite">
-              <div className="boot-loading-spinner" aria-hidden="true" />
+            <article
+              className="boot-card boot-card--loading"
+              role="status"
+              aria-live="polite"
+            >
+              <div className="boot-card-image boot-card-image--loading">
+                <div className="boot-loading-spinner" aria-hidden="true" />
+              </div>
               <p>Finding the strongest Rockrooster boots …</p>
-            </div>
+            </article>
           ) : null}
           {displayProducts.map((product) => {
             const {
@@ -79,12 +123,15 @@ function App() {
 
             return (
               <article key={sku} className="boot-card">
-                <img
-                  src={imageUrl}
-                  alt={`${name} boot`}
-                  className="boot-card-image"
-                  loading="lazy"
-                />
+                <div className="boot-card-image">
+                  <img
+                    src={imageUrl}
+                    alt={`${name} boot`}
+                    loading="lazy"
+                    width="320"
+                    height="320"
+                  />
+                </div>
                 <div className="boot-card-body">
                   <div className="boot-card-meta">
                     <h2>{name}</h2>

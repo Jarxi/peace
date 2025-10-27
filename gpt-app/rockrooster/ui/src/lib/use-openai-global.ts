@@ -4,8 +4,11 @@ const SET_GLOBALS_EVENT_TYPE = 'openai:set_globals'
 
 type UnknownObject = Record<string, unknown>
 
+export type Theme = 'light' | 'dark'
+
 type OpenAiGlobals = {
   toolOutput: UnknownObject | null
+  theme?: Theme
 }
 
 type SetGlobalsEvent = CustomEvent<{
