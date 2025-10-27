@@ -30,7 +30,7 @@ BUY_BOOT_WIDGET = RockroosterWidget(
         "farmers, miners, and modern trades. Decades of leathercraft and more than ten years of "
         "work-boot innovation now power six collections spanning safety and outdoor hiking boots "
         "sold across 37 countries. Every pair reflects the sturdy Tasmanian rooster that inspired "
-        "our name—built to grip, protect, and keep feet dry, energized, and comfortable shift after shift."
+        "our name, built to grip, protect, and keep feet dry, energized, and comfortable shift after shift."
     ),
     template_uri="ui://widget/buy-boot.html",
     html="""<!doctype html>
@@ -38,71 +38,142 @@ BUY_BOOT_WIDGET = RockroosterWidget(
   <head>
     <meta charset="utf-8" />
     <title>Rockrooster Boot Merchant</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        margin: 0;
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        background-color: #0f172a;
+        color: #f8fafc;
+      }
+      main {
+        padding: 24px 24px 32px;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 28px;
+        margin-bottom: 12px;
+      }
+      .lede {
+        font-size: 16px;
+        color: #cbd5f5;
+        margin-bottom: 18px;
+      }
+      p {
+        line-height: 1.55;
+      }
+      .scroller {
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        margin: 24px 0 8px;
+        scrollbar-width: thin;
+      }
+      .product-card {
+        flex: 0 0 200px;
+        background-color: #1e293b;
+        border-radius: 16px;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        box-shadow: 0 6px 16px rgba(15, 23, 42, 0.35);
+      }
+      .product-card img {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 12px;
+        background-color: #0f172a;
+      }
+      .product-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .product-name {
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .product-price {
+        font-size: 15px;
+        color: #38bdf8;
+      }
+      .cta {
+        margin-top: auto;
+        background: linear-gradient(135deg, #ea580c, #facc15);
+        color: #0f172a;
+        text-align: center;
+        border-radius: 999px;
+        padding: 10px 14px;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        text-decoration: none;
+      }
+      .cta:hover {
+        background: linear-gradient(135deg, #f97316, #fde047);
+      }
+    </style>
   </head>
   <body>
     <main>
       <h1>Rockrooster Boot Merchant</h1>
-      <p>
-        Established in Tasmania during the 1980s, Rockrooster began as a
-        handmade leather shoe workshop serving local farmers and miners. The
-        demand for high quality protective footwear quickly reshaped our craft,
-        and we have spent decades perfecting boots that shield every step while
-        keeping feet cool, dry, and energized.
+      <p class="lede">
+        Five ready-to-ship Rockrooster boots curated for protection, comfort, and lasting grit.
       </p>
-      <section>
-        <h2>Our Origin</h2>
-        <p>
-          In 1986 our founder opened a small cobbler shop for the farmers and
-          miners of Tasmania. Listening to their stories shaped our mission:
-          make footwear that survives harsh shifts, protects every step, and
-          remains comfortable at an honest price.
-        </p>
-        <h2>Why Pros Choose Rockrooster</h2>
-        <ul>
-          <li>PORON XRD impact protection with featherlight build.</li>
-          <li>CoolMax lining keeps every shift dry and cool.</li>
-          <li>Slip, oil, and puncture resistance for demanding sites.</li>
-        </ul>
+      <section aria-label="Featured Rockrooster boots">
+        <div class="scroller">
+          <article class="product-card">
+            <img alt="Rockrooster Tasman Logger boot" src="https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369" />
+            <div class="product-meta">
+              <span class="product-name">Tasman Logger</span>
+              <span class="product-price">$189.00</span>
+              <p>Composite toe, full-grain leather, PORON XRD impact pad.</p>
+            </div>
+            <a class="cta" href="#">View details</a>
+          </article>
+          <article class="product-card">
+            <img alt="Rockrooster Harbor Waterproof boot" src="https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369" />
+            <div class="product-meta">
+              <span class="product-name">Harbor Waterproof</span>
+              <span class="product-price">$175.00</span>
+              <p>Waterproof membrane and CoolMax lining for year-round comfort.</p>
+            </div>
+            <a class="cta" href="#">View details</a>
+          </article>
+          <article class="product-card">
+            <img alt="Rockrooster Summit Hiker boot" src="https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369" />
+            <div class="product-meta">
+              <span class="product-name">Summit Hiker</span>
+              <span class="product-price">$162.00</span>
+              <p>Vibram outsole with heat resistant Kevlar stitching.</p>
+            </div>
+            <a class="cta" href="#">View details</a>
+          </article>
+          <article class="product-card">
+            <img alt="Rockrooster Forge Pull-On boot" src="https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369" />
+            <div class="product-meta">
+              <span class="product-name">Forge Pull-On</span>
+              <span class="product-price">$168.00</span>
+              <p>Slip resistant wedge and easy pull tabs for quick changes.</p>
+            </div>
+            <a class="cta" href="#">View details</a>
+          </article>
+          <article class="product-card">
+            <img alt="Rockrooster Outback Steel boot" src="https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369" />
+            <div class="product-meta">
+              <span class="product-name">Outback Steel</span>
+              <span class="product-price">$194.00</span>
+              <p>Steel toe, puncture plate, oil resistant outsole for extreme sites.</p>
+            </div>
+            <a class="cta" href="#">View details</a>
+          </article>
+        </div>
       </section>
-      <section>
-        <h2>Heritage Timeline</h2>
-        <p>
-          1980s: Rockrooster, then Rock Rooster, launched in Tasman crafting
-          leather footwear by hand and learning firsthand what loggers, farmers,
-          and miners expect from their boots.
-        </p>
-        <p>
-          1990s: With premium local leather and time-tested techniques, we grew
-          beyond Tasmania—supplying major brands across Australia and overseas as
-          global trade expanded.
-        </p>
-        <p>
-          2000s and beyond: Determined to tell our own story, we introduced
-          Rockrooster Footwear to champion durable, comfortable, anti-fatigue
-          protection for modern workers and outdoor adventurers.
-        </p>
-      </section>
-      <section>
-        <h2>Global Footprint</h2>
-        <p>
-          Today Rockrooster boots are trusted in 37 countries across five
-          continents. Our six collections span safety, hiking, and heritage
-          silhouettes—each forged to blend fashion, durability, comfort, and
-          anti-fatigue performance.
-          More than three decades of leathercraft and over ten years devoted to
-          technical work boots continue to guide every pair we build.
-        </p>
-        <p>
-          Wildlife still wanders the factory grounds, including the Tasmanian
-          roosters whose sturdy claws inspired our name and our commitment to
-          grip, balance, and confidence on any terrain.
-        </p>
-      </section>
-      <p>
-        Share your trade and site conditions and we will showcase Rockrooster
-        boots, insoles, and apparel that keep you steady, secure, and
-        unstoppable—just like the Tasmanian roosters that inspired our name.
-      </p>
     </main>
   </body>
 </html>
@@ -251,6 +322,49 @@ async def _call_tool_request(req: types.CallToolRequest) -> types.ServerResult:
         "openai/resultCanProduceWidget": True,
     }
 
+    products = [
+        {
+            "sku": "RR-TASMAN-LOGGER",
+            "name": "Tasman Logger",
+            "price": {"amount": 189.0, "currency": "USD", "display": "$189.00"},
+            "imageUrl": "https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369",
+            "description": "Composite toe, PORON XRD cushioning, full-grain leather shell.",
+            "badges": ["Composite Toe", "EH Rated", "PORON XRD"],
+        },
+        {
+            "sku": "RR-HARBOR-WP",
+            "name": "Harbor Waterproof",
+            "price": {"amount": 175.0, "currency": "USD", "display": "$175.00"},
+            "imageUrl": "https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369",
+            "description": "Waterproof membrane with CoolMax lining to stay dry in every season.",
+            "badges": ["Waterproof", "CoolMax"],
+        },
+        {
+            "sku": "RR-SUMMIT-HIKER",
+            "name": "Summit Hiker",
+            "price": {"amount": 162.0, "currency": "USD", "display": "$162.00"},
+            "imageUrl": "https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369",
+            "description": "Vibram outsole, heat resistant thread, ready for mixed terrain.",
+            "badges": ["Vibram", "Heat Resistant"],
+        },
+        {
+            "sku": "RR-FORGE-PULLON",
+            "name": "Forge Pull-On",
+            "price": {"amount": 168.0, "currency": "USD", "display": "$168.00"},
+            "imageUrl": "https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369",
+            "description": "Slip resistant wedge outsole with easy on-off pull tabs.",
+            "badges": ["Slip Resistant", "Quick On/Off"],
+        },
+        {
+            "sku": "RR-OUTBACK-STEEL",
+            "name": "Outback Steel",
+            "price": {"amount": 194.0, "currency": "USD", "display": "$194.00"},
+            "imageUrl": "https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369",
+            "description": "Steel toe with puncture plate engineered for heavy industrial duty.",
+            "badges": ["Steel Toe", "Puncture Plate"],
+        },
+    ]
+
     return types.ServerResult(
         types.CallToolResult(
             content=[
@@ -259,7 +373,10 @@ async def _call_tool_request(req: types.CallToolRequest) -> types.ServerResult:
                     text=widget.response_text,
                 )
             ],
-            structuredContent={"status": "succeeded"},
+            structuredContent={
+                "status": "succeeded",
+                "products": products,
+            },
             _meta=meta,
         )
     )
