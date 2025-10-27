@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List
+import os
 
 import re
 from urllib.parse import urlparse
@@ -10,6 +11,18 @@ from urllib.parse import urlparse
 import mcp.types as types
 from mcp.server.fastmcp import FastMCP
 from starlette.staticfiles import StaticFiles
+from openai import OpenAI
+from supabase import create_client, Client
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+
+# Initialize clients for search functionality
+openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY")) if os.getenv("OPENAI_API_KEY") else None
+supabase_client: Client = None
+if os.getenv("SUPABASE_URL") and os.getenv("SUPABASE_KEY"):
+    supabase_client = create_client(os.getenv("SUPABASE_URL"), os.getenv("SUPABASE_KEY"))
 
 
 @dataclass(frozen=True)
@@ -79,7 +92,7 @@ def _load_widget_html(asset_name: str) -> str:
 BUY_BOOT_WIDGET = RockroosterWidget(
     identifier="buy_boot",
     title="Rockrooster Boot Merchant",
-    description="Browse five spotlighted Rockrooster boots ready to buy for demanding worksites.",
+    description="Browse spotlighted Rockrooster boots ready to buy for demanding worksites. You can search using natural language queries (e.g., 'shoes for hiking')",
     template_uri="ui://widget/buy-boot.html",
     html=_load_widget_html("buy-boot"),
     invoking="Gathering Rockrooster boot lineup",
@@ -108,6 +121,18 @@ TOOL_INPUT_SCHEMA: Dict[str, Any] = {
     "description": "Input payload to tailor footwear recommendations.",
 }
 
+SEARCH_TOOL_INPUT_SCHEMA: Dict[str, Any] = {
+    "type": "object",
+    "properties": {
+        "query": {
+            "type": "string",
+            "description": "Optional natural language search query (e.g., 'shoes for hiking', 'waterproof boots'). If not provided, shows popular products."
+        }
+    },
+    "required": [],
+    "description": "Browse and search products.",
+}
+
 
 def _tool_meta(widget: RockroosterWidget) -> Dict[str, Any]:
     return {
@@ -133,21 +158,26 @@ def _embedded_widget_resource(widget: RockroosterWidget) -> types.EmbeddedResour
 
 @mcp._mcp_server.list_tools()
 async def _list_tools() -> List[types.Tool]:
-    return [
-        types.Tool(
-            name=widget.identifier,
-            title=widget.title,
-            description=widget.description,
-            inputSchema=TOOL_INPUT_SCHEMA,
-            _meta=_tool_meta(widget),
-            annotations={
-                "destructiveHint": False,
-                "openWorldHint": False,
-                "readOnlyHint": True,
-            },
+    tools = []
+    for widget in widgets:
+        # buy_boot now supports search with query parameter
+        input_schema = SEARCH_TOOL_INPUT_SCHEMA
+
+        tools.append(
+            types.Tool(
+                name=widget.identifier,
+                title=widget.title,
+                description=widget.description,
+                inputSchema=input_schema,
+                _meta=_tool_meta(widget),
+                annotations={
+                    "destructiveHint": False,
+                    "openWorldHint": False,
+                    "readOnlyHint": True,
+                },
+            )
         )
-        for widget in widgets
-    ]
+    return tools
 
 
 @mcp._mcp_server.list_resources()
@@ -201,6 +231,78 @@ async def _handle_read_resource(req: types.ReadResourceRequest) -> types.ServerR
     return types.ServerResult(types.ReadResourceResult(contents=contents))
 
 
+def generate_query_embedding(query: str) -> List[float]:
+    """Generate embedding for a search query using OpenAI."""
+    if not openai_client:
+        raise ValueError("OpenAI client not initialized. Please set OPENAI_API_KEY.")
+
+    try:
+        response = openai_client.embeddings.create(
+            model="text-embedding-3-small",
+            input=query,
+            encoding_format="float"
+        )
+        return response.data[0].embedding
+    except Exception as e:
+        raise ValueError(f"Error generating embedding: {e}")
+
+
+def search_products_by_embedding(query_embedding: List[float], limit: int = 5) -> List[Dict[str, Any]]:
+    """
+    Search products using vector similarity in Supabase.
+    Returns the top N most similar products with their variants.
+    """
+    if not supabase_client:
+        raise ValueError("Supabase client not initialized. Please set SUPABASE_URL and SUPABASE_KEY.")
+
+    try:
+        # Use RPC function for vector similarity search
+        # The query uses cosine distance (1 - cosine_similarity)
+        response = supabase_client.rpc(
+            "search_products_by_embedding",
+            {
+                "query_embedding": query_embedding,
+                "match_limit": limit
+            }
+        ).execute()
+
+        # If the RPC function doesn't exist, fallback to direct query
+        if not response.data:
+            # Direct SQL query using pgvector
+            response = supabase_client.table("product").select(
+                "id, title, description, thumbnail, handle"
+            ).execute()
+
+            # Note: This fallback won't do similarity search, just returns products
+            # The RPC function should be created in Supabase for proper functionality
+            return response.data[:limit]
+
+        return response.data
+    except Exception as e:
+        # Fallback: return regular products without similarity search
+        print(f"Error in vector search: {e}")
+        try:
+            response = supabase_client.table("product").select(
+                "id, title, description, thumbnail, handle"
+            ).limit(limit).execute()
+            return response.data
+        except Exception as e2:
+            print(f"Error in fallback query: {e2}")
+            return []
+
+
+def format_product_for_widget(product: Dict[str, Any]) -> Dict[str, Any]:
+    """Format a product from Supabase into the widget format."""
+    return {
+        "sku": product.get("id", ""),
+        "name": product.get("title", "Unknown Product"),
+        "price": {"amount": 0.0, "currency": "USD", "display": "Price not available"},
+        "imageUrl": product.get("thumbnail", ""),
+        "description": product.get("description", "")[:200] + "..." if product.get("description") else "",
+        "badges": [],
+    }
+
+
 async def _call_tool_request(req: types.CallToolRequest) -> types.ServerResult:
     widget = WIDGETS_BY_ID.get(req.params.name)
     if widget is None:
@@ -226,6 +328,56 @@ async def _call_tool_request(req: types.CallToolRequest) -> types.ServerResult:
         "openai/resultCanProduceWidget": True,
     }
 
+    # Handle buy_boot tool (now used for search)
+    if req.params.name == "buy_boot":
+        try:
+            # Extract query from arguments, default to "work boots" if not provided
+            query = req.params.arguments.get("query", "work boots") if req.params.arguments else "work boots"
+
+            # Generate embedding for the query
+            query_embedding = generate_query_embedding(query)
+
+            # Search for similar products
+            matching_products = search_products_by_embedding(query_embedding, limit=5)
+
+            # Format products for the widget
+            products = [format_product_for_widget(p) for p in matching_products]
+
+            # Log product IDs being returned
+            product_ids = [p.get('id') for p in matching_products if p.get('id')]
+            print(f"[SEARCH] Returning product IDs: {product_ids}")
+
+            return types.ServerResult(
+                types.CallToolResult(
+                    content=[
+                        types.TextContent(
+                            type="text",
+                            text=f"Found {len(products)} products matching '{query}'",
+                        )
+                    ],
+                    structuredContent={
+                        "status": "succeeded",
+                        "query": query,
+                        "products": products,
+                        "display": "show results"
+                    },
+                    _meta=meta,
+                )
+            )
+        except Exception as e:
+            return types.ServerResult(
+                types.CallToolResult(
+                    content=[
+                        types.TextContent(
+                            type="text",
+                            text=f"Error searching products: {str(e)}",
+                        )
+                    ],
+                    isError=True,
+                )
+            )
+
+    # Fallback for unknown tools
     products = [
         {
             "sku": "RR-TASMAN-LOGGER",
