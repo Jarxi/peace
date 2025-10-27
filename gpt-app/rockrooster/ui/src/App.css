@@ -1,8 +1,6 @@
 .boot-app {
   background: var(--rr-surface-app);
   border-radius: 0;
-  border: 1px solid var(--rr-border-subtle);
-  box-shadow: 0 24px 55px var(--rr-shadow-soft);
   padding: 32px clamp(20px, 4vw, 36px);
   color: var(--rr-text-primary);
   display: flex;
@@ -49,6 +47,7 @@
   scroll-behavior: smooth;
   scrollbar-color: var(--rr-border-muted) transparent;
   width: 100%;
+  background: var(--rr-surface-app);
 }
 
 .boot-carousel--loading {
@@ -69,9 +68,7 @@
 
 .boot-card {
   background: var(--rr-surface-card);
-  border: 1px solid var(--rr-border-muted);
   border-radius: 20px;
-  box-shadow: 0 18px 35px var(--rr-shadow-soft);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -88,8 +85,7 @@
   width: 100%;
   aspect-ratio: 1 / 1;
   border-radius: 16px;
-  background: var(--rr-bg-primary);
-  border: 1px solid var(--rr-border-subtle);
+  background: var(--rr-surface-card);
   display: grid;
   place-items: center;
   overflow: hidden;
@@ -100,6 +96,7 @@
   height: 88%;
   object-fit: contain;
   display: block;
+  border-radius: 12px;
   filter: saturate(1.05);
 }
 .boot-card-body {
