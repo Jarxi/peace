@@ -1,4 +1,6 @@
+import { useEffect } from 'react'
 import './App.css'
+import { useOpenAiGlobal } from './lib/use-openai-global'
 import { useWidgetProps } from './lib/use-widget-props'
 
 type Product = {
@@ -22,6 +24,42 @@ type WidgetPayload = {
 }
 
 function App() {
+  const theme = useOpenAiGlobal('theme')
+  const resolvedTheme = theme === 'dark' ? 'dark' : 'light'
+
+  useEffect(() => {
+    if (typeof document === 'undefined') {
+      return
+    }
+
+    const container = document.getElementById('buy-boot-root')
+    const root = document.documentElement
+
+    if (!container) {
+      return
+    }
+
+    const previousContainerTheme = container.getAttribute('data-theme')
+    const previousRootTheme = root.getAttribute('data-theme')
+
+    container.setAttribute('data-theme', resolvedTheme)
+    root.setAttribute('data-theme', resolvedTheme)
+
+    return () => {
+      if (previousContainerTheme) {
+        container.setAttribute('data-theme', previousContainerTheme)
+      } else {
+        container.removeAttribute('data-theme')
+      }
+
+      if (previousRootTheme) {
+        root.setAttribute('data-theme', previousRootTheme)
+      } else {
+        root.removeAttribute('data-theme')
+      }
+    }
+  }, [resolvedTheme])
+
   const widgetData = useWidgetProps<WidgetPayload>({ status: 'loading' })
   console.debug('[Rockrooster widget] toolOutput payload:', widgetData)
 
