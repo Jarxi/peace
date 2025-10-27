@@ -2,23 +2,83 @@
   font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color-scheme: dark;
-  color: #f8fafc;
-  background: #0f172a;
+  --rr-bg-primary: #ffffff;
+  --rr-bg-secondary: #e8e8e8;
+  --rr-bg-tertiary: #f3f3f3;
+  --rr-text-primary: #0d0d0d;
+  --rr-text-secondary: #5d5d5d;
+  --rr-text-tertiary: #8f8f8f;
+  --rr-text-inverted: #8f8f8f;
+  --rr-text-on-accent: #ffffff;
+  --rr-icon-primary: #0d0d0d;
+  --rr-icon-secondary: #5d5d5d;
+  --rr-icon-tertiary: #8f8f8f;
+  --rr-icon-inverted: #8f8f8f;
+  --rr-accent-orange: #e25507;
+  --rr-accent-blue: #0285ff;
+  --rr-accent-red: #e02e2a;
+  --rr-accent-green: #008635;
+  --rr-accent-blue-soft: rgba(2, 133, 255, 0.14);
+  --rr-border-muted: rgba(13, 13, 13, 0.12);
+  --rr-border-subtle: rgba(13, 13, 13, 0.08);
+  --rr-shadow-soft: rgba(13, 13, 13, 0.08);
+  --rr-shadow-strong: rgba(13, 13, 13, 0.14);
+  --rr-surface-app: var(--rr-bg-primary);
+  --rr-surface-card: var(--rr-bg-tertiary);
+  color-scheme: light;
+  color: var(--rr-text-primary);
+  background: var(--rr-bg-secondary);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --rr-bg-primary: #111827;
+  --rr-bg-secondary: #0f172a;
+  --rr-bg-tertiary: #1f2937;
+  --rr-text-primary: #f8fafc;
+  --rr-text-secondary: #cbd5f5;
+  --rr-text-tertiary: #94a3b8;
+  --rr-text-inverted: #0d0d0d;
+  --rr-text-on-accent: #0d0d0d;
+  --rr-icon-primary: #f8fafc;
+  --rr-icon-secondary: #cbd5f5;
+  --rr-icon-tertiary: #94a3b8;
+  --rr-icon-inverted: #0d0d0d;
+  --rr-accent-blue-soft: rgba(2, 133, 255, 0.2);
+  --rr-border-muted: rgba(148, 163, 184, 0.35);
+  --rr-border-subtle: rgba(148, 163, 184, 0.2);
+  --rr-shadow-soft: rgba(15, 23, 42, 0.25);
+  --rr-shadow-strong: rgba(15, 23, 42, 0.35);
+  --rr-surface-app: #0f172a;
+  --rr-surface-card: rgba(15, 23, 42, 0.75);
+  color-scheme: dark;
+  background: var(--rr-bg-secondary);
+  color: var(--rr-text-primary);
+  /* TODO: refine dark theme colors with product design */
+}
+
 body {
   margin: 0;
-  min-height: 100vh;
-  background: #0f172a;
+  min-height: 100%;
+  background: transparent;
+  color: var(--rr-text-primary);
 }
 
 #buy-boot-root {
-  min-height: 100vh;
+  background: transparent;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0;
 }
 
 button {
