@@ -33,16 +33,22 @@
 }
 
 .boot-carousel {
-  --card-width: clamp(220px, 26vw, 260px);
+  --card-gap: clamp(16px, 3vw, 24px);
+  --card-width: clamp(
+    260px,
+    calc((100% - var(--card-gap) * 2) * 0.5),
+    420px
+  );
   display: flex;
-  gap: 18px;
+  gap: var(--card-gap);
   overflow-x: auto;
-  padding-bottom: 12px;
+  padding: 0;
   scroll-snap-type: x mandatory;
   scrollbar-width: thin;
   position: relative;
   scroll-behavior: smooth;
   scrollbar-color: var(--rr-border-muted) transparent;
+  width: 100%;
 }
 
 .boot-carousel--loading {
@@ -70,7 +76,9 @@
   flex-direction: column;
   gap: 16px;
   padding: 18px;
+  flex: 0 0 var(--card-width);
   width: var(--card-width);
+  min-width: var(--card-width);
   scroll-snap-align: start;
   scroll-snap-stop: always;
   backdrop-filter: blur(6px);
@@ -218,6 +226,11 @@
   .boot-card {
     gap: 14px;
     padding: 16px;
+  }
+
+  .boot-carousel {
+    --card-width: min(82vw, 320px);
+    --card-gap: 16px;
   }
 
   .boot-card-image {
