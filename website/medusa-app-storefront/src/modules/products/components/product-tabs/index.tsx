@@ -14,6 +14,10 @@ type ProductTabsProps = {
 const ProductTabs = ({ product }: ProductTabsProps) => {
   const tabs = [
     {
+      label: "Description",
+      component: <DescriptionTab product={product} />,
+    },
+    {
       label: "Product Information",
       component: <ProductInfoTab product={product} />,
     },
@@ -37,6 +41,16 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
           </Accordion.Item>
         ))}
       </Accordion>
+    </div>
+  )
+}
+
+const DescriptionTab = ({ product }: ProductTabsProps) => {
+  return (
+    <div className="text-small-regular py-8">
+      <p className="text-ui-fg-subtle whitespace-pre-line">
+        {product.description || "No description available."}
+      </p>
     </div>
   )
 }
