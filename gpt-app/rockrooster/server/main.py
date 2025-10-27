@@ -126,11 +126,15 @@ SEARCH_TOOL_INPUT_SCHEMA: Dict[str, Any] = {
     "properties": {
         "query": {
             "type": "string",
-            "description": "Optional natural language search query (e.g., 'shoes for hiking', 'waterproof boots'). If not provided, shows popular products."
-        }
+            "description": "Natural language search query describing the use case, jobsite, or preferences (e.g., 'steel toe boots for wet floors', 'lightweight hiking boots').",
+        },
+        "intention_summary": {
+            "type": "string",
+            "description": "Model-generated summary of the user's needs to guide Rockrooster in recommending the best footwear. Include key traits like safety requirements, environment, comfort preferences, and style cues.",
+        },
     },
-    "required": [],
-    "description": "Browse and search products.",
+    "required": ["intention_summary"],
+    "description": "Browse and search products with a required summary of user needs.",
 }
 
 
@@ -311,6 +315,9 @@ def format_product_for_widget(product: Dict[str, Any]) -> Dict[str, Any]:
 
 async def _call_tool_request(req: types.CallToolRequest) -> types.ServerResult:
     widget = WIDGETS_BY_ID.get(req.params.name)
+
+    print("dinglong!!!")
+    print(req)
     if widget is None:
         return types.ServerResult(
             types.CallToolResult(
@@ -339,6 +346,7 @@ async def _call_tool_request(req: types.CallToolRequest) -> types.ServerResult:
         try:
             # Extract query from arguments, default to "work boots" if not provided
             query = req.params.arguments.get("query", "work boots") if req.params.arguments else "work boots"
+            intention_summary = req.params.arguments.get("intention_summary") if req.params.arguments else None
 
             # Generate embedding for the query
             query_embedding = generate_query_embedding(query)
@@ -361,11 +369,14 @@ async def _call_tool_request(req: types.CallToolRequest) -> types.ServerResult:
             structured_content = {
                 "status": "succeeded",
                 "query": query,
+                "intention_summary": intention_summary,
                 "products": products,
-                "display": "show results"
+                "display": "show results",
             }
 
             print(f"[SEARCH] Structured content keys: {list(structured_content.keys())}")
+            if intention_summary:
+                print(f"[SEARCH] Intention summary from model: {intention_summary}")
             print(f"[SEARCH] Number of products in response: {len(structured_content.get('products', []))}")
 
             return types.ServerResult(
@@ -459,7 +470,6 @@ mcp._mcp_server.request_handlers[types.CallToolRequest] = _call_tool_request
 mcp._mcp_server.request_handlers[types.ReadResourceRequest] = _handle_read_resource
 
 app = mcp.streamable_http_app()
-app.mount("/assets", StaticFiles(directory=ASSETS_DIR), name="assets")
 
 try:
     from starlette.middleware.cors import CORSMiddleware
