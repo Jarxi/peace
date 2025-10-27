@@ -280,6 +280,7 @@ async def _call_tool_request(req: types.CallToolRequest) -> types.ServerResult:
             structuredContent={
                 "status": "succeeded",
                 "products": products,
+                "display": "don't show picture"
             },
             _meta=meta,
         )
