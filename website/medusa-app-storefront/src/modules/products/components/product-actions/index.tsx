@@ -171,15 +171,15 @@ export default function ProductActions({
           data-testid="add-product-button"
         >
           <span>
-            {!selectedVariant && !options
-              ? "Select variant"
+            {!selectedVariant
+              ? "Select options"
               : !inStock || !isValidVariant
               ? "Out of stock"
               : "Add to Cart"}
           </span>
           {selectedVariant && inStock && isValidVariant && (
             <span>{selectedVariant.calculated_price?.calculated_amount ?
-              new Intl.NumberFormat('en-US', { style: 'currency', currency: selectedVariant.calculated_price.currency_code || 'USD' }).format(selectedVariant.calculated_price.calculated_amount / 100) :
+              new Intl.NumberFormat('en-US', { style: 'currency', currency: selectedVariant.calculated_price.currency_code || 'USD' }).format(selectedVariant.calculated_price.calculated_amount) :
               ''}</span>
           )}
         </Button>
