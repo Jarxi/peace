@@ -293,6 +293,11 @@ def search_products_by_embedding(query_embedding: List[float], limit: int = 5) -
 
 def format_product_for_widget(product: Dict[str, Any]) -> Dict[str, Any]:
     """Format a product from Supabase into the widget format."""
+    # Construct product URL using handle
+    storefront_url = os.getenv("STOREFRONT_URL", "http://localhost:8000")
+    handle = product.get("handle", "")
+    product_url = f"{storefront_url}/products/{handle}" if handle else ""
+
     return {
         "sku": product.get("id", ""),
         "name": product.get("title", "Unknown Product"),
@@ -300,6 +305,7 @@ def format_product_for_widget(product: Dict[str, Any]) -> Dict[str, Any]:
         "imageUrl": product.get("thumbnail", ""),
         "description": product.get("description", "")[:200] + "..." if product.get("description") else "",
         "badges": [],
+        "productUrl": product_url,
     }
 
 
@@ -343,9 +349,24 @@ async def _call_tool_request(req: types.CallToolRequest) -> types.ServerResult:
             # Format products for the widget
             products = [format_product_for_widget(p) for p in matching_products]
 
-            # Log product IDs being returned
+            # Log product IDs and URLs being returned
             product_ids = [p.get('id') for p in matching_products if p.get('id')]
             print(f"[SEARCH] Returning product IDs: {product_ids}")
+            print(f"[SEARCH] Product data being sent to widget:")
+            for i, product in enumerate(products):
+                print(f"  [{i}] {product.get('name')}")
+                print(f"      productUrl: {product.get('productUrl')}")
+                print(f"      sku: {product.get('sku')}")
+
+            structured_content = {
+                "status": "succeeded",
+                "query": query,
+                "products": products,
+                "display": "show results"
+            }
+
+            print(f"[SEARCH] Structured content keys: {list(structured_content.keys())}")
+            print(f"[SEARCH] Number of products in response: {len(structured_content.get('products', []))}")
 
             return types.ServerResult(
                 types.CallToolResult(
@@ -355,12 +376,7 @@ async def _call_tool_request(req: types.CallToolRequest) -> types.ServerResult:
                             text=f"Found {len(products)} products matching '{query}'",
                         )
                     ],
-                    structuredContent={
-                        "status": "succeeded",
-                        "query": query,
-                        "products": products,
-                        "display": "show results"
-                    },
+                    structuredContent=structured_content,
                     _meta=meta,
                 )
             )

@@ -12,6 +12,7 @@ type Product = {
   }
   badges: string[]
   imageUrl: string
+  productUrl?: string
 }
 
 type WidgetPayload = {
@@ -51,7 +52,19 @@ function App() {
               price,
               description,
               badges = [],
+              productUrl,
             } = product
+
+            const handleViewDetails = () => {
+              console.log('[Rockrooster widget] View details clicked for:', name)
+              console.log('[Rockrooster widget] Product URL:', productUrl)
+              if (productUrl) {
+                console.log('[Rockrooster widget] Navigating to:', productUrl)
+                window.open(productUrl, '_blank')
+              } else {
+                console.warn('[Rockrooster widget] No productUrl provided for:', name)
+              }
+            }
 
             return (
               <article key={sku} className="boot-card">
@@ -80,7 +93,11 @@ function App() {
                   ) : null}
                 </div>
                 <footer className="boot-card-footer">
-                  <button type="button" className="boot-card-cta">
+                  <button
+                    type="button"
+                    className="boot-card-cta"
+                    onClick={handleViewDetails}
+                  >
                     View details
                   </button>
                 </footer>

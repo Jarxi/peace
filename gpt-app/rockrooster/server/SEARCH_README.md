@@ -40,6 +40,7 @@ Then edit .env and add your credentials:
 OPENAI_API_KEY=sk-...
 SUPABASE_URL=https://yftlkuhoitlrelxojpcp.supabase.co
 SUPABASE_KEY=your_supabase_anon_key
+STOREFRONT_URL=http://localhost:8000
 ```
 
 ### 3. Generate Embeddings for Existing Products
