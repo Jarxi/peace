@@ -224,6 +224,14 @@
   margin-top: auto;
 }
 
+.boot-card--loading {
+  justify-content: center;
+  align-items: center;
+  min-height: 220px;
+  text-align: center;
+  gap: 18px;
+}
+
 .boot-card-cta {
   width: 100%;
   background: var(--rr-accent-orange);
