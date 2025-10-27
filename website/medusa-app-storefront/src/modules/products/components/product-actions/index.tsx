@@ -132,10 +132,12 @@ export default function ProductActions({
 
   return (
     <>
-      <div className="flex flex-col gap-y-2" ref={actionsRef}>
+      <div className="flex flex-col gap-y-6" ref={actionsRef}>
+        <ProductPrice product={product} variant={selectedVariant} />
+
         <div>
           {(product.variants?.length ?? 0) > 1 && (
-            <div className="flex flex-col gap-y-4">
+            <div className="flex flex-col gap-y-6">
               {(product.options || []).map((option) => {
                 return (
                   <div key={option.id}>
@@ -150,12 +152,9 @@ export default function ProductActions({
                   </div>
                 )
               })}
-              <Divider />
             </div>
           )}
         </div>
-
-        <ProductPrice product={product} variant={selectedVariant} />
 
         <Button
           onClick={handleAddToCart}
@@ -167,15 +166,22 @@ export default function ProductActions({
             !isValidVariant
           }
           variant="primary"
-          className="w-full h-10"
+          className="w-full h-12 text-base font-semibold flex justify-between items-center px-6"
           isLoading={isAdding}
           data-testid="add-product-button"
         >
-          {!selectedVariant && !options
-            ? "Select variant"
-            : !inStock || !isValidVariant
-            ? "Out of stock"
-            : "Add to cart"}
+          <span>
+            {!selectedVariant && !options
+              ? "Select variant"
+              : !inStock || !isValidVariant
+              ? "Out of stock"
+              : "Add to Cart"}
+          </span>
+          {selectedVariant && inStock && isValidVariant && (
+            <span>{selectedVariant.calculated_price?.calculated_amount ?
+              new Intl.NumberFormat('en-US', { style: 'currency', currency: selectedVariant.calculated_price.currency_code || 'USD' }).format(selectedVariant.calculated_price.calculated_amount / 100) :
+              ''}</span>
+          )}
         </Button>
         <MobileActions
           product={product}

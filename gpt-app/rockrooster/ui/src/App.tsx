@@ -20,6 +20,7 @@ type Product = {
 type WidgetPayload = {
   status?: string
   intention_summary?: string
+  summary?: string
   products?: Product[]
 }
 
@@ -61,7 +62,6 @@ function App() {
   }, [resolvedTheme])
 
   const widgetData = useWidgetProps<WidgetPayload>({ status: 'loading' })
-  console.debug('[Rockrooster widget] toolOutput payload:', widgetData)
 
   const displayProducts = widgetData.products ?? []
   const isLoading = widgetData.status === 'loading' && displayProducts.length === 0
@@ -76,8 +76,7 @@ function App() {
       <header className="boot-header">
         <h1>Rockrooster Boot Merchant</h1>
         <p className="boot-lede">
-          Five ready-to-ship Rockrooster boots curated for protection, comfort,
-          and lasting grit.
+          {widgetData.summary || 'Five ready-to-ship Rockrooster boots curated for protection, comfort, and lasting grit.'}
         </p>
         <p className="boot-status">{statusMessage}</p>
       </header>
@@ -108,9 +107,7 @@ function App() {
             } = product
 
             const handleViewDetails = () => {
-              console.log('[Rockrooster widget] View details clicked for:', name)
               const targetUrl = productUrl || 'https://rockroosterfootwear.com'
-              console.log('[Rockrooster widget] Navigating to:', targetUrl)
               window.open(targetUrl, '_blank')
             }
 
