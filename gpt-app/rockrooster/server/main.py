@@ -373,9 +373,7 @@ def format_product_for_widget(product: Dict[str, Any]) -> Dict[str, Any]:
 
 async def _call_tool_request(req: types.CallToolRequest) -> types.ServerResult:
     widget = WIDGETS_BY_ID.get(req.params.name)
-
-    print("dinglong!!!")
-    print(req)
+    
     if widget is None:
         return types.ServerResult(
             types.CallToolResult(
