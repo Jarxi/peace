@@ -1,4 +1,5 @@
 import { Suspense } from "react"
+import Image from "next/image"
 
 import { listRegions } from "@lib/data/regions"
 import { StoreRegion } from "@medusajs/types"
@@ -22,10 +23,19 @@ export default async function Nav() {
           <div className="flex items-center h-full">
             <LocalizedClientLink
               href="/"
-              className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase"
+              className="flex items-center gap-x-2 hover:opacity-80 transition-opacity"
               data-testid="nav-store-link"
             >
-              Rockrooster
+              <Image
+                src="/rockrooster_round_400x400.webp"
+                alt="Rockrooster Logo"
+                width={40}
+                height={40}
+                className="object-contain"
+              />
+              <span className="txt-compact-xlarge-plus uppercase">
+                Rockrooster
+              </span>
             </LocalizedClientLink>
           </div>
 
