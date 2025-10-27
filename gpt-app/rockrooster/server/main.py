@@ -538,6 +538,12 @@ mcp._mcp_server.request_handlers[types.ReadResourceRequest] = _handle_read_resou
 
 app = mcp.streamable_http_app()
 
+app.mount(
+    "/assets",
+    StaticFiles(directory=ASSETS_DIR),
+    name="assets",
+)
+
 try:
     from starlette.middleware.cors import CORSMiddleware
 
