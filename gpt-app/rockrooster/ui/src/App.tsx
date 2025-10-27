@@ -119,12 +119,10 @@ function App() {
   return (
     <div className={`boot-app ${isLoading ? 'is-loading' : ''}`}>
       {!isLoading ? (
-        <header className="boot-header">
-          <h1>Rockrooster Boot Merchant</h1>
-          <p className="boot-lede">
-            {widgetData.summary || 'Popular Rockrooster boots curated for protection, comfort, and lasting grit.'}
-          </p>
-        </header>
+        <p className="boot-lede">
+          {widgetData.summary ||
+            'Popular Rockrooster boots curated for protection, comfort, and lasting grit.'}
+        </p>
       ) : null}
 
       <section aria-label="Featured Rockrooster boots">

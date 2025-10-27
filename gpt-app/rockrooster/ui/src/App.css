@@ -1,11 +1,10 @@
 .boot-app {
   background: var(--rr-surface-app);
   border-radius: 0;
-  padding: 32px clamp(20px, 4vw, 36px);
   color: var(--rr-text-primary);
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 18px;
   width: 100%;
   max-width: none;
   align-self: stretch;
@@ -13,20 +12,7 @@
 }
 
 .boot-app.is-loading {
-  padding: 16px;
-  gap: 12px;
-}
-
-.boot-app.is-loading {
-  padding: 20px clamp(16px, 4vw, 28px);
-  gap: 16px;
-}
-
-.boot-header h1 {
-  font-size: clamp(24px, 3vw, 34px);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  margin: 0 0 12px;
+  gap: 8px;
 }
 
 .boot-lede {
@@ -53,6 +39,12 @@
   scrollbar-color: var(--rr-border-muted) transparent;
   width: 100%;
   background: var(--rr-surface-app);
+}
+
+.boot-app.is-loading .boot-carousel {
+  justify-content: center;
+  min-height: auto;
+  padding: 0;
 }
 
 .boot-app.is-loading .boot-carousel {
@@ -224,14 +216,6 @@
   margin-top: auto;
 }
 
-.boot-card--loading {
-  justify-content: center;
-  align-items: center;
-  min-height: 220px;
-  text-align: center;
-  gap: 18px;
-}
-
 .boot-card-cta {
   width: 100%;
   background: var(--rr-accent-orange);
@@ -249,6 +233,7 @@
   transform: translateY(-1px);
   box-shadow: 0 12px 30px rgba(226, 85, 7, 0.28);
 }
+
 
 
 .boot-card-cta:focus-visible {
