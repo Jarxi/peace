@@ -12,11 +12,12 @@ type Product = {
   }
   badges: string[]
   imageUrl: string
-  productUrl: string
+  productUrl?: string
 }
 
 type WidgetPayload = {
   status?: string
+  intention_summary?: string
   products?: Product[]
 }
 
@@ -25,14 +26,15 @@ function App() {
   console.debug('[Rockrooster widget] toolOutput payload:', widgetData)
 
   const displayProducts = widgetData.products ?? []
-  const statusMessage =
-    widgetData.status ??
-    (displayProducts.length > 0
+  const isLoading = widgetData.status === 'loading' && displayProducts.length === 0
+  const hasProducts = displayProducts.length > 0
+  const statusMessage = widgetData.status ??
+    (hasProducts
       ? 'Ready to explore Rockrooster boots tailored to your trade.'
-      : 'No Rockrooster products available right now.')
+      : 'Describe your shift and constraints to sharpen these recommendations.')
 
   return (
-    <div className="boot-app">
+    <div className={`boot-app ${isLoading ? 'is-loading' : ''}`}>
       <header className="boot-header">
         <h1>Rockrooster Boot Merchant</h1>
         <p className="boot-lede">
@@ -43,7 +45,13 @@ function App() {
       </header>
 
       <section aria-label="Featured Rockrooster boots">
-        <div className="boot-carousel">
+        <div className={`boot-carousel ${isLoading ? 'boot-carousel--loading' : ''}`}>
+          {isLoading ? (
+            <div className="boot-loading" role="status" aria-live="polite">
+              <div className="boot-loading-spinner" aria-hidden="true" />
+              <p>Finding the strongest Rockrooster boots …</p>
+            </div>
+          ) : null}
           {displayProducts.map((product) => {
             const {
               sku,
@@ -57,8 +65,9 @@ function App() {
 
             const handleViewDetails = () => {
               console.log('[Rockrooster widget] View details clicked for:', name)
-              console.log('[Rockrooster widget] Navigating to:', productUrl)
-              window.open(productUrl, '_blank')
+              const targetUrl = productUrl || 'https://rockroosterfootwear.com'
+              console.log('[Rockrooster widget] Navigating to:', targetUrl)
+              window.open(targetUrl, '_blank')
             }
 
             return (
@@ -99,9 +108,12 @@ function App() {
               </article>
             )
           })}
-          {displayProducts.length === 0 ? (
+          {!isLoading && !hasProducts ? (
             <div className="boot-empty">
-              <p>No Rockrooster products available right now.</p>
+              <p>
+                We could not find a matching boot yet. Adjust your request or ask for
+                Rockrooster best sellers to get restarted.
+              </p>
             </div>
           ) : null}
         </div>
