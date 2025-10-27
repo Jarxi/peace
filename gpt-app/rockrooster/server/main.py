@@ -14,6 +14,7 @@ from starlette.staticfiles import StaticFiles
 from openai import OpenAI
 from supabase import create_client, Client
 from dotenv import load_dotenv
+from util import generate_summary
 
 # Load environment variables
 load_dotenv()
@@ -422,10 +423,20 @@ async def _call_tool_request(req: types.CallToolRequest) -> types.ServerResult:
                 print(f"      productUrl: {product.get('productUrl')}")
                 print(f"      sku: {product.get('sku')}")
 
+            # Generate concise summary using OpenAI GPT-4o-mini
+            summary = generate_summary(
+                openai_client=openai_client,
+                query=query,
+                intention_summary=intention_summary,
+                products=products
+            )
+            print(f"[SEARCH] Generated summary: {summary}")
+
             structured_content = {
                 "status": "succeeded",
                 "query": query,
                 "intention_summary": intention_summary,
+                "summary": summary,
                 "products": products,
                 "display": "show results",
             }
