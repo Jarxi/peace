@@ -85,10 +85,14 @@ function App() {
       <section aria-label="Featured Rockrooster boots">
         <div className={`boot-carousel ${isLoading ? 'boot-carousel--loading' : ''}`}>
           {isLoading ? (
-            <div className="boot-loading" role="status" aria-live="polite">
+            <article
+              className="boot-card boot-card--loading"
+              role="status"
+              aria-live="polite"
+            >
               <div className="boot-loading-spinner" aria-hidden="true" />
               <p>Finding the strongest Rockrooster boots …</p>
-            </div>
+            </article>
           ) : null}
           {displayProducts.map((product) => {
             const {

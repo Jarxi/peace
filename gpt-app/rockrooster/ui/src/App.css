@@ -1,6 +1,6 @@
 .boot-app {
   background: var(--rr-surface-app);
-  border-radius: 24px;
+  border-radius: 0;
   border: 1px solid var(--rr-border-subtle);
   box-shadow: 0 24px 55px var(--rr-shadow-soft);
   padding: 32px clamp(20px, 4vw, 36px);
@@ -9,7 +9,8 @@
   flex-direction: column;
   gap: 28px;
   max-width: 1080px;
-  margin: 24px auto;
+  width: min(100%, 1080px);
+  align-self: center;
 }
 
 .boot-header h1 {
@@ -139,6 +140,14 @@
   margin-top: auto;
 }
 
+.boot-card--loading {
+  justify-content: center;
+  align-items: center;
+  min-height: 220px;
+  text-align: center;
+  gap: 18px;
+}
+
 .boot-card-cta {
   width: 100%;
   background: var(--rr-accent-orange);
@@ -162,19 +171,7 @@
   outline-offset: 2px;
 }
 
-.boot-loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  padding: 32px;
-  border-radius: 18px;
-  background: var(--rr-surface-card);
-  border: 1px solid var(--rr-border-muted);
-  text-align: center;
-}
-
-.boot-loading p {
+.boot-card--loading p {
   margin: 0;
   font-size: 15px;
   color: var(--rr-text-secondary);
@@ -213,8 +210,7 @@
 
 @media (max-width: 640px) {
   .boot-app {
-    margin: 12px;
-    border-radius: 20px;
+    border-radius: 0;
     padding: 24px;
     gap: 22px;
   }
