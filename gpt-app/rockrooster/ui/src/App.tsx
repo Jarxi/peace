@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import './App.css'
-import { useEffect } from 'react'
 import { useOpenAiGlobal } from './lib/use-openai-global'
 import { useWidgetProps } from './lib/use-widget-props'
 
@@ -63,13 +62,6 @@ function App() {
   }, [resolvedTheme])
 
   const widgetData = useWidgetProps<WidgetPayload>({ status: 'loading' })
-  console.debug('[Rockrooster widget] toolOutput payload:', widgetData)
-  console.log('[Rockrooster widget] Summary from API:', widgetData.summary)
-  console.log('[Rockrooster widget] Has summary?', !!widgetData.summary)
-
-  useEffect(() => {
-    console.log('[Rockrooster widget] Component re-rendered with summary:', widgetData.summary)
-  }, [widgetData.summary])
 
   const displayProducts = widgetData.products ?? []
   const isLoading = widgetData.status === 'loading' && displayProducts.length === 0
@@ -115,9 +107,7 @@ function App() {
             } = product
 
             const handleViewDetails = () => {
-              console.log('[Rockrooster widget] View details clicked for:', name)
               const targetUrl = productUrl || 'https://rockroosterfootwear.com'
-              console.log('[Rockrooster widget] Navigating to:', targetUrl)
               window.open(targetUrl, '_blank')
             }
 
