@@ -46,11 +46,42 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
 }
 
 const DescriptionTab = ({ product }: ProductTabsProps) => {
+  const formatDescription = (description: string) => {
+    if (!description) return "No description available."
+
+    // Split by 【 to find bullet points
+    const parts = description.split('【')
+
+    return parts.map((part, i) => {
+      if (i === 0) {
+        // First part (before any bullet points)
+        return part.trim() ? <p key={i} className="mb-3">{part.trim()}</p> : null
+      }
+
+      // Find the closing 】 and split title from detail
+      const closingIndex = part.indexOf('】')
+      if (closingIndex !== -1) {
+        const title = part.substring(0, closingIndex).trim()
+        const detail = part.substring(closingIndex + 1).trim()
+
+        return (
+          <div key={i} className="mb-3">
+            <span className="font-semibold">[{title}]</span>
+            {detail && <span> {detail}</span>}
+          </div>
+        )
+      }
+
+      // Fallback if no closing bracket
+      return <p key={i} className="mb-3">{part.trim()}</p>
+    }).filter(Boolean)
+  }
+
   return (
     <div className="text-small-regular py-8">
-      <p className="text-ui-fg-subtle whitespace-pre-line">
-        {product.description || "No description available."}
-      </p>
+      <div className="text-ui-fg-subtle whitespace-pre-line leading-relaxed">
+        {formatDescription(product.description || "")}
+      </div>
     </div>
   )
 }

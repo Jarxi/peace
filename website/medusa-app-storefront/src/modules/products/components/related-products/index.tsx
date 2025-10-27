@@ -19,7 +19,7 @@ export default async function RelatedProducts({
   }
 
   // edit this function to define your related products logic
-  const queryParams: HttpTypes.StoreProductListParams = {}
+  const queryParams: HttpTypes.StoreProductParams = {}
   if (region?.id) {
     queryParams.region_id = region.id
   }
@@ -48,13 +48,10 @@ export default async function RelatedProducts({
 
   return (
     <div className="w-full">
-      <div className="flex flex-col items-center text-center mb-8 px-6">
+      <div className="flex flex-col mb-8 px-6">
         <span className="text-base-regular text-gray-600 mb-4">
-          Related products
+          You may also like
         </span>
-        <p className="text-2xl-regular text-ui-fg-base max-w-lg">
-          You might also want to check out these products.
-        </p>
       </div>
 
       <div className="w-full overflow-x-auto no-scrollbar">
