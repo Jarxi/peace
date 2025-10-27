@@ -1,12 +1,15 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, List
 
+import re
+from urllib.parse import urlparse
+
 import mcp.types as types
 from mcp.server.fastmcp import FastMCP
+from starlette.staticfiles import StaticFiles
 
 
 @dataclass(frozen=True)
@@ -26,19 +29,51 @@ MIME_TYPE = "text/html+skybridge"
 ASSETS_DIR = Path(__file__).resolve().parent / "assets"
 
 
-@lru_cache(maxsize=None)
+def _inline_widget_assets(html: str) -> str:
+    def _read_asset(asset_url: str) -> str:
+        parsed = urlparse(asset_url)
+        filename = Path(parsed.path).name
+        asset_path = ASSETS_DIR / filename
+        if not asset_path.exists():
+            raise FileNotFoundError(f"Asset {filename} not found in {ASSETS_DIR}")
+        return asset_path.read_text(encoding="utf8")
+
+    def replace_stylesheet(match: re.Match[str]) -> str:
+        css_url = match.group(1)
+        css = _read_asset(css_url)
+        return f"<style>\n{css}\n</style>"
+
+    def replace_script(match: re.Match[str]) -> str:
+        js_url = match.group(1)
+        js = _read_asset(js_url)
+        return f"<script type=\"module\">\n{js}\n</script>"
+
+    html = re.sub(
+        r'<link[^>]+rel="stylesheet"[^>]+href="([^"]+)"[^>]*/?>',
+        replace_stylesheet,
+        html,
+        flags=re.IGNORECASE,
+    )
+    html = re.sub(
+        r'<script[^>]+type="module"[^>]+src="([^"]+)"[^>]*></script>',
+        replace_script,
+        html,
+        flags=re.IGNORECASE,
+    )
+    return html
+
+
 def _load_widget_html(asset_name: str) -> str:
     html_path = ASSETS_DIR / f"{asset_name}.html"
     if not html_path.exists():
-        # Vite builds may fall back to index.html when the entry name is implicit.
         legacy_html_path = ASSETS_DIR / "index.html"
         if legacy_html_path.exists():
-            return legacy_html_path.read_text(encoding="utf8")
+            return _inline_widget_assets(legacy_html_path.read_text(encoding="utf8"))
         raise FileNotFoundError(
             f"Widget HTML {asset_name}.html not found in {ASSETS_DIR}. "
             "Run `pnpm run build` inside gpt-app/rockrooster/ui to generate it."
         )
-    return html_path.read_text(encoding="utf8")
+    return _inline_widget_assets(html_path.read_text(encoding="utf8"))
 
 
 BUY_BOOT_WIDGET = RockroosterWidget(
@@ -194,10 +229,10 @@ async def _call_tool_request(req: types.CallToolRequest) -> types.ServerResult:
     products = [
         {
             "sku": "RR-TASMAN-LOGGER",
-            "name": "Tasman Logger",
+            "name": "Tasman Logger Dinglong!!!",
             "price": {"amount": 189.0, "currency": "USD", "display": "$189.00"},
             "imageUrl": "https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369",
-            "description": "Composite toe, PORON XRD cushioning, full-grain leather shell.",
+            "description": "[Test] Composite toe, PORON XRD cushioning, full-grain leather shell.",
             "badges": ["Composite Toe", "EH Rated", "PORON XRD"],
         },
         {
@@ -255,6 +290,7 @@ mcp._mcp_server.request_handlers[types.CallToolRequest] = _call_tool_request
 mcp._mcp_server.request_handlers[types.ReadResourceRequest] = _handle_read_resource
 
 app = mcp.streamable_http_app()
+app.mount("/assets", StaticFiles(directory=ASSETS_DIR), name="assets")
 
 try:
     from starlette.middleware.cors import CORSMiddleware

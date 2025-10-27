@@ -25,6 +25,12 @@
   color: #cbd5f5;
 }
 
+.boot-status {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: rgba(148, 163, 184, 0.85);
+}
+
 .boot-carousel {
   --card-width: clamp(220px, 26vw, 260px);
   display: flex;
@@ -142,6 +148,19 @@
 .boot-card-cta:focus-visible {
   outline: 3px solid rgba(250, 204, 21, 0.6);
   outline-offset: 2px;
+}
+
+.boot-empty {
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 28px;
+  border-radius: 20px;
+  border: 1px dashed rgba(148, 163, 184, 0.35);
+  color: rgba(226, 232, 240, 0.85);
+  background: rgba(15, 23, 42, 0.6);
 }
 
 @media (max-width: 640px) {

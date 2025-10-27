@@ -7,6 +7,7 @@ import react from '@vitejs/plugin-react'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const assetsDir = path.resolve(__dirname, '../server/assets')
+const DEFAULT_BASE_URL = 'https://nonpresentable-monika-unperturbed.ngrok-free.dev/assets'
 
 function renameHtmlPlugin() {
   return {
@@ -24,6 +25,7 @@ function renameHtmlPlugin() {
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: process.env.BASE_URL?.trim() || DEFAULT_BASE_URL,
   plugins: [react(), renameHtmlPlugin()],
   build: {
     outDir: '../server/assets',

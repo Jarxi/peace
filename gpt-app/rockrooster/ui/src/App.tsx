@@ -1,4 +1,5 @@
 import './App.css'
+import { useWidgetProps } from './lib/use-widget-props'
 
 type Product = {
   sku: string
@@ -13,58 +14,22 @@ type Product = {
   imageUrl: string
 }
 
-const products: Product[] = [
-  {
-    sku: 'RR-TASMAN-LOGGER',
-    name: 'Tasman Logger',
-    description:
-      'Composite toe, PORON XRD cushioning, full-grain leather shell.',
-    price: { amount: 189.0, currency: 'USD', display: '$189.00' },
-    badges: ['Composite Toe', 'EH Rated', 'PORON XRD'],
-    imageUrl:
-      'https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369',
-  },
-  {
-    sku: 'RR-HARBOR-WP',
-    name: 'Harbor Waterproof',
-    description:
-      'Waterproof membrane with CoolMax lining to stay dry in every season.',
-    price: { amount: 175.0, currency: 'USD', display: '$175.00' },
-    badges: ['Waterproof', 'CoolMax'],
-    imageUrl:
-      'https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369',
-  },
-  {
-    sku: 'RR-SUMMIT-HIKER',
-    name: 'Summit Hiker',
-    description: 'Vibram outsole, heat resistant thread, ready for mixed terrain.',
-    price: { amount: 162.0, currency: 'USD', display: '$162.00' },
-    badges: ['Vibram', 'Heat Resistant'],
-    imageUrl:
-      'https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369',
-  },
-  {
-    sku: 'RR-FORGE-PULLON',
-    name: 'Forge Pull-On',
-    description: 'Slip resistant wedge outsole with easy on-off pull tabs.',
-    price: { amount: 168.0, currency: 'USD', display: '$168.00' },
-    badges: ['Slip Resistant', 'Quick On/Off'],
-    imageUrl:
-      'https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369',
-  },
-  {
-    sku: 'RR-OUTBACK-STEEL',
-    name: 'Outback Steel',
-    description:
-      'Steel toe with puncture plate engineered for heavy industrial duty.',
-    price: { amount: 194.0, currency: 'USD', display: '$194.00' },
-    badges: ['Steel Toe', 'Puncture Plate'],
-    imageUrl:
-      'https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369',
-  },
-]
+type WidgetPayload = {
+  status?: string
+  products?: Product[]
+}
 
 function App() {
+  const widgetData = useWidgetProps<WidgetPayload>({ status: 'loading' })
+  console.debug('[Rockrooster widget] toolOutput payload:', widgetData)
+
+  const displayProducts = widgetData.products ?? []
+  const statusMessage =
+    widgetData.status ??
+    (displayProducts.length > 0
+      ? 'Ready to explore Rockrooster boots tailored to your trade.'
+      : 'No Rockrooster products available right now.')
+
   return (
     <div className="boot-app">
       <header className="boot-header">
@@ -73,37 +38,60 @@ function App() {
           Five ready-to-ship Rockrooster boots curated for protection, comfort,
           and lasting grit.
         </p>
+        <p className="boot-status">{statusMessage}</p>
       </header>
 
       <section aria-label="Featured Rockrooster boots">
         <div className="boot-carousel">
-          {products.map((product) => (
-            <article key={product.sku} className="boot-card">
-              <img
-                src={product.imageUrl}
-                alt={`${product.name} boot`}
-                className="boot-card-image"
-                loading="lazy"
-              />
-              <div className="boot-card-body">
-                <div className="boot-card-meta">
-                  <h2>{product.name}</h2>
-                  <p className="boot-card-price">{product.price.display}</p>
+          {displayProducts.map((product) => {
+            const {
+              sku,
+              name,
+              imageUrl,
+              price,
+              description,
+              badges = [],
+            } = product
+
+            return (
+              <article key={sku} className="boot-card">
+                <img
+                  src={imageUrl}
+                  alt={`${name} boot`}
+                  className="boot-card-image"
+                  loading="lazy"
+                />
+                <div className="boot-card-body">
+                  <div className="boot-card-meta">
+                    <h2>{name}</h2>
+                    {price?.display ? (
+                      <p className="boot-card-price">{price.display}</p>
+                    ) : null}
+                  </div>
+                  {description ? (
+                    <p className="boot-card-description">{description}</p>
+                  ) : null}
+                  {badges.length > 0 ? (
+                    <ul className="boot-card-badges">
+                      {badges.map((badge) => (
+                        <li key={`${sku}-${badge}`}>{badge}</li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </div>
-                <p className="boot-card-description">{product.description}</p>
-                <ul className="boot-card-badges">
-                  {product.badges.map((badge) => (
-                    <li key={badge}>{badge}</li>
-                  ))}
-                </ul>
-              </div>
-              <footer className="boot-card-footer">
-                <button type="button" className="boot-card-cta">
-                  View details
-                </button>
-              </footer>
-            </article>
-          ))}
+                <footer className="boot-card-footer">
+                  <button type="button" className="boot-card-cta">
+                    View details
+                  </button>
+                </footer>
+              </article>
+            )
+          })}
+          {displayProducts.length === 0 ? (
+            <div className="boot-empty">
+              <p>No Rockrooster products available right now.</p>
+            </div>
+          ) : null}
         </div>
       </section>
     </div>
