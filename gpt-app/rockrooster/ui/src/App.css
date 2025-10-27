@@ -36,8 +36,8 @@
   --card-gap: clamp(16px, 3vw, 24px);
   --card-width: clamp(
     260px,
-    calc((100% - var(--card-gap) * 2) * 0.5),
-    420px
+    calc((100% - var(--card-gap) * 2) / 2.75),
+    360px
   );
   display: flex;
   gap: var(--card-gap);
@@ -86,12 +86,22 @@
 
 .boot-card-image {
   width: 100%;
-  height: 160px;
-  object-fit: cover;
+  aspect-ratio: 1 / 1;
   border-radius: 16px;
-  background-color: var(--rr-bg-secondary);
+  background: var(--rr-bg-primary);
+  border: 1px solid var(--rr-border-subtle);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
 }
 
+.boot-card-image > img {
+  width: 88%;
+  height: 88%;
+  object-fit: contain;
+  display: block;
+  filter: saturate(1.05);
+}
 .boot-card-body {
   display: flex;
   flex-direction: column;

@@ -90,7 +90,9 @@ function App() {
               role="status"
               aria-live="polite"
             >
-              <div className="boot-loading-spinner" aria-hidden="true" />
+              <div className="boot-card-image boot-card-image--loading">
+                <div className="boot-loading-spinner" aria-hidden="true" />
+              </div>
               <p>Finding the strongest Rockrooster boots …</p>
             </article>
           ) : null}
@@ -114,12 +116,15 @@ function App() {
 
             return (
               <article key={sku} className="boot-card">
-                <img
-                  src={imageUrl}
-                  alt={`${name} boot`}
-                  className="boot-card-image"
-                  loading="lazy"
-                />
+                <div className="boot-card-image">
+                  <img
+                    src={imageUrl}
+                    alt={`${name} boot`}
+                    loading="lazy"
+                    width="320"
+                    height="320"
+                  />
+                </div>
                 <div className="boot-card-body">
                   <div className="boot-card-meta">
                     <h2>{name}</h2>
