@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from functools import lru_cache
+from pathlib import Path
 from typing import Any, Dict, List
 
 import mcp.types as types
@@ -21,163 +23,30 @@ class RockroosterWidget:
 
 MIME_TYPE = "text/html+skybridge"
 
+ASSETS_DIR = Path(__file__).resolve().parent / "assets"
+
+
+@lru_cache(maxsize=None)
+def _load_widget_html(asset_name: str) -> str:
+    html_path = ASSETS_DIR / f"{asset_name}.html"
+    if not html_path.exists():
+        # Vite builds may fall back to index.html when the entry name is implicit.
+        legacy_html_path = ASSETS_DIR / "index.html"
+        if legacy_html_path.exists():
+            return legacy_html_path.read_text(encoding="utf8")
+        raise FileNotFoundError(
+            f"Widget HTML {asset_name}.html not found in {ASSETS_DIR}. "
+            "Run `pnpm run build` inside gpt-app/rockrooster/ui to generate it."
+        )
+    return html_path.read_text(encoding="utf8")
+
+
 BUY_BOOT_WIDGET = RockroosterWidget(
     identifier="buy_boot",
     title="Rockrooster Boot Merchant",
-    description=(
-        "Established in Tasmania during the 1980s, Rockrooster evolved from a handmade leather "
-        "shoe workshop into a dedicated maker of high quality protective footwear for loggers, "
-        "farmers, miners, and modern trades. Decades of leathercraft and more than ten years of "
-        "work-boot innovation now power six collections spanning safety and outdoor hiking boots "
-        "sold across 37 countries. Every pair reflects the sturdy Tasmanian rooster that inspired "
-        "our name, built to grip, protect, and keep feet dry, energized, and comfortable shift after shift."
-    ),
+    description="Browse five spotlighted Rockrooster boots ready to buy for demanding worksites.",
     template_uri="ui://widget/buy-boot.html",
-    html="""<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Rockrooster Boot Merchant</title>
-    <style>
-      :root {
-        color-scheme: light dark;
-      }
-      body {
-        margin: 0;
-        font-family: "Helvetica Neue", Arial, sans-serif;
-        background-color: #0f172a;
-        color: #f8fafc;
-      }
-      main {
-        padding: 24px 24px 32px;
-        max-width: 960px;
-        margin: 0 auto;
-      }
-      h1 {
-        font-size: 28px;
-        margin-bottom: 12px;
-      }
-      .lede {
-        font-size: 16px;
-        color: #cbd5f5;
-        margin-bottom: 18px;
-      }
-      p {
-        line-height: 1.55;
-      }
-      .scroller {
-        display: flex;
-        gap: 16px;
-        overflow-x: auto;
-        padding-bottom: 8px;
-        margin: 24px 0 8px;
-        scrollbar-width: thin;
-      }
-      .product-card {
-        flex: 0 0 200px;
-        background-color: #1e293b;
-        border-radius: 16px;
-        padding: 16px;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        box-shadow: 0 6px 16px rgba(15, 23, 42, 0.35);
-      }
-      .product-card img {
-        width: 100%;
-        height: 140px;
-        object-fit: cover;
-        border-radius: 12px;
-        background-color: #0f172a;
-      }
-      .product-meta {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-      }
-      .product-name {
-        font-size: 16px;
-        font-weight: 600;
-      }
-      .product-price {
-        font-size: 15px;
-        color: #38bdf8;
-      }
-      .cta {
-        margin-top: auto;
-        background: linear-gradient(135deg, #ea580c, #facc15);
-        color: #0f172a;
-        text-align: center;
-        border-radius: 999px;
-        padding: 10px 14px;
-        font-weight: 600;
-        letter-spacing: 0.01em;
-        text-decoration: none;
-      }
-      .cta:hover {
-        background: linear-gradient(135deg, #f97316, #fde047);
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <h1>Rockrooster Boot Merchant</h1>
-      <p class="lede">
-        Five ready-to-ship Rockrooster boots curated for protection, comfort, and lasting grit.
-      </p>
-      <section aria-label="Featured Rockrooster boots">
-        <div class="scroller">
-          <article class="product-card">
-            <img alt="Rockrooster Tasman Logger boot" src="https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369" />
-            <div class="product-meta">
-              <span class="product-name">Tasman Logger</span>
-              <span class="product-price">$189.00</span>
-              <p>Composite toe, full-grain leather, PORON XRD impact pad.</p>
-            </div>
-            <a class="cta" href="#">View details</a>
-          </article>
-          <article class="product-card">
-            <img alt="Rockrooster Harbor Waterproof boot" src="https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369" />
-            <div class="product-meta">
-              <span class="product-name">Harbor Waterproof</span>
-              <span class="product-price">$175.00</span>
-              <p>Waterproof membrane and CoolMax lining for year-round comfort.</p>
-            </div>
-            <a class="cta" href="#">View details</a>
-          </article>
-          <article class="product-card">
-            <img alt="Rockrooster Summit Hiker boot" src="https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369" />
-            <div class="product-meta">
-              <span class="product-name">Summit Hiker</span>
-              <span class="product-price">$162.00</span>
-              <p>Vibram outsole with heat resistant Kevlar stitching.</p>
-            </div>
-            <a class="cta" href="#">View details</a>
-          </article>
-          <article class="product-card">
-            <img alt="Rockrooster Forge Pull-On boot" src="https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369" />
-            <div class="product-meta">
-              <span class="product-name">Forge Pull-On</span>
-              <span class="product-price">$168.00</span>
-              <p>Slip resistant wedge and easy pull tabs for quick changes.</p>
-            </div>
-            <a class="cta" href="#">View details</a>
-          </article>
-          <article class="product-card">
-            <img alt="Rockrooster Outback Steel boot" src="https://rockroosterfootwear.com/cdn/shop/files/IMG_0294_1390x1390.jpg?v=1754550369" />
-            <div class="product-meta">
-              <span class="product-name">Outback Steel</span>
-              <span class="product-price">$194.00</span>
-              <p>Steel toe, puncture plate, oil resistant outsole for extreme sites.</p>
-            </div>
-            <a class="cta" href="#">View details</a>
-          </article>
-        </div>
-      </section>
-    </main>
-  </body>
-</html>
-""",
+    html=_load_widget_html("buy-boot"),
     invoking="Gathering Rockrooster boot lineup",
     invoked="Shared Rockrooster boot lineup",
     response_text="Highlighted Rockrooster boots ready to buy.",
