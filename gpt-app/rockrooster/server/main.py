@@ -250,7 +250,7 @@ def generate_query_embedding(query: str) -> List[float]:
 def search_products_by_embedding(query_embedding: List[float], limit: int = 5) -> List[Dict[str, Any]]:
     """
     Search products using vector similarity in Supabase.
-    Returns the top N most similar products with their variants.
+    Returns the top N most similar products with their variants and prices.
     """
     if not supabase_client:
         raise ValueError("Supabase client not initialized. Please set SUPABASE_URL and SUPABASE_KEY.")
@@ -277,7 +277,47 @@ def search_products_by_embedding(query_embedding: List[float], limit: int = 5) -
             # The RPC function should be created in Supabase for proper functionality
             return response.data[:limit]
 
-        return response.data
+        products = response.data
+
+        # Fetch variants and prices for each product
+        for product in products:
+            try:
+                # Get first variant
+                variants_response = supabase_client.table("product_variant").select(
+                    "id"
+                ).eq("product_id", product["id"]).limit(1).execute()
+
+                if variants_response.data and len(variants_response.data) > 0:
+                    variant_id = variants_response.data[0]["id"]
+
+                    # Get price set for this variant
+                    price_set_response = supabase_client.table("product_variant_price_set").select(
+                        "price_set_id"
+                    ).eq("variant_id", variant_id).limit(1).execute()
+
+                    if price_set_response.data and len(price_set_response.data) > 0:
+                        price_set_id = price_set_response.data[0]["price_set_id"]
+
+                        # Get price
+                        price_response = supabase_client.table("price").select(
+                            "amount, currency_code"
+                        ).eq("price_set_id", price_set_id).limit(1).execute()
+
+                        if price_response.data and len(price_response.data) > 0:
+                            price_data = price_response.data[0]
+                            product["price_amount"] = price_data["amount"]
+                            product["price_currency"] = price_data["currency_code"]
+                            print(f"[SEARCH] Found price for {product['id']}: {price_data['amount']} {price_data['currency_code']}")
+                        else:
+                            print(f"[SEARCH] No price found for variant {variant_id}")
+                    else:
+                        print(f"[SEARCH] No price set found for variant {variant_id}")
+                else:
+                    print(f"[SEARCH] No variants found for product {product['id']}")
+            except Exception as e:
+                print(f"[SEARCH] Error fetching price for product {product['id']}: {e}")
+
+        return products
     except Exception as e:
         # Fallback: return regular products without similarity search
         print(f"Error in vector search: {e}")
@@ -298,10 +338,28 @@ def format_product_for_widget(product: Dict[str, Any]) -> Dict[str, Any]:
     handle = product.get("handle", "")
     product_url = f"{storefront_url}/products/{handle}" if handle else ""
 
+    # Format price from fetched data
+    price_amount = product.get("price_amount")
+    price_currency = product.get("price_currency", "usd").upper()
+
+    if price_amount:
+        # Convert from cents to dollars
+        amount_dollars = float(price_amount) / 100
+        price_display = f"${amount_dollars:.2f}"
+        print(f"[FORMAT] Product {product.get('id')} price: {price_amount} cents = {price_display}")
+    else:
+        amount_dollars = 0.0
+        price_display = "Price not available"
+        print(f"[FORMAT] Product {product.get('id')} has no price data")
+
     return {
         "sku": product.get("id", ""),
         "name": product.get("title", "Unknown Product"),
-        "price": {"amount": 0.0, "currency": "USD", "display": "Price not available"},
+        "price": {
+            "amount": amount_dollars,
+            "currency": price_currency,
+            "display": price_display
+        },
         "imageUrl": product.get("thumbnail", ""),
         "description": product.get("description", "")[:200] + "..." if product.get("description") else "",
         "badges": [],

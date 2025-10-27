@@ -12,7 +12,7 @@ type Product = {
   }
   badges: string[]
   imageUrl: string
-  productUrl?: string
+  productUrl: string
 }
 
 type WidgetPayload = {
@@ -57,13 +57,8 @@ function App() {
 
             const handleViewDetails = () => {
               console.log('[Rockrooster widget] View details clicked for:', name)
-              console.log('[Rockrooster widget] Product URL:', productUrl)
-              if (productUrl) {
-                console.log('[Rockrooster widget] Navigating to:', productUrl)
-                window.open(productUrl, '_blank')
-              } else {
-                console.warn('[Rockrooster widget] No productUrl provided for:', name)
-              }
+              console.log('[Rockrooster widget] Navigating to:', productUrl)
+              window.open(productUrl, '_blank')
             }
 
             return (
