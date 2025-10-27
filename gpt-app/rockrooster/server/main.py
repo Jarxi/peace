@@ -347,10 +347,10 @@ def format_product_for_widget(product: Dict[str, Any]) -> Dict[str, Any]:
     price_currency = product.get("price_currency", "usd").upper()
 
     if price_amount:
-        # Convert from cents to dollars
-        amount_dollars = float(price_amount) / 100
+        # Price is already in dollars (converted from cents)
+        amount_dollars = float(price_amount)
         price_display = f"${amount_dollars:.2f}"
-        print(f"[FORMAT] Product {product.get('id')} price: {price_amount} cents = {price_display}")
+        print(f"[FORMAT] Product {product.get('id')} price: ${amount_dollars:.2f}")
     else:
         amount_dollars = 0.0
         price_display = "Price not available"
