@@ -32,13 +32,13 @@ def generate_summary(
     product_list = ', '.join(product_names) if product_names else 'No products'
 
     # Create prompt for GPT-4o-mini
-    prompt = f"""Create a very concise summary (maximum 20 words) for these boot search results:
+    prompt = f"""You're helping a customer find the perfect boots. Write a natural, conversational summary (maximum 20 words) that explains what boots we found for them.
 
-Query: {query}
-User intention: {intention_summary or 'Not specified'}
-Found {len(products)} products: {product_list}
+Customer searched for: {query}
+What they need: {intention_summary or 'work boots'}
+We found: {len(products)} boots including {product_list}
 
-Summarize in under 20 words combining the user's need, query, and top recommendations."""
+Write a friendly, natural sentence explaining these products to the customer. Focus on how these boots match their needs. Keep it under 20 words."""
 
     try:
         response = openai_client.chat.completions.create(
@@ -46,15 +46,15 @@ Summarize in under 20 words combining the user's need, query, and top recommenda
             messages=[
                 {
                     "role": "system",
-                    "content": "You are a helpful assistant that creates very brief product search summaries. Keep responses under 20 words."
+                    "content": "You are a friendly boot expert helping customers find the perfect boots. Write natural, conversational summaries that warmly explain products to customers. Always stay under 20 words and focus on how the boots meet their needs."
                 },
                 {
                     "role": "user",
                     "content": prompt
                 }
             ],
-            max_tokens=50,
-            temperature=0.7
+            max_tokens=60,
+            temperature=0.8
         )
 
         summary = response.choices[0].message.content.strip()
