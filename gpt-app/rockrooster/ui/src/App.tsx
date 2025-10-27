@@ -160,10 +160,6 @@ function App() {
                 <div className="boot-loading-spinner" aria-hidden="true" />
                 <span>Rockrooster is picking the right boots…</span>
               </div>
-              <div className="boot-loading-inline" role="status" aria-live="polite">
-                <div className="boot-loading-spinner" aria-hidden="true" />
-                <span>Rockrooster is picking the right boots…</span>
-              </div>
             ) : null}
             {displayProducts.map((product) => {
               const {
