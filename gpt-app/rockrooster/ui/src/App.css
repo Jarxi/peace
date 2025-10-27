@@ -6,9 +6,20 @@
   display: flex;
   flex-direction: column;
   gap: 28px;
-  max-width: 1080px;
-  width: min(100%, 1080px);
-  align-self: center;
+  width: 100%;
+  max-width: none;
+  align-self: stretch;
+  box-sizing: border-box;
+}
+
+.boot-app.is-loading {
+  padding: 16px;
+  gap: 12px;
+}
+
+.boot-app.is-loading {
+  padding: 20px clamp(16px, 4vw, 28px);
+  gap: 16px;
 }
 
 .boot-header h1 {
@@ -22,12 +33,6 @@
   margin: 0;
   font-size: clamp(15px, 2vw, 18px);
   color: var(--rr-text-secondary);
-}
-
-.boot-status {
-  margin: 6px 0 0;
-  font-size: 14px;
-  color: var(--rr-text-tertiary);
 }
 
 .boot-carousel {
@@ -48,6 +53,70 @@
   scrollbar-color: var(--rr-border-muted) transparent;
   width: 100%;
   background: var(--rr-surface-app);
+}
+
+.boot-app.is-loading .boot-carousel {
+  justify-content: center;
+  min-height: auto;
+  padding: 0;
+}
+
+.boot-carousel-frame {
+  position: relative;
+}
+
+.boot-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--rr-icon-primary);
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+  backdrop-filter: blur(8px);
+  z-index: 2;
+}
+
+[data-theme='dark'] .boot-carousel-arrow {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.boot-carousel-arrow svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.boot-carousel-arrow--left {
+  left: 6px;
+}
+
+.boot-carousel-arrow--right {
+  right: 6px;
+}
+
+.boot-carousel-arrow:hover,
+.boot-carousel-arrow:focus-visible {
+  background: rgba(0, 0, 0, 0.12);
+  outline: none;
+}
+
+.boot-carousel-arrow:focus-visible {
+  box-shadow: 0 0 0 3px rgba(2, 133, 255, 0.35);
+}
+
+[data-theme='dark'] .boot-carousel-arrow:hover,
+[data-theme='dark'] .boot-carousel-arrow:focus-visible {
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .boot-carousel--loading {
@@ -181,22 +250,34 @@
   box-shadow: 0 12px 30px rgba(226, 85, 7, 0.28);
 }
 
+
 .boot-card-cta:focus-visible {
   outline: 3px solid rgba(2, 133, 255, 0.45);
   outline-offset: 2px;
 }
 
-.boot-card--loading p {
-  margin: 0;
-  font-size: 15px;
+.boot-loading-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: var(--rr-surface-card);
   color: var(--rr-text-secondary);
+  font-size: 14px;
+  white-space: nowrap;
+  margin: 12px auto;
+}
+
+.boot-app.is-loading .boot-loading-inline {
+  margin: 0 auto;
 }
 
 .boot-loading-spinner {
-  width: 42px;
-  height: 42px;
+  width: 22px;
+  height: 22px;
   border-radius: 999px;
-  border: 3px solid var(--rr-border-subtle);
+  border: 2px solid var(--rr-border-subtle);
   border-top-color: var(--rr-accent-orange);
   animation: boot-spin 900ms linear infinite;
 }
@@ -242,5 +323,9 @@
 
   .boot-card-image {
     height: 140px;
+  }
+
+  .boot-carousel-arrow {
+    display: none;
   }
 }
