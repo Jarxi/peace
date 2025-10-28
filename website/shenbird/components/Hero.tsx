@@ -91,15 +91,19 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="about" className="relative text-center py-24 sm:py-32 overflow-hidden bg-brand-bg">
-      <div 
-        className="absolute inset-0 opacity-20" 
+    <section id="about" className="relative text-center py-24 sm:py-32 overflow-hidden bg-gradient-to-br from-white via-brand-peach/30 to-white">
+      <div
+        className="absolute inset-0 opacity-30"
         style={{
           backgroundImage: `
-            radial-gradient(circle at 15% 50%, #209781 0%, transparent 25%),
-            radial-gradient(circle at 85% 40%, #1B8CFE 0%, transparent 25%)
+            radial-gradient(circle at 15% 50%, #E93D0A 0%, transparent 35%),
+            radial-gradient(circle at 85% 40%, #FF945A 0%, transparent 35%),
+            radial-gradient(circle at 50% 100%, #FDE6D4 0%, transparent 50%)
           `,
         }}
+      ></div>
+      <div
+        className="absolute inset-0 bg-[radial-gradient(#E93D0A15_1px,transparent_1px)] [background-size:20px_20px] opacity-20"
       ></div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -144,7 +148,7 @@ const Hero: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-4 sm:text-lg rounded-full bg-brand-primary hover:bg-brand-primary-dark text-white font-bold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-surface focus:ring-brand-primary disabled:bg-brand-primary/70 disabled:scale-100 disabled:cursor-wait"
+                  className="w-full py-4 sm:text-lg rounded-full bg-brand-primary hover:bg-brand-primary-dark text-white font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-brand-primary/30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-surface focus:ring-brand-primary disabled:bg-brand-primary/70 disabled:scale-100 disabled:cursor-wait"
                 >
                   {isLoading ? 'Joining...' : 'Join Waiting List'}
                 </button>
@@ -161,28 +165,37 @@ const Hero: React.FC = () => {
         </div>
         
         <div className="mt-20 max-w-5xl mx-auto grid gap-8 md:grid-cols-1 lg:grid-cols-3">
-          <div className="bg-brand-bg p-8 rounded-2xl shadow-lg border border-brand-border text-center transform transition-all duration-300 hover:scale-105" style={{ borderColor: '#20978140' }}>
-            <div className="flex items-center justify-center h-16 w-16 rounded-full mx-auto" style={{ backgroundColor: '#20978120' }}>
-              <TargetIcon className="h-8 w-8" style={{ color: '#209781' }} />
+          <div className="relative bg-white p-8 rounded-2xl shadow-xl border-2 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-brand-primary/20 group overflow-hidden" style={{ borderColor: '#E93D0A40' }}>
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="relative z-10">
+              <div className="flex items-center justify-center h-16 w-16 rounded-full mx-auto shadow-lg" style={{ background: 'linear-gradient(135deg, #E93D0A 0%, #FF945A 100%)' }}>
+                <TargetIcon className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="mt-6 text-xl font-bold text-brand-text-primary">Integration</h3>
+              <p className="mt-2 text-base text-brand-text-secondary">We integrate your products into GPT and other generative AI engines.</p>
             </div>
-            <h3 className="mt-6 text-xl font-bold text-brand-text-primary">Intergration</h3>
-            <p className="mt-2 text-base text-brand-text-secondary">We intergrate your products into GPT and other generative AI engines.</p>
           </div>
-          
-          <div className="bg-brand-bg p-8 rounded-2xl shadow-lg border border-brand-border text-center transform transition-all duration-300 hover:scale-105" style={{ borderColor: '#1B8CFE40' }}>
-            <div className="flex items-center justify-center h-16 w-16 rounded-full mx-auto" style={{ backgroundColor: '#1B8CFE20' }}>
-              <AnswerEngineIcon className="h-8 w-8" style={{ color: '#1B8CFE' }} />
+
+          <div className="relative bg-white p-8 rounded-2xl shadow-xl border-2 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-brand-accent/20 group overflow-hidden" style={{ borderColor: '#FF945A40' }}>
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="relative z-10">
+              <div className="flex items-center justify-center h-16 w-16 rounded-full mx-auto shadow-lg" style={{ background: 'linear-gradient(135deg, #FF945A 0%, #FDE6D4 100%)' }}>
+                <AnswerEngineIcon className="h-8 w-8 text-brand-primary" />
+              </div>
+              <h3 className="mt-6 text-xl font-bold text-brand-text-primary">Insights</h3>
+              <p className="mt-2 text-base text-brand-text-secondary">We get insights into your products and sales in generative AI engines.</p>
             </div>
-            <h3 className="mt-6 text-xl font-bold text-brand-text-primary">Insights</h3>
-            <p className="mt-2 text-base text-brand-text-secondary">We get insights into your products and sales in generative AI engines.</p>
           </div>
-          
-          <div className="bg-brand-bg p-8 rounded-2xl shadow-lg border border-brand-border text-center transform transition-all duration-300 hover:scale-105" style={{ borderColor: '#FFB60A40' }}>
-            <div className="flex items-center justify-center h-16 w-16 rounded-full mx-auto" style={{ backgroundColor: '#FFB60A20' }}>
-              <FileCodeIcon className="h-8 w-8" style={{ color: '#FFB60A' }} />
+
+          <div className="relative bg-white p-8 rounded-2xl shadow-xl border-2 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-brand-peach/30 group overflow-hidden" style={{ borderColor: '#FDE6D440' }}>
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-peach/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="relative z-10">
+              <div className="flex items-center justify-center h-16 w-16 rounded-full mx-auto shadow-lg" style={{ background: 'linear-gradient(135deg, #E93D0A 0%, #FDE6D4 100%)' }}>
+                <FileCodeIcon className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="mt-6 text-xl font-bold text-brand-text-primary">Improvement</h3>
+              <p className="mt-2 text-base text-brand-text-secondary">We help increase GMV and conversation rates.</p>
             </div>
-            <h3 className="mt-6 text-xl font-bold text-brand-text-primary">Improvement</h3>
-            <p className="mt-2 text-base text-brand-text-secondary">We help increase GMV and conversation rates.</p>
           </div>
         </div>
       </div>

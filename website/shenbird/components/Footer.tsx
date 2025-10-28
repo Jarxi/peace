@@ -22,15 +22,16 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer id="about" className="bg-brand-surface text-brand-text-secondary">
+    <footer id="about" className="bg-gradient-to-b from-white to-brand-peach/20 text-brand-text-secondary border-t-2 border-brand-border">
       <div className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
-            <div className="col-span-2 md:col-span-4 lg:col-span-2">
-                <a href="#" className="flex items-center space-x-2">
-                    <LogoIcon className="h-8 w-auto" />
-                    <span className="font-bold text-2xl text-brand-text-primary">Peace ai</span>
+            <div className="col-span-2 md:col-span-4 lg:col-span-2 flex flex-col">
+                <a href="#" className="flex items-center space-x-3">
+                    <LogoIcon className="h-6 w-auto" />
+                    <span className="font-bold text-2xl text-black">Shenbird</span>
                 </a>
                 <p className="mt-4 text-sm">The first end-to-end Conversational Commerce platform.</p>
+                <p className="mt-auto pt-4 text-xs">&copy; {new Date().getFullYear()} Shenbird, Inc. All rights reserved.</p>
             </div>
             {Object.entries(footerLinks).map(([title, links]) => (
                 <div key={title}>
@@ -44,9 +45,6 @@ const Footer: React.FC = () => {
                     </ul>
                 </div>
             ))}
-        </div>
-        <div className="mt-12 border-t border-brand-border pt-8 flex flex-col sm:flex-row items-center justify-between">
-            <p className="text-base">&copy; {new Date().getFullYear()} Peace ai, Inc. All rights reserved.</p>
         </div>
       </div>
     </footer>

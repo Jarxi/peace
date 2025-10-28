@@ -17,8 +17,8 @@ const NavLink: React.FC<{ children: React.ReactNode; href: string; active?: bool
     href={href}
     className={`transition-colors duration-300 font-medium text-base ${
       active
-        ? 'text-blue-600 border-b-2 border-blue-600 pb-1'
-        : 'text-slate-600 hover:text-blue-600'
+        ? 'text-brand-primary border-b-2 border-brand-primary pb-1'
+        : 'text-brand-text-secondary hover:text-brand-primary'
     }`}
   >
     {children}
@@ -47,9 +47,9 @@ export default function DashboardLayout({ children, vendorName = "Vendor", vendo
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
-              <Link href="/dashboard" className="flex items-center space-x-2">
-                <PeaceLogo className="h-8 w-auto" />
-                <span className="font-bold text-2xl text-slate-900">Peace ai</span>
+              <Link href="/dashboard" className="flex items-center space-x-3">
+                <PeaceLogo className="h-6 w-auto" />
+                <span className="font-bold text-2xl text-black">Shenbird</span>
               </Link>
             </div>
             <div className="hidden md:flex items-center space-x-10">
