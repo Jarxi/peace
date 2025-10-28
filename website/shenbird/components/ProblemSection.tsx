@@ -19,64 +19,66 @@ const ProblemSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Main Problem Visual */}
-        <div className="max-w-5xl mx-auto mb-16">
-          <div className="bg-gradient-to-br from-white to-brand-peach/30 rounded-3xl shadow-2xl border-2 border-brand-border p-8 sm:p-12 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/5 rounded-full -mr-32 -mt-32 blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-accent/5 rounded-full -ml-32 -mb-32 blur-3xl"></div>
+      </div>
 
-            <div className="relative z-10">
-              <div className="grid md:grid-cols-2 gap-8 items-center">
-                <div>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-brand-text-primary mb-4">
-                    The Opportunity Cost
-                  </h3>
-                  <p className="text-lg text-brand-text-secondary mb-6">
-                    AI platforms are the fastest-growing sales channel. But merchants can&apos;t:
-                  </p>
-                  <ul className="space-y-3">
-                    <li className="flex items-start gap-3">
-                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-red-100 flex items-center justify-center mt-1">
-                        <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                      </div>
-                      <span className="text-brand-text-secondary">List products on conversational interfaces</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-red-100 flex items-center justify-center mt-1">
-                        <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                      </div>
-                      <span className="text-brand-text-secondary">Promote to high-intent AI shoppers</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-red-100 flex items-center justify-center mt-1">
-                        <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                      </div>
-                      <span className="text-brand-text-secondary">Transact seamlessly within chat</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="bg-white rounded-2xl p-8 shadow-xl border border-brand-border">
-                  <div className="text-center mb-6">
-                    <div className="text-5xl font-extrabold text-brand-primary mb-2">$4.1T</div>
-                    <p className="text-sm text-brand-text-secondary">Global e-commerce revenue by 2025</p>
-                  </div>
-                  <div className="text-center">
-                    <div className="p-4 bg-brand-peach/30 rounded-xl">
-                      <div className="text-2xl font-bold text-brand-text-primary">800M+</div>
-                      <p className="text-sm text-brand-text-secondary mt-1">Weekly ChatGPT users</p>
+      {/* Full Bleed - The Opportunity Cost */}
+      <div className="bg-gradient-to-br from-white via-brand-peach/20 to-white py-16 sm:py-20 mb-16 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(#E93D0A15_1px,transparent_1px)] [background-size:20px_20px] opacity-20"></div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h3 className="text-2xl sm:text-3xl font-bold text-brand-text-primary mb-4">
+                  The Opportunity Cost
+                </h3>
+                <p className="text-lg text-brand-text-secondary mb-6">
+                  AI platforms are the fastest-growing sales channel. But merchants can&apos;t:
+                </p>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-red-100 flex items-center justify-center mt-1">
+                      <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
                     </div>
+                    <span className="text-brand-text-secondary">List products on conversational interfaces</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-red-100 flex items-center justify-center mt-1">
+                      <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </div>
+                    <span className="text-brand-text-secondary">Promote to high-intent AI shoppers</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-red-100 flex items-center justify-center mt-1">
+                      <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </div>
+                    <span className="text-brand-text-secondary">Transact seamlessly within chat</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <div className="text-center mb-6">
+                  <div className="text-5xl font-extrabold text-brand-primary mb-2">$4.1T</div>
+                  <p className="text-sm text-brand-text-secondary">Global e-commerce revenue by 2025</p>
+                </div>
+                <div className="text-center">
+                  <div className="p-4 bg-white rounded-xl shadow-sm">
+                    <div className="text-2xl font-bold text-brand-text-primary">800M+</div>
+                    <p className="text-sm text-brand-text-secondary mt-1">Weekly ChatGPT users</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* The Three Barriers */}
         <div className="max-w-6xl mx-auto">
