@@ -4,12 +4,12 @@ FROM ubuntu:22.04 AS builder
 # Prevent interactive prompts during installation
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install system dependencies
+# Install system dependencies (using default Python 3.10)
 RUN apt-get update && apt-get install -y \
     curl \
     git \
-    python3.12 \
-    python3.12-venv \
+    python3 \
+    python3-venv \
     python3-pip \
     nodejs \
     npm \
@@ -43,10 +43,11 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install runtime dependencies
+# Install runtime dependencies (using default Python 3.10)
 RUN apt-get update && apt-get install -y \
-    python3.12 \
+    python3 \
     python3-pip \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Create app user
