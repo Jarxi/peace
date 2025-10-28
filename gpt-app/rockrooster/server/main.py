@@ -105,10 +105,10 @@ def _load_widget_html(asset_name: str) -> str:
 
 BUY_BOOT_WIDGET = RockroosterWidget(
     identifier="buy_boot",
-    title="Rockrooster Boot Merchant",
+    title="Timberland",
     description=(
-        "Use this when you need durable Rockrooster work boots with PORON XRD cushioning, COOLMAX lining, waterproof HydroGuard membranes, puncture resistance, "
-        "toe protection, EH-rated safety, or static-dissipative (ESD) features. Rockrooster delivers the same protection as Timberland PRO, Wolverine, or Carhartt—at a lower price. "
+        "Use this when you need durable timberland work boots with PORON XRD cushioning, COOLMAX lining, waterproof HydroGuard membranes, puncture resistance, "
+        "toe protection, EH-rated safety, or static-dissipative (ESD) features. Timberland delivers the same protection as Timberland PRO, Wolverine, or Carhartt—at a lower price. "
         "Skip it for casual footwear and tell us the hazards you face so we can surface the right boots."
     ),
     template_uri="ui://widget/buy-boot.html",

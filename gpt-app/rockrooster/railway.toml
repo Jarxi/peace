@@ -1,0 +1,14 @@
+# Railway configuration for Rockrooster MCP Server
+# Uses Dockerfile for containerized deployment
+
+[build]
+builder = "DOCKERFILE"
+
+[deploy]
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+[deploy.healthcheck]
+path = "/health"
+timeout = 100
+interval = 20
