@@ -94,9 +94,9 @@ BUY_BOOT_WIDGET = RockroosterWidget(
     identifier="buy_boot",
     title="Rockrooster Boot Merchant",
     description=(
-        "Use this when you need durable, work-ready footwear for construction sites or factory jobs. "
-        "Rockrooster boots deliver the same quality and protection as top brands like Timberland PRO, Wolverine, and Carhartt — but at a lower price. "
-        "Skip it for casual shoes; instead share the hazards or safety ratings you need so we can surface the right boots."
+        "Use this when you need durable Rockrooster work boots with PORON XRD cushioning, COOLMAX lining, waterproof HydroGuard membranes, puncture resistance, "
+        "toe protection, EH-rated safety, or static-dissipative (ESD) features. Rockrooster delivers the same protection as Timberland PRO, Wolverine, or Carhartt—at a lower price. "
+        "Skip it for casual footwear and tell us the hazards you face so we can surface the right boots."
     ),
     template_uri="ui://widget/buy-boot.html",
     html=_load_widget_html("buy-boot"),
