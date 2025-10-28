@@ -180,12 +180,21 @@
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--rr-text-primary);
+  flex: 1 1 auto;
+  min-width: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .boot-card-price {
   margin: 0;
   font-weight: 600;
   color: var(--rr-accent-blue);
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .boot-card-description {

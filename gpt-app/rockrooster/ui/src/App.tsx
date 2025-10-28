@@ -189,8 +189,8 @@ function App() {
                     />
                   </div>
                   <div className="boot-card-body">
-                    <div className="boot-card-meta">
-                      <h2>{name}</h2>
+                  <div className="boot-card-meta">
+                    <h2 title={name}>{name}</h2>
                       {price?.display ? (
                         <p className="boot-card-price">{price.display}</p>
                       ) : null}
