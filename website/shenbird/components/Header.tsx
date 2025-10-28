@@ -16,16 +16,16 @@ const Header: React.FC = () => {
     { name: "Blog", href: "/blog" },
   ];
 
-  const slackLink = "https://join.slack.com/t/Peace/shared_invite/zt-3eualqmsx-xaFX~jk8LG7co48JiNrPsg";
+  const slackLink = "https://shenbird.slack.com";
 
   return (
-    <header className="bg-brand-bg/70 backdrop-blur-lg sticky top-0 z-50 border-b border-brand-border">
+    <header className="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b-2 border-brand-border shadow-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-4">
-            <Link href="/" className="flex items-center space-x-2">
-              <LogoIcon className="h-8 w-auto" />
-              <span className="font-bold text-2xl text-brand-text-primary">Peace ai</span>
+            <Link href="/" className="flex items-center space-x-3">
+              <LogoIcon className="h-6 w-auto" />
+              <span className="font-bold text-2xl text-black">Shenbird</span>
             </Link>
           </div>
           <div className="hidden md:flex items-center space-x-10">
@@ -47,7 +47,7 @@ const Header: React.FC = () => {
             </a>
             <Link
               href="/login"
-              className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-primary rounded-md text-sm font-medium text-white hover:bg-brand-primary/90 transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2 bg-brand-primary hover:bg-brand-primary-dark rounded-full text-sm font-bold text-white shadow-lg hover:shadow-xl hover:shadow-brand-primary/30 transition-all duration-300 transform hover:scale-105"
             >
               Login
             </Link>
@@ -61,26 +61,26 @@ const Header: React.FC = () => {
         </div>
       </div>
       {isMenuOpen && (
-        <div className="md:hidden bg-brand-surface/95 backdrop-blur-sm">
+        <div className="md:hidden bg-white/95 backdrop-blur-md border-b-2 border-brand-border">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navLinks.map((link) => (
-              <Link key={link.name} href={link.href} className="block px-3 py-2 rounded-md text-base font-medium text-brand-text-secondary hover:text-brand-primary hover:bg-brand-border">
+              <Link key={link.name} href={link.href} className="block px-3 py-2 rounded-lg text-base font-medium text-brand-text-secondary hover:text-brand-primary hover:bg-brand-peach/30">
                 {link.name}
               </Link>
             ))}
-            <div className="border-t border-brand-border my-2"></div>
+            <div className="border-t-2 border-brand-border my-2"></div>
             <a
               href={slackLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 px-3 py-2 rounded-md text-base font-medium text-brand-text-secondary hover:text-brand-primary hover:bg-brand-border"
+              className="flex items-center gap-3 px-3 py-2 rounded-lg text-base font-medium text-brand-text-secondary hover:text-brand-primary hover:bg-brand-peach/30"
             >
               <SlackIcon className="h-5 w-5" />
               <span>Join Community</span>
             </a>
             <Link
               href="/login"
-              className="flex items-center gap-3 px-3 py-2 rounded-md text-base font-medium bg-brand-primary text-white hover:bg-brand-primary/90"
+              className="flex items-center justify-center gap-3 px-3 py-2 rounded-full text-base font-bold bg-brand-primary text-white shadow-lg"
             >
               Login
             </Link>

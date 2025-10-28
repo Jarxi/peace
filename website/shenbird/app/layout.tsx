@@ -8,7 +8,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Peace ai",
+  title: "Shenbird",
   description: "Sell Your Products in ChatGPT",
 };
 

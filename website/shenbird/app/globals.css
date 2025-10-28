@@ -13,21 +13,25 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  /* Peace brand colors */
+  /* Shenbird brand colors - Cutting-edge tech palette */
   --color-brand-bg: #ffffff;
-  --color-brand-surface: #f8fafc;
-  --color-brand-text-primary: #2c3642;
-  --color-brand-text-secondary: #5e6c7a;
-  --color-brand-border: #e8edf2;
-  --color-brand-primary: #209781;
-  --color-brand-primary-dark: #187967;
-  --color-brand-accent: #1b8cfe;
-  --color-brand-accent-dark: #1373d1;
-  --color-brand-yellow: #ffb60a;
+  --color-brand-surface: #FDE6D4;
+  --color-brand-text-primary: #4C4C4C;
+  --color-brand-text-secondary: #4C4C4C;
+  --color-brand-border: #FDE6D4;
+  --color-brand-primary: #E93D0A;
+  --color-brand-primary-dark: #d43509;
+  --color-brand-accent: #FF945A;
+  --color-brand-accent-dark: #ff7a3d;
+  --color-brand-yellow: #FF945A;
+  --color-brand-peach: #FDE6D4;
+  --color-brand-dark: #4C4C4C;
 
   /* animations */
   --animate-fade-in: fadeIn 1s ease-in-out;
   --animate-background-pan: backgroundPan 15s linear infinite;
+  --animate-gradient: gradient 8s ease infinite;
+  --animate-glow: glow 2s ease-in-out infinite alternate;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -57,6 +61,27 @@
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px rgba(233, 61, 10, 0.2), 0 0 20px rgba(233, 61, 10, 0.1);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(233, 61, 10, 0.4), 0 0 30px rgba(233, 61, 10, 0.2);
   }
 }
 

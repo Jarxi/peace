@@ -12,7 +12,7 @@ export default function ContactPage() {
           <div className="bg-brand-surface rounded-2xl shadow-lg border border-brand-border p-8 sm:p-12">
             <h1 className="text-4xl font-extrabold text-brand-text-primary mb-4">Get in Touch</h1>
             <p className="text-lg text-brand-text-secondary mb-12">
-              Have questions about Peace ai? We&apos;d love to hear from you. Reach out to us through any of the channels below.
+              Have questions about Shenbird? We&apos;d love to hear from you. Reach out to us through any of the channels below.
             </p>
 
             <div className="space-y-8">
@@ -56,7 +56,7 @@ export default function ContactPage() {
                       Join our Slack workspace to connect with the team and other users in real-time.
                     </p>
                     <a
-                      href="https://join.slack.com/t/Peace/shared_invite/zt-3eualqmsx-xaFX~jk8LG7co48JiNrPsg"
+                      href="https://shenbird.slack.com"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 text-brand-primary hover:text-brand-primary-dark font-semibold transition-colors"
@@ -76,7 +76,7 @@ export default function ContactPage() {
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="text-brand-text-secondary">
                     <h4 className="font-semibold text-brand-text-primary mb-2">General Inquiries</h4>
-                    <p className="text-sm">Questions about our platform, pricing, or how Peace ai works</p>
+                    <p className="text-sm">Questions about our platform, pricing, or how Shenbird works</p>
                   </div>
                   <div className="text-brand-text-secondary">
                     <h4 className="font-semibold text-brand-text-primary mb-2">Technical Support</h4>
