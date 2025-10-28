@@ -3,7 +3,7 @@
 
 [build]
 builder = "NIXPACKS"
-buildCommand = "npm install -g pnpm && cd ui && pnpm install && pnpm run build && cd ../server && pip install -e ."
+buildCommand = "npx pnpm add -g pnpm && cd ui && pnpm install && pnpm run build && cd ../server && pip install -e ."
 
 [deploy]
 startCommand = "cd server && uvicorn main:app --host 0.0.0.0 --port $PORT"
