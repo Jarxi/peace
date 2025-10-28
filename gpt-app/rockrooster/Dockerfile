@@ -11,12 +11,17 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-venv \
     python3-pip \
-    nodejs \
-    npm \
+    ca-certificates \
+    gnupg \
     && rm -rf /var/lib/apt/lists/*
 
-# Install pnpm
-RUN npm install -g pnpm
+# Install Node.js 20.x from NodeSource
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install pnpm using corepack (comes with Node.js 20)
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
 # Set working directory
 WORKDIR /app
