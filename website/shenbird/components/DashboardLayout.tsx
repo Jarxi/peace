@@ -42,8 +42,8 @@ export default function DashboardLayout({ children, vendorName = "Vendor", vendo
   }, [])
 
   return (
-    <div className="bg-gray-50 text-slate-800 min-h-screen font-sans">
-      <header className="bg-white/70 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-200">
+    <div className="bg-gradient-to-br from-white via-brand-peach/10 to-white text-brand-text-primary min-h-screen font-sans">
+      <header className="bg-white/70 backdrop-blur-lg sticky top-0 z-50 border-b border-brand-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">

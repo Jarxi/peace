@@ -22,26 +22,26 @@ export default async function ProfilePage() {
     >
       <div className="p-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Vendor Profile</h1>
-          <p className="mt-2 text-gray-600">
+          <h1 className="text-3xl font-bold text-brand-text-primary">Vendor Profile</h1>
+          <p className="mt-2 text-brand-text-secondary">
             Manage your vendor information, contact details, and store policies
           </p>
         </div>
 
-        <div className="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <h2 className="text-sm font-semibold text-blue-900 mb-1">Admin Information</h2>
+        <div className="mb-6 bg-brand-peach/20 border-2 border-brand-border rounded-2xl p-4">
+          <h2 className="text-sm font-semibold text-brand-text-primary mb-1">Admin Information</h2>
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
-              <span className="text-blue-700 font-medium">Name:</span>{" "}
-              <span className="text-blue-900">{adminName}</span>
+              <span className="text-brand-primary font-medium">Name:</span>{" "}
+              <span className="text-brand-text-primary">{adminName}</span>
             </div>
             <div>
-              <span className="text-blue-700 font-medium">Email:</span>{" "}
-              <span className="text-blue-900">{admin.email}</span>
+              <span className="text-brand-primary font-medium">Email:</span>{" "}
+              <span className="text-brand-text-primary">{admin.email}</span>
             </div>
             <div>
-              <span className="text-blue-700 font-medium">Vendor ID:</span>{" "}
-              <span className="text-blue-900 font-mono text-xs">{vendor.id}</span>
+              <span className="text-brand-primary font-medium">Vendor ID:</span>{" "}
+              <span className="text-brand-text-primary font-mono text-xs">{vendor.id}</span>
             </div>
           </div>
         </div>

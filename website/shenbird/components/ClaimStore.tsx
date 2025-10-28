@@ -32,14 +32,14 @@ export default function ClaimStore({ isTestAccount = false }: ClaimStoreProps) {
 
   return (
     <div className="min-h-[60vh] flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-lg w-full">
+      <div className="bg-white rounded-2xl shadow-xl border-2 border-brand-border max-w-lg w-full">
         <div className="p-6">
           <div className="mb-4">
-            <h3 className="text-xl font-semibold text-slate-900">
+            <h3 className="text-xl font-semibold text-brand-text-primary">
               Link Your Store
             </h3>
           </div>
-          <p className="text-sm text-slate-600 mb-6">
+          <p className="text-sm text-brand-text-secondary mb-6">
             Enter your store claim code to connect your store and view its analytics
           </p>
 
@@ -62,7 +62,7 @@ export default function ClaimStore({ isTestAccount = false }: ClaimStoreProps) {
             )}
 
             <div>
-              <label htmlFor="claimCode" className="block text-sm font-medium text-slate-700 mb-2">
+              <label htmlFor="claimCode" className="block text-sm font-medium text-brand-text-primary mb-2">
                 Claim Code
               </label>
               <input
@@ -73,9 +73,9 @@ export default function ClaimStore({ isTestAccount = false }: ClaimStoreProps) {
                 value={claimCode}
                 onChange={(e) => setClaimCode(e.target.value)}
                 placeholder="Enter your claim code"
-                className="appearance-none block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm text-slate-900"
+                className="appearance-none block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-primary focus:border-brand-primary text-sm text-brand-text-primary"
               />
-              <p className="mt-2 text-xs text-slate-500">
+              <p className="mt-2 text-xs text-brand-text-secondary">
                 You can find your claim code in your store&apos;s integration settings
               </p>
             </div>
@@ -84,7 +84,7 @@ export default function ClaimStore({ isTestAccount = false }: ClaimStoreProps) {
               <button
                 type="submit"
                 disabled={!claimCode || (!isTestAccount && state?.success)}
-                className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-primary hover:bg-brand-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
                 {!isTestAccount && state?.success ? "Linking..." : "Link Store"}
               </button>

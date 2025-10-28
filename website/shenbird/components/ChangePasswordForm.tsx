@@ -13,12 +13,12 @@ export default function ChangePasswordForm() {
   })
 
   return (
-    <div className="bg-white shadow sm:rounded-lg">
+    <div className="bg-white shadow-xl border-2 border-brand-border sm:rounded-2xl">
       <div className="px-4 py-5 sm:p-6">
-        <h3 className="text-lg font-medium leading-6 text-gray-900 mb-2">
+        <h3 className="text-lg font-medium leading-6 text-brand-text-primary mb-2">
           Change Password
         </h3>
-        <p className="text-sm text-gray-600 mb-4">
+        <p className="text-sm text-brand-text-secondary mb-4">
           Update your password to keep your account secure
         </p>
 
@@ -26,7 +26,7 @@ export default function ChangePasswordForm() {
           <div>
             <label
               htmlFor="currentPassword"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-brand-text-primary"
             >
               Current Password
             </label>
@@ -36,7 +36,7 @@ export default function ChangePasswordForm() {
                 id="currentPassword"
                 name="currentPassword"
                 required
-                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border pr-10"
+                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-primary focus:ring-brand-primary sm:text-sm px-3 py-2 border pr-10"
               />
               <button
                 type="button"
@@ -62,7 +62,7 @@ export default function ChangePasswordForm() {
           <div>
             <label
               htmlFor="newPassword"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-brand-text-primary"
             >
               New Password
             </label>
@@ -73,7 +73,7 @@ export default function ChangePasswordForm() {
                 name="newPassword"
                 required
                 minLength={8}
-                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border pr-10"
+                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-primary focus:ring-brand-primary sm:text-sm px-3 py-2 border pr-10"
               />
               <button
                 type="button"
@@ -102,7 +102,7 @@ export default function ChangePasswordForm() {
           <div>
             <label
               htmlFor="confirmPassword"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-brand-text-primary"
             >
               Confirm New Password
             </label>
@@ -113,7 +113,7 @@ export default function ChangePasswordForm() {
                 name="confirmPassword"
                 required
                 minLength={8}
-                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-3 py-2 border pr-10"
+                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-primary focus:ring-brand-primary sm:text-sm px-3 py-2 border pr-10"
               />
               <button
                 type="button"
@@ -151,7 +151,7 @@ export default function ChangePasswordForm() {
             <button
               type="submit"
               disabled={isPending}
-              className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
+              className="inline-flex justify-center rounded-md border border-transparent bg-brand-primary py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-brand-primary-dark focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
               {isPending ? "Changing..." : "Change Password"}
             </button>
