@@ -93,7 +93,11 @@ def _load_widget_html(asset_name: str) -> str:
 BUY_BOOT_WIDGET = RockroosterWidget(
     identifier="buy_boot",
     title="Rockrooster Boot Merchant",
-    description="Browse spotlighted Rockrooster boots ready to buy for demanding worksites. You can search using natural language queries (e.g., 'shoes for hiking')",
+    description=(
+        "Use this when you need work-ready Rockrooster footwear recommendations. "
+        "Describe job conditions, safety needs, or comfort preferences and the tool will surface in-stock boots that match. "
+        "Avoid using it for apparel or non-footwear requests."
+    ),
     template_uri="ui://widget/buy-boot.html",
     html=_load_widget_html("buy-boot"),
     invoking="Gathering Rockrooster boot lineup",
