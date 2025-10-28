@@ -35,13 +35,12 @@ RUN pnpm install
 COPY ui/ ./
 RUN pnpm run build
 
-# Copy server source and install dependencies
+# Copy server source
 WORKDIR /app/server
-COPY server/pyproject.toml server/uv.lock* ./
-RUN pip3 install --no-cache-dir -e .
-
-# Copy rest of server source
 COPY server/ ./
+
+# Install Python dependencies directly from pyproject.toml
+RUN pip3 install --no-cache-dir mcp[cli]>=1.19.0 openai>=1.57.4 supabase>=2.10.0 python-dotenv>=1.0.0 uvicorn
 
 # Production stage
 FROM ubuntu:22.04
@@ -63,9 +62,7 @@ WORKDIR /app
 # Copy built assets from builder
 COPY --from=builder --chown=appuser:appuser /app/server /app/server
 
-# Install Python dependencies
 WORKDIR /app/server
-RUN pip3 install --no-cache-dir uvicorn
 
 # Switch to non-root user
 USER appuser
