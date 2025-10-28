@@ -1,23 +1,11 @@
 # Multi-stage build for Rockrooster MCP Server + UI
-FROM ubuntu:22.04 AS builder
+FROM node:20-slim AS builder
 
-# Prevent interactive prompts during installation
-ENV DEBIAN_FRONTEND=noninteractive
-
-# Install system dependencies (using default Python 3.10)
+# Install Python and build dependencies
 RUN apt-get update && apt-get install -y \
-    curl \
-    git \
     python3 \
-    python3-venv \
     python3-pip \
-    ca-certificates \
-    gnupg \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install Node.js 20.x from NodeSource
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs \
+    python3-venv \
     && rm -rf /var/lib/apt/lists/*
 
 # Install pnpm using corepack (comes with Node.js 20)
@@ -43,14 +31,10 @@ COPY server/ ./
 RUN pip3 install --no-cache-dir mcp[cli]>=1.19.0 openai>=1.57.4 supabase>=2.10.0 python-dotenv>=1.0.0 uvicorn
 
 # Production stage
-FROM ubuntu:22.04
+FROM python:3.10-slim
 
-ENV DEBIAN_FRONTEND=noninteractive
-
-# Install runtime dependencies (using default Python 3.10)
+# Install curl for healthchecks
 RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
@@ -63,6 +47,9 @@ WORKDIR /app
 COPY --from=builder --chown=appuser:appuser /app/server /app/server
 
 WORKDIR /app/server
+
+# Install Python dependencies in production stage
+RUN pip install --no-cache-dir mcp[cli]>=1.19.0 openai>=1.57.4 supabase>=2.10.0 python-dotenv>=1.0.0 uvicorn
 
 # Switch to non-root user
 USER appuser
