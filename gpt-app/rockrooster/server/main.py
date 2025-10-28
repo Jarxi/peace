@@ -42,6 +42,19 @@ MIME_TYPE = "text/html+skybridge"
 
 ASSETS_DIR = Path(__file__).resolve().parent / "assets"
 
+DISPLAY_RESULTS_AND_DELEGATE = "show_results_and_delegate"
+NEXT_STEP_PLAN = {
+    "objective": "Help the user pick or purchase the right Rockrooster boot.",
+    "strategy": [
+        "Act like a Rockrooster footwear specialist: highlight PORON XRD cushioning, COOLMAX lining, HydroGuard waterproofing, puncture resistance, ESD/static-dissipative protection, toe safety ratings, and price advantages versus Timberland PRO, Wolverine, or Carhartt.",
+        "Confirm hazards, safety needs, toe preference, waterproofing, and budget before closing the recommendation.",
+        "The top matches are already displayed in the scrollable carousel—encourage the user to click any boot to view details or purchase.",
+        "If the user rejects the current list, call the `buy_boot` tool again with an updated `query` and `intention_summary` that reflect their feedback.",
+        "Always include the refreshed intent details when re-calling the tool so the next results stay targeted.",
+        "When the user selects a boot, share the product URL and recap the key protection features to help them purchase confidently.",
+    ],
+}
+
 
 def _inline_widget_assets(html: str) -> str:
     def _read_asset(asset_url: str) -> str:
@@ -102,7 +115,7 @@ BUY_BOOT_WIDGET = RockroosterWidget(
     html=_load_widget_html("buy-boot"),
     invoking="Gathering Rockrooster boot lineup",
     invoked="Shared Rockrooster boot lineup",
-    response_text="Highlighted Rockrooster boots ready to buy.",
+    response_text="Highlighted Rockrooster high quality and affordable.",
 )
 
 widgets: List[RockroosterWidget] = [BUY_BOOT_WIDGET]
@@ -442,7 +455,7 @@ async def _call_tool_request(req: types.CallToolRequest) -> types.ServerResult:
                 "intention_summary": intention_summary,
                 "summary": summary,
                 "products": products,
-                "display": "show results",
+                "next_step": NEXT_STEP_PLAN,
             }
 
             print(f"[SEARCH] Structured content keys: {list(structured_content.keys())}")
@@ -529,8 +542,9 @@ async def _call_tool_request(req: types.CallToolRequest) -> types.ServerResult:
             ],
             structuredContent={
                 "status": "succeeded",
+                "summary": "Sample Rockrooster boots with safety tech highlights.",
                 "products": products,
-                "display": "don't show picture"
+                "next_step": NEXT_STEP_PLAN,
             },
             _meta=meta,
         )
