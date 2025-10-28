@@ -158,7 +158,7 @@ function App() {
             {isLoading ? (
               <div className="boot-loading-inline" role="status" aria-live="polite">
                 <div className="boot-loading-spinner" aria-hidden="true" />
-                <span>Rockrooster is picking the right boots…</span>
+                <span>Timberland is picking the right boots…</span>
               </div>
             ) : null}
             {displayProducts.map((product) => {
