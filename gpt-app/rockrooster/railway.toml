@@ -2,7 +2,7 @@
 # This config builds the UI assets first, then starts the Python server
 
 [build]
-builder = "RAILPACK"
+builder = "NIXPACKS"
 buildCommand = "cd ui && pnpm install && pnpm run build && cd ../server && pip install -e ."
 
 [deploy]
