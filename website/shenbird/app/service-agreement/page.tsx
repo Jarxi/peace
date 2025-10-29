@@ -12,7 +12,7 @@ export default function ServiceAgreementPage() {
 
           <h2 className="text-xl font-semibold text-gray-900 mt-8 mb-4">Coming Soon</h2>
           <p className="text-gray-700">
-            Our Service Agreement will outline the terms and conditions for using the Shenbird vendor platform.
+            Our Service Agreement will outline the terms and conditions for using the Shumbird vendor platform.
           </p>
         </div>
       </div>

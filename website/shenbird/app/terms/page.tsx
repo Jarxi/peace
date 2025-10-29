@@ -22,14 +22,14 @@ export default function TermsPage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Acceptance of Terms</h2>
             <p className="text-gray-700">
-              By accessing and using Shenbird (&ldquo;the Service&rdquo;), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to these Terms of Service, please do not use the Service.
+              By accessing and using Shumbird (&ldquo;the Service&rdquo;), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to these Terms of Service, please do not use the Service.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Description of Service</h2>
             <p className="text-gray-700">
-              Shenbird provides a conversational commerce platform that enables businesses to integrate their products with AI-powered chat interfaces, facilitating product discovery and transactions through natural language interactions.
+              Shumbird provides a conversational commerce platform that enables businesses to integrate their products with AI-powered chat interfaces, facilitating product discovery and transactions through natural language interactions.
             </p>
           </section>
 
@@ -63,7 +63,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Intellectual Property</h2>
             <p className="text-gray-700 mb-3">
-              The Service and its original content, features, and functionality are owned by Shenbird and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.
+              The Service and its original content, features, and functionality are owned by Shumbird and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.
             </p>
             <p className="text-gray-700">
               You retain all rights to the content you upload to the Service. By uploading content, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, modify, and display such content solely for the purpose of providing the Service.
@@ -108,14 +108,14 @@ export default function TermsPage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">9. Limitation of Liability</h2>
             <p className="text-gray-700">
-              To the maximum extent permitted by law, Shenbird shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses resulting from your use of the Service.
+              To the maximum extent permitted by law, Shumbird shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses resulting from your use of the Service.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">10. Indemnification</h2>
             <p className="text-gray-700">
-              You agree to indemnify, defend, and hold harmless Shenbird and its officers, directors, employees, and agents from any claims, damages, losses, liabilities, and expenses (including legal fees) arising from your use of the Service or violation of these Terms.
+              You agree to indemnify, defend, and hold harmless Shumbird and its officers, directors, employees, and agents from any claims, damages, losses, liabilities, and expenses (including legal fees) arising from your use of the Service or violation of these Terms.
             </p>
           </section>
 
@@ -164,7 +164,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">17. Entire Agreement</h2>
             <p className="text-gray-700">
-              These Terms constitute the entire agreement between you and Shenbird regarding the Service and supersede all prior agreements and understandings.
+              These Terms constitute the entire agreement between you and Shumbird regarding the Service and supersede all prior agreements and understandings.
             </p>
           </section>
 

@@ -47,14 +47,14 @@ export default function DashboardLayout({ children, vendorName = "Vendor", vendo
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
-              <Link href="/dashboard" className="flex items-center space-x-3">
+              <Link href="/" className="flex items-center space-x-3">
                 <PeaceLogo className="h-6 w-auto" />
-                <span className="font-bold text-2xl text-black">Shenbird</span>
+                <span className="font-bold text-2xl text-black">Shumbird</span>
               </Link>
             </div>
             <div className="hidden md:flex items-center space-x-10">
-              <NavLink href="/dashboard" active={pathname === "/dashboard"}>AEO</NavLink>
-              <NavLink href="/dashboard/acp-report" active={pathname === "/dashboard/acp-report"}>ACP Report</NavLink>
+              <NavLink href="/dashboard" active={pathname === "/dashboard"}>Connect</NavLink>
+              {/* <NavLink href="/dashboard/acp-report" active={pathname === "/dashboard/acp-report"}>ACP Report</NavLink> */}
             </div>
             <div className="hidden md:flex items-center space-x-4">
               <div className="relative" ref={profileRef}>
