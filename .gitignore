@@ -2,6 +2,7 @@
 /linker-client/dist
 .DS_Store
 website/.DS_Store
+website/shenbird/env.local
 
 .vercel
 /sandbox/chatgpt-ui/node_modules
@@ -24,5 +25,8 @@ gpt-app/rockrooster/ui/dist
 gpt-app/rockrooster/server/assets/
 **/.env
 **/venv/
+<<<<<<< HEAD
 
 tokens
+=======
+>>>>>>> 5669005e0a8a6fbbfd78fbc9c6227bc28b2ac5a9

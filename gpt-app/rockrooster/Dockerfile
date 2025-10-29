@@ -28,7 +28,7 @@ WORKDIR /app/server
 COPY server/ ./
 
 # Install Python dependencies directly from pyproject.toml
-RUN pip3 install --no-cache-dir mcp[cli]>=1.19.0 openai>=1.57.4 supabase>=2.10.0 python-dotenv>=1.0.0 uvicorn
+RUN pip3 install --no-cache-dir --break-system-packages mcp[cli]>=1.19.0 openai>=1.57.4 supabase>=2.10.0 python-dotenv>=1.0.0 uvicorn
 
 # Production stage
 FROM python:3.10-slim
@@ -49,7 +49,7 @@ COPY --from=builder --chown=appuser:appuser /app/server /app/server
 WORKDIR /app/server
 
 # Install Python dependencies in production stage
-RUN pip install --no-cache-dir mcp[cli]>=1.19.0 openai>=1.57.4 supabase>=2.10.0 python-dotenv>=1.0.0 uvicorn
+RUN pip install --no-cache-dir --break-system-packages mcp[cli]>=1.19.0 openai>=1.57.4 supabase>=2.10.0 python-dotenv>=1.0.0 uvicorn
 
 # Switch to non-root user
 USER appuser

@@ -5,8 +5,8 @@ export const PeaceLogo: React.FC<{ className?: string }> = ({
   className,
 }) => (
   <Image
-    src="/shenbird_black.png"
-    alt="Shenbird Logo"
+    src="/shumbird_black.png"
+    alt="Shumbird Logo"
     width={40}
     height={40}
     className={className}

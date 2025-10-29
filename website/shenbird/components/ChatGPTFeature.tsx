@@ -32,7 +32,7 @@ const ChatGPTFeature: React.FC = () => {
               Sell Directly Inside ChatGPT
             </h2>
             <p className="mt-6 text-lg sm:text-xl text-brand-text-secondary max-w-xl mx-auto lg:mx-0">
-              Transform conversations into conversions. With Shenbird, your customers can browse, select, and purchase products directly within their ChatGPT session — no redirects, no friction, just a seamless path to checkout.
+              Transform conversations into conversions. With Shumbird, your customers can browse, select, and purchase products directly within their ChatGPT session — no redirects, no friction, just a seamless path to checkout.
             </p>
             <div className="mt-8 flex gap-4 justify-center lg:justify-start">
                <a href="#demo" className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-full text-white bg-brand-primary hover:bg-brand-primary-dark transition-all duration-300 shadow-2xl shadow-brand-primary/30 transform hover:scale-105 hover:shadow-brand-primary/50">
