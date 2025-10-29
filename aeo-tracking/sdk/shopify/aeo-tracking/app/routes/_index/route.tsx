@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from "react";
 import type { LoaderFunctionArgs } from "react-router";
 import { redirect, Form, useLoaderData } from "react-router";
 
@@ -15,6 +16,32 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export default function Landing() {
   const { showForm } = useLoaderData<typeof loader>();
+  const screenshots = useMemo(
+    () => [
+      {
+        src: "/images/dashboard_recent_activity.png",
+        alt: "Screenshot of recent activity metrics in the Shumbird tracker dashboard",
+      },
+      {
+        src: "/images/dashboard_source.png",
+        alt: "Screenshot showing traffic source breakdown in the Shumbird tracker dashboard",
+      },
+      {
+        src: "/images/dashboard_trending.png",
+        alt: "Screenshot of trending products driven by ChatGPT referrals",
+      },
+    ],
+    [],
+  );
+  const [activeScreenshot, setActiveScreenshot] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveScreenshot((prev) => (prev + 1) % screenshots.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [screenshots.length]);
 
   const layoutStyles = {
     page: {
@@ -23,7 +50,7 @@ export default function Landing() {
       alignItems: "center",
       justifyContent: "center",
       padding: "4rem 1.5rem",
-      background: "linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%)",
+      background: "#f3f3f3",
     },
     shell: {
       width: "100%",
@@ -34,7 +61,8 @@ export default function Landing() {
       background: "#ffffff",
       borderRadius: "24px",
       padding: "3rem",
-      boxShadow: "0 40px 80px rgba(79, 70, 229, 0.12)",
+      boxShadow: "0 32px 64px rgba(13, 13, 13, 0.06)",
+      border: "1px solid rgba(13, 13, 13, 0.12)",
     },
     pitch: {
       display: "flex",
@@ -50,21 +78,21 @@ export default function Landing() {
       fontWeight: 600,
       textTransform: "uppercase" as const,
       letterSpacing: "0.08em",
-      color: "#3730a3",
-      background: "rgba(79, 70, 229, 0.12)",
+      color: "#e25507",
+      background: "rgba(255, 158, 108, 0.2)",
       borderRadius: "999px",
       padding: "0.45rem 0.85rem",
     },
     title: {
       fontSize: "2.25rem",
       lineHeight: 1.2,
-      color: "#0f172a",
+      color: "#0d0d0d",
       margin: 0,
     },
     lede: {
       fontSize: "1.05rem",
       lineHeight: 1.6,
-      color: "#475569",
+      color: "#5d5d5d",
       margin: 0,
     },
     highlights: {
@@ -73,7 +101,7 @@ export default function Landing() {
       margin: 0,
       display: "grid",
       gap: "0.9rem",
-      color: "#1e293b",
+      color: "#5d5d5d",
     },
     highlightItem: {
       paddingLeft: "1.75rem",
@@ -87,8 +115,8 @@ export default function Landing() {
       width: "0.65rem",
       height: "0.65rem",
       borderRadius: "0.2rem",
-      background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
-      boxShadow: "0 0 0 3px rgba(99, 102, 241, 0.15)",
+      background: "#e25507",
+      boxShadow: "0 0 0 3px rgba(226, 85, 7, 0.18)",
     },
     form: {
       marginTop: "0.5rem",
@@ -100,11 +128,11 @@ export default function Landing() {
       display: "grid",
       gap: "0.35rem",
       fontSize: "0.95rem",
-      color: "#111827",
+      color: "#0d0d0d",
     },
     input: {
       borderRadius: "0.75rem",
-      border: "1px solid #cbd5f5",
+      border: "1px solid rgba(13, 13, 13, 0.12)",
       padding: "0.75rem 1rem",
       fontSize: "0.95rem",
       transition: "border-color 0.2s, box-shadow 0.2s",
@@ -120,13 +148,13 @@ export default function Landing() {
       fontSize: "0.95rem",
       fontWeight: 600,
       color: "#ffffff",
-      background: "linear-gradient(135deg, #6366f1 0%, #4338ca 100%)",
+      background: "#e25507",
       cursor: "pointer",
-      boxShadow: "0 12px 24px rgba(99, 102, 241, 0.25)",
+      boxShadow: "0 12px 24px rgba(226, 85, 7, 0.18)",
     },
     linkRow: {
       fontSize: "0.9rem",
-      color: "#4c1d95",
+      color: "#0285ff",
     },
     preview: {
       display: "flex",
@@ -139,15 +167,45 @@ export default function Landing() {
       width: "100%",
       borderRadius: "20px",
       overflow: "hidden",
-      border: "1px solid rgba(99, 102, 241, 0.15)",
-      background: "#f1f5f9",
-      boxShadow: "0 25px 60px rgba(148, 163, 184, 0.35)",
+      border: "1px solid rgba(13, 13, 13, 0.12)",
+      background: "#ffffff",
+      position: "relative" as const,
+      minHeight: "320px",
     },
     caption: {
       fontSize: "0.9rem",
-      color: "#475569",
+      color: "#5d5d5d",
       textAlign: "center" as const,
       margin: 0,
+    },
+    screenshotImage: {
+      position: "absolute" as const,
+      inset: 0,
+      width: "100%",
+      height: "100%",
+      objectFit: "contain" as const,
+      background: "#ffffff",
+      opacity: 0,
+      transition: "opacity 0.6s ease",
+    },
+    screenshotImageActive: {
+      opacity: 1,
+    },
+    dots: {
+      display: "flex",
+      justifyContent: "center",
+      gap: "0.5rem",
+      marginTop: "1rem",
+    },
+    dot: {
+      width: "10px",
+      height: "10px",
+      borderRadius: "50%",
+      background: "rgba(13, 13, 13, 0.12)",
+      display: "inline-block",
+    },
+    dotActive: {
+      background: "#e25507",
     },
   };
 
@@ -199,12 +257,36 @@ export default function Landing() {
 
         <aside style={layoutStyles.preview} aria-label="Product preview">
           <div style={layoutStyles.frame}>
-            <img
-              src="/images/demo.png"
-              alt="Dashboard preview showing ChatGPT traffic and integration code"
-              loading="lazy"
-              style={{ display: "block", width: "100%", height: "auto" }}
-            />
+            {screenshots.map((shot, index) => (
+              <img
+                key={shot.src}
+                src={shot.src}
+                alt={shot.alt}
+                loading={index === 0 ? "eager" : "lazy"}
+                aria-hidden={index === activeScreenshot ? "false" : "true"}
+                role="presentation"
+                style={{
+                  ...layoutStyles.screenshotImage,
+                  ...(index === activeScreenshot
+                    ? layoutStyles.screenshotImageActive
+                    : null),
+                }}
+              />
+            ))}
+          </div>
+          <div style={layoutStyles.dots} role="tablist" aria-label="Screenshot picker">
+            {screenshots.map((_, index) => (
+              <span
+                key={index}
+                style={
+                  index === activeScreenshot
+                    ? { ...layoutStyles.dot, ...layoutStyles.dotActive }
+                    : layoutStyles.dot
+                }
+                role="tab"
+                aria-selected={index === activeScreenshot}
+              />
+            ))}
           </div>
           <p style={layoutStyles.caption}>
             Up and running in minutes—watch ChatGPT visits show up right away.
