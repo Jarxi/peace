@@ -69,8 +69,17 @@ export default function Landing() {
       flexDirection: "column" as const,
       gap: "1.5rem",
     },
+    brandRow: {
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "0.65rem",
+    },
+    logoImg: {
+      height: "56px",
+      width: "auto",
+      display: "block",
+    },
     tag: {
-      alignSelf: "flex-start",
       display: "inline-flex",
       alignItems: "center",
       gap: "0.35rem",
@@ -213,7 +222,14 @@ export default function Landing() {
     <main style={layoutStyles.page}>
       <div style={layoutStyles.shell}>
         <section style={layoutStyles.pitch} aria-label="AEO tracking overview">
-          <span style={layoutStyles.tag}>Shumbird AEO tracking</span>
+          <div style={layoutStyles.brandRow}>
+            <img
+              src="/images/logo.png"
+              alt="Shumbird logo"
+              style={layoutStyles.logoImg}
+            />
+            <span style={layoutStyles.tag}>Shumbird AEO tracking</span>
+          </div>
           <h1 style={layoutStyles.title}>ChatGPT Attribution for Shopify Stores</h1>
           <p style={layoutStyles.lede}>
             See how many shoppers arrive from ChatGPT, what they do once they land, and how much revenue it creates—no code or theme edits required.
