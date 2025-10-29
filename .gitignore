@@ -24,3 +24,5 @@ gpt-app/rockrooster/ui/dist
 gpt-app/rockrooster/server/assets/
 **/.env
 **/venv/
+
+tokens
