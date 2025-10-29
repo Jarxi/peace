@@ -16,7 +16,7 @@ const Header: React.FC = () => {
     { name: "Blog", href: "/blog" },
   ];
 
-  const slackLink = "https://shumbird.slack.com";
+  const slackLink = "https://join.slack.com/t/shumbird/shared_invite/zt-3g1423380-4NtYidQ7XmzwmST5wviCsQ";
 
   return (
     <header className="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b-2 border-brand-border shadow-sm">
