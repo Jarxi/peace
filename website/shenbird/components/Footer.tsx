@@ -28,10 +28,10 @@ const Footer: React.FC = () => {
             <div className="col-span-2 md:col-span-4 lg:col-span-2 flex flex-col">
                 <a href="#" className="flex items-center space-x-3">
                     <LogoIcon className="h-6 w-auto" />
-                    <span className="font-bold text-2xl text-black">Shenbird</span>
+                    <span className="font-bold text-2xl text-black">Shumbird</span>
                 </a>
                 <p className="mt-4 text-sm">The first end-to-end Conversational Commerce platform.</p>
-                <p className="mt-auto pt-4 text-xs">&copy; {new Date().getFullYear()} Shenbird, Inc. All rights reserved.</p>
+                <p className="mt-auto pt-4 text-xs">&copy; {new Date().getFullYear()} Shumbird, Inc. All rights reserved.</p>
             </div>
             {Object.entries(footerLinks).map(([title, links]) => (
                 <div key={title}>

@@ -16,7 +16,7 @@ const Header: React.FC = () => {
     { name: "Blog", href: "/blog" },
   ];
 
-  const slackLink = "https://shenbird.slack.com";
+  const slackLink = "https://shumbird.slack.com";
 
   return (
     <header className="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b-2 border-brand-border shadow-sm">
@@ -25,7 +25,7 @@ const Header: React.FC = () => {
           <div className="flex items-center space-x-4">
             <Link href="/" className="flex items-center space-x-3">
               <LogoIcon className="h-6 w-auto" />
-              <span className="font-bold text-2xl text-black">Shenbird</span>
+              <span className="font-bold text-2xl text-black">Shumbird</span>
             </Link>
           </div>
           <div className="hidden md:flex items-center space-x-10">

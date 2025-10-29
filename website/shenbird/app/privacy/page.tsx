@@ -22,7 +22,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Introduction</h2>
             <p className="text-gray-700">
-              Welcome to Shenbird (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our conversational commerce platform.
+              Welcome to Shumbird (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our conversational commerce platform.
             </p>
           </section>
 
