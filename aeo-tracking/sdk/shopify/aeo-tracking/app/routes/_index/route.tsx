@@ -155,7 +155,7 @@ export default function Landing() {
     <main style={layoutStyles.page}>
       <div style={layoutStyles.shell}>
         <section style={layoutStyles.pitch} aria-label="AEO tracking overview">
-          <span style={layoutStyles.tag}>Shopify App</span>
+          <span style={layoutStyles.tag}>Shumbird AEO tracking</span>
           <h1 style={layoutStyles.title}>ChatGPT Attribution for Shopify Stores</h1>
           <p style={layoutStyles.lede}>
             See how many shoppers arrive from ChatGPT, what they do once they land, and how much revenue it creates—no code or theme edits required.
@@ -191,8 +191,8 @@ export default function Landing() {
           )}
 
           <div style={layoutStyles.linkRow}>
-            <a href="https://www.Peace.ai" target="_blank" rel="noreferrer">
-              Learn more at Peace.ai
+            <a href="https://shumbird.com" target="_blank" rel="noreferrer">
+              Learn more at shumbird.com
             </a>
           </div>
         </section>
