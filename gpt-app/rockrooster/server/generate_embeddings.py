@@ -24,7 +24,7 @@ supabase: Client = create_client(
 def create_product_text(product: Dict[str, Any], variants: List[Dict[str, Any]]) -> str:
     """
     Create a text representation of a product for embedding generation.
-    Combines product title, description, and variant details.
+    Combines product title, description, geo_metadata, tags from metadata, and variant details.
     """
     parts = []
 
@@ -35,6 +35,18 @@ def create_product_text(product: Dict[str, Any], variants: List[Dict[str, Any]])
     # Add product description
     if product.get("description"):
         parts.append(product["description"])
+
+    # Add geo_metadata if present
+    if product.get("geo_metadata"):
+        parts.append(f"Geographic context: {product['geo_metadata']}")
+
+    # Add tags from metadata if present
+    metadata = product.get("metadata")
+    if metadata and isinstance(metadata, dict):
+        tags = metadata.get("tags")
+        if tags and isinstance(tags, str) and tags.strip():
+            # Tags are comma-separated, clean them up for embedding
+            parts.append(f"Tags: {tags}")
 
     # Add variant information
     if variants:
