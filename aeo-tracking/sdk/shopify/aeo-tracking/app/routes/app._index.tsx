@@ -52,8 +52,8 @@ export default function Index() {
         text: "Copy your link code below.",
       },
       {
-        title: "Open Peace.ai",
-        text: "Open Peace.ai, register, and log in.",
+        title: "Open Shumbird.com",
+        text: "Open Shunbird.com, register, and log in.",
       },
       {
         title: "Paste the code",
@@ -103,9 +103,9 @@ export default function Index() {
     <s-page>
       <div className={styles.pageShell}>
         <div className={styles.headerStrip}>
-          <span className={styles.headerTag}>AEO tracking for Shopify store</span>
+          <span className={styles.headerTag}>AEO tracking</span>
           <span className={styles.dividerDot} aria-hidden />
-          <span className={styles.headerCopy}>Connect your store to Peace</span>
+          <span className={styles.headerCopy}>Connect your store to Shumbird</span>
         </div>
 
         <section className={styles.heroCard} aria-label="Connect Shopify & track ChatGPT clicks">
@@ -153,11 +153,11 @@ export default function Index() {
 
           <a
             className={styles.primaryCta}
-            href="https://www.Peace.ai/login"
+            href="https://www.shumbird.com/login"
             target="_blank"
             rel="noreferrer"
           >
-            Go to Peace.ai to activate
+            Go to shumbird.com to activate
           </a>
           <div className={styles.heroCtaCaption}>
             No developer changes required.
@@ -184,7 +184,7 @@ export default function Index() {
 
         <section className={styles.helpStrip}>
           Need a hand?{' '}
-          <a className={styles.helpLink} href="https://www.Peace.ai/contact">
+          <a className={styles.helpLink} href="https://www.shumbird.com/contact">
             contact support
           </a>
           .
