@@ -53,7 +53,7 @@ export default function Index() {
       },
       {
         title: "Open Shumbird.com",
-        text: "Open Shunbird.com, register, and log in.",
+        text: "Open Shumbird.com, register, and log in.",
       },
       {
         title: "Paste the code",
@@ -63,6 +63,26 @@ export default function Index() {
     [],
   );
 
+  const screenshots = useMemo(
+    () => [
+      {
+        src: "/images/dashboard_source.png",
+        alt: "Screenshot showing traffic source breakdown in the Shumbird tracker dashboard",
+      },
+      {
+        src: "/images/dashboard_recent_activity.png",
+        alt: "Screenshot of recent activity metrics in the Shumbird tracker dashboard",
+      },
+
+      {
+        src: "/images/dashboard_trending.png",
+        alt: "Screenshot of traffic trending driven by ChatGPT VS Google, Meta referrals",
+      },
+    ],
+    [],
+  );
+
+  const [activeScreenshot, setActiveScreenshot] = useState(0);
 
   const integrationCodeDisplay = integrationCode || "Pending - please refresh the page";
 
@@ -99,19 +119,26 @@ export default function Index() {
     };
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveScreenshot((prev) => (prev + 1) % screenshots.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [screenshots]);
+
   return (
     <s-page>
       <div className={styles.pageShell}>
         <div className={styles.headerStrip}>
-          <span className={styles.headerTag}>AEO tracking</span>
-          <span className={styles.dividerDot} aria-hidden />
-          <span className={styles.headerCopy}>Connect your store to Shumbird</span>
+          <span className={styles.headerTag}>Shumbird AEO tracking</span>
         </div>
 
         <section className={styles.heroCard} aria-label="Connect Shopify & track ChatGPT clicks">
           <header className={styles.heroHeader}>
             <div>
               <h1>ChatGPT AEO Tracker for Shopify Store</h1>
+              <p className={styles.heroSubcopy}>Connect your store to Shumbird and activate real-time attribution.</p>
               <p>Real-time tracking how many shoppers coming from ChatGPT to your Shopify store (limited-time <strong>free</strong>).</p>
             </div>
           </header>
@@ -172,12 +199,36 @@ export default function Index() {
           <p className={styles.screenshotCaption}>
             Monitor ChatGPT-driven sessions and conversions at a glance.
           </p>
-          <div className={styles.screenshotFrame}>
-            <img
-              src="/images/demo.png"
-              alt="Screenshot of the AEO tracking dashboard showing ChatGPT referral metrics"
-              loading="lazy"
-            />
+          <div className={styles.screenshotFrame} role="list">
+            {screenshots.map((shot, index) => (
+              <img
+                key={shot.src}
+                src={shot.src}
+                alt={shot.alt}
+                role="listitem"
+                className={
+                  index === activeScreenshot
+                    ? styles.screenshotImageActive
+                    : styles.screenshotImage
+                }
+                loading={index === 0 ? "eager" : "lazy"}
+                aria-hidden={index === activeScreenshot ? "false" : "true"}
+              />
+            ))}
+          </div>
+          <div className={styles.screenshotDots} role="tablist" aria-label="Screenshot picker">
+            {screenshots.map((_, index) => (
+              <span
+                key={index}
+                className={
+                  index === activeScreenshot
+                    ? styles.screenshotDotActive
+                    : styles.screenshotDot
+                }
+                role="tab"
+                aria-selected={index === activeScreenshot}
+              />
+            ))}
           </div>
         </section>
 

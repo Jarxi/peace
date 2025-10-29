@@ -15,7 +15,7 @@
   font-size: 0.9rem;
   color: #5d5d5d;
   margin-bottom: 1.5rem;
-  gap: 0.6rem;
+  justify-content: flex-start;
 }
 
 .headerTag {
@@ -29,17 +29,6 @@
   letter-spacing: 0.08em;
 }
 
-.dividerDot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #e25507;
-}
-
-.headerCopy {
-  /* No specific styles needed */
-}
-
 .heroCard {
   /* No specific container styles needed */
 }
@@ -48,6 +37,12 @@
   font-size: 1.85rem;
   margin: 0;
   color: #0d0d0d;
+}
+
+.heroSubcopy {
+  margin: 0.45rem 0 0.9rem;
+  color: #5d5d5d;
+  font-size: 1rem;
 }
 
 .heroHeader p {
@@ -184,7 +179,7 @@
   color: #0d0d0d;
   text-align: center;
   border: 1px solid rgba(13, 13, 13, 0.12);
-  box-shadow: 0 18px 32px rgba(15, 23, 42, 0.12);
+  box-shadow: none;
 }
 
 .screenshotTitle {
@@ -205,15 +200,52 @@
   width: 100%;
   border-radius: 0.9rem;
   overflow: hidden;
-  border: 1px solid rgba(13, 13, 13, 0.12);
+  border: none;
   background: #ffffff;
-  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.16);
+  position: relative;
+  min-height: 320px;
 }
 
 .screenshotFrame img {
   display: block;
   width: 100%;
   height: auto;
+}
+
+.screenshotImage,
+.screenshotImageActive {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #ffffff;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.screenshotImageActive {
+  opacity: 1;
+}
+
+.screenshotDots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.screenshotDot,
+.screenshotDotActive {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(13, 13, 13, 0.12);
+  display: inline-block;
+}
+
+.screenshotDotActive {
+  background: #e25507;
 }
 
 .helpStrip {
@@ -236,5 +268,9 @@
 
   .copyButton {
     width: 100%;
+  }
+
+  .screenshotFrame {
+    min-height: 220px;
   }
 }
