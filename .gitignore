@@ -2,6 +2,7 @@
 /linker-client/dist
 .DS_Store
 website/.DS_Store
+website/shenbird/env.local
 
 .vercel
 /sandbox/chatgpt-ui/node_modules
