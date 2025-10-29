@@ -44,8 +44,8 @@ export default function Index() {
       <s-section heading="Welcome">
         <s-paragraph>
           Hi, we provide auto AEO tracking. Please check{" "}
-          <s-link href="https://Peace.ai" target="_blank">
-            Peace.ai
+          <s-link href="https://shumbird.com" target="_blank">
+            Shumbird.com
           </s-link>{" "}
           for details.
         </s-paragraph>
