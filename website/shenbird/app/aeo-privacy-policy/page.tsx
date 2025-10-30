@@ -51,7 +51,7 @@ export default function AEOPrivacyPolicy() {
 
             <h3 className="text-xl font-semibold text-brand-text-primary mt-6 mb-3">Contact Us</h3>
             <p className="mb-6">
-              For more information about our privacy practices, if you have questions, or if you would like to make a complaint, please contact us by e-mail at <a href="mailto:contact@Peace.ai" className="text-brand-primary hover:text-brand-primary-dark underline">contact@Peace.ai</a>.
+              For more information about our privacy practices, if you have questions, or if you would like to make a complaint, please contact us by e-mail at <a href="mailto:contact@shumbird.com" className="text-brand-primary hover:text-brand-primary-dark underline">contact@shumbird.com</a>.
             </p>
           </div>
         </div>
