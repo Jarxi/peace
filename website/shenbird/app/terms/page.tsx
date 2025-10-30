@@ -9,10 +9,9 @@ export default function TermsPage() {
       <Header />
       <main className="min-h-screen bg-brand-bg py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-          <div className="bg-brand-surface rounded-2xl shadow-lg border border-brand-border p-8 sm:p-12">
-            <h1 className="text-4xl font-extrabold text-brand-text-primary mb-8">Terms of Service</h1>
+          <h1 className="text-4xl font-extrabold text-brand-text-primary mb-8">Terms of Service</h1>
 
-            <div className="space-y-8 text-brand-text-secondary prose prose-lg max-w-none">
+          <div className="space-y-8 text-brand-text-secondary prose prose-lg max-w-none">
           <section>
             <p className="text-sm text-gray-600 mb-6">
               Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
@@ -177,13 +176,12 @@ export default function TermsPage() {
               Email: <a href="mailto:legal@Peace.ai" className="text-blue-600 hover:text-blue-800">legal@Peace.ai</a>
             </p>
           </section>
-            </div>
+          </div>
 
-            <div className="mt-8 text-center">
-              <Link href="/" className="text-brand-primary hover:text-brand-primary-dark font-bold transition-colors">
-                ← Back to Home
-              </Link>
-            </div>
+          <div className="mt-8 text-center">
+            <Link href="/" className="text-brand-primary hover:text-brand-primary-dark font-bold transition-colors">
+              ← Back to Home
+            </Link>
           </div>
         </div>
       </main>
