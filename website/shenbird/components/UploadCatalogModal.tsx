@@ -155,14 +155,14 @@ export default function UploadCatalogModal({ isOpen, onClose, onAnalysisComplete
 
             {state?.success && !state?.warning && state?.analysis && (
               <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md text-sm">
-                <div className="font-semibold mb-1">Compliance Analysis Complete!</div>
+                <div className="font-semibold mb-1">Analysis Complete!</div>
                 <div className="text-xs mt-2 space-y-1">
                   <div>Overall Score: <span className="font-bold">{state.analysis.overall_score}%</span></div>
                   <div>Total Products: {state.analysis.total_products}</div>
                   <div className="flex gap-4">
-                    <span className="text-green-700">✓ Compliant: {state.analysis.compliant_products}</span>
+                    <span className="text-green-700">✓ Ready: {state.analysis.compliant_products}</span>
                     <span className="text-yellow-700">⚠ Needs Work: {state.analysis.needs_improvement}</span>
-                    <span className="text-red-700">✗ Non-Compliant: {state.analysis.non_compliant}</span>
+                    <span className="text-red-700">✗ Needs Attention: {state.analysis.non_compliant}</span>
                   </div>
                 </div>
               </div>

@@ -269,11 +269,11 @@ export default function ProductComplianceReport({
       {/* Overall Status */}
       <div className="bg-white shadow rounded-lg p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold text-gray-900">Product Compliance Report</h2>
+          <h2 className="text-xl font-semibold text-gray-900">Product Analysis Report</h2>
           {getOverallStatusBadge()}
         </div>
         <p className="text-gray-600 mb-4">
-          Analysis of {total_products} products against ACP (Agentic Checkout Protocol) requirements
+          Analysis of {total_products} products for platform readiness
         </p>
 
         {/* Score Summary */}
@@ -285,7 +285,7 @@ export default function ProductComplianceReport({
           </div>
           <div className="border border-green-200 rounded-lg p-4 bg-green-50">
             <div className="text-3xl font-bold text-green-700 mb-1">{compliant_products}</div>
-            <div className="text-sm font-semibold text-gray-700">Compliant</div>
+            <div className="text-sm font-semibold text-gray-700">Ready</div>
             <div className="text-xs text-gray-500">&ge; 90% coverage</div>
           </div>
           <div className="border border-yellow-200 rounded-lg p-4 bg-yellow-50">
@@ -295,17 +295,17 @@ export default function ProductComplianceReport({
           </div>
           <div className="border border-red-200 rounded-lg p-4 bg-red-50">
             <div className="text-3xl font-bold text-red-700 mb-1">{non_compliant}</div>
-            <div className="text-sm font-semibold text-gray-700">Non-Compliant</div>
+            <div className="text-sm font-semibold text-gray-700">Needs Attention</div>
             <div className="text-xs text-gray-500">&lt; 50% coverage</div>
           </div>
         </div>
       </div>
 
-      {/* Merchant Compliance Section */}
+      {/* Merchant Information Section */}
       <div className="bg-white shadow rounded-lg p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Merchant Compliance</h2>
+        <h2 className="text-xl font-semibold text-gray-900 mb-4">Merchant Information</h2>
         <p className="text-gray-600 mb-4">
-          Seller information required for ACP product feed
+          Seller information required for product feed
         </p>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
@@ -324,11 +324,11 @@ export default function ProductComplianceReport({
         </div>
       </div>
 
-      {/* Fulfillment Compliance Section */}
+      {/* Fulfillment Information Section */}
       <div className="bg-white shadow rounded-lg p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Fulfillment Compliance</h2>
+        <h2 className="text-xl font-semibold text-gray-900 mb-4">Fulfillment Information</h2>
         <p className="text-gray-600 mb-4">
-          Shipping methods, costs, and estimated delivery times for ACP product feed
+          Shipping methods, costs, and estimated delivery times for product feed
         </p>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
@@ -348,11 +348,11 @@ export default function ProductComplianceReport({
         </div>
       </div>
 
-      {/* Returns Compliance Section */}
+      {/* Returns Information Section */}
       <div className="bg-white shadow rounded-lg p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Returns Compliance</h2>
+        <h2 className="text-xl font-semibold text-gray-900 mb-4">Returns Information</h2>
         <p className="text-gray-600 mb-4">
-          Return and refund policies required for ACP product feed
+          Return and refund policies required for product feed
         </p>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
@@ -373,7 +373,7 @@ export default function ProductComplianceReport({
 
       {/* Product-Level Details */}
       <div className="bg-white shadow rounded-lg p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Product-Level Compliance</h2>
+        <h2 className="text-xl font-semibold text-gray-900 mb-4">Product-Level Analysis</h2>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">

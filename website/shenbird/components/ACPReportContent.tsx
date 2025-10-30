@@ -96,7 +96,7 @@ export default function ACPReportContent() {
     <>
       <div className="p-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">ACP Compliance Report</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Product Analysis Report</h1>
           <p className="mt-2 text-gray-600">
             AI Commerce Platform readiness assessment for your product catalog
           </p>
@@ -106,9 +106,9 @@ export default function ACPReportContent() {
         {isLoadingReport && (
           <div className="bg-white shadow rounded-lg p-12 text-center">
             <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-blue-600 border-r-transparent mb-4"></div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Loading Compliance Report</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">Loading Report</h3>
             <p className="text-gray-600">
-              Fetching your product compliance data...
+              Fetching your product data...
             </p>
           </div>
         )}
@@ -146,7 +146,7 @@ export default function ACPReportContent() {
             </svg>
             <h3 className="text-lg font-medium text-gray-900 mb-2">No Analysis Yet</h3>
             <p className="text-gray-600 mb-6">
-              Upload your Shopify product catalog to get a detailed ACP compliance analysis
+              Upload your Shopify product catalog to get a detailed analysis
             </p>
             <button
               onClick={() => setIsUploadModalOpen(true)}
