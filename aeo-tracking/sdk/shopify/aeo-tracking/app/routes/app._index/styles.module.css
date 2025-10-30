@@ -133,6 +133,26 @@
   box-shadow: none;
 }
 
+.toggleVisibilityButton {
+  padding: 0.55rem 1.1rem;
+  border: 1px solid rgba(13, 13, 13, 0.12);
+  border-radius: 0.6rem;
+  background: #ffffff;
+  color: #5d5d5d;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.toggleVisibilityButton:hover {
+  background: #f3f3f3;
+  box-shadow: 0 6px 14px rgba(13, 13, 13, 0.06);
+}
+
+.toggleVisibilityButton:focus-visible {
+  outline: 3px solid rgba(2, 133, 255, 0.35);
+  outline-offset: 2px;
+}
+
 .refreshLink {
   background: none;
   border: none;

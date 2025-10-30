@@ -43,6 +43,7 @@ export default function Index() {
   const { claimCode } = useLoaderData<typeof loader>();
   const integrationCode = claimCode ?? "";
   const [copied, setCopied] = useState(false);
+  const [showCode, setShowCode] = useState(false);
   const copyResetTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const steps = useMemo(
@@ -85,6 +86,12 @@ export default function Index() {
   const [activeScreenshot, setActiveScreenshot] = useState(0);
 
   const integrationCodeDisplay = integrationCode || "Pending - please refresh the page";
+  const isPending = !integrationCode;
+  const renderedCode = isPending
+    ? integrationCodeDisplay
+    : showCode
+      ? integrationCode
+      : "••••••••";
 
   const handleCopy = async () => {
     if (!integrationCode) {
@@ -118,6 +125,10 @@ export default function Index() {
       }
     };
   }, []);
+
+  useEffect(() => {
+    setShowCode(false);
+  }, [integrationCode]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -162,9 +173,19 @@ export default function Index() {
             <div className={styles.codeRow}>
               <div className={styles.codeBox}>
                 <code id="integration-code" className={styles.codeText}>
-                  {integrationCodeDisplay}
+                  {renderedCode}
                 </code>
               </div>
+              {integrationCode ? (
+                <button
+                  type="button"
+                  className={styles.toggleVisibilityButton}
+                  onClick={() => setShowCode((prev) => !prev)}
+                  aria-pressed={showCode}
+                >
+                  {showCode ? "Hide" : "Show"}
+                </button>
+              ) : null}
               <button
                 className={styles.copyButton}
                 type="button"
