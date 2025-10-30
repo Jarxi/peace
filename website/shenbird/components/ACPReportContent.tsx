@@ -97,9 +97,6 @@ export default function ACPReportContent() {
       <div className="p-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Product Analysis Report</h1>
-          <p className="mt-2 text-gray-600">
-            AI Commerce Platform readiness assessment for your product catalog
-          </p>
         </div>
 
         {/* Loading state */}
