@@ -131,15 +131,13 @@ export default function Index() {
     <s-page>
       <div className={styles.pageShell}>
         <div className={styles.headerStrip}>
-          <span className={styles.headerTag}>Shumbird AEO tracking</span>
+          <span className={styles.headerTag}>Shumbird, connecting the AI world </span>
         </div>
 
         <section className={styles.heroCard} aria-label="Connect Shopify & track ChatGPT clicks">
           <header className={styles.heroHeader}>
             <div>
-              <h1>ChatGPT AEO Tracker for Shopify Store</h1>
-              <p className={styles.heroSubcopy}>Connect your store to Shumbird and activate real-time attribution.</p>
-              <p>Real-time tracking how many shoppers coming from ChatGPT to your Shopify store (limited-time <strong>free</strong>).</p>
+              <h1>Connect ChatGPT for your Shopify Store</h1>
             </div>
           </header>
 
