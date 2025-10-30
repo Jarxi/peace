@@ -159,7 +159,7 @@ export default function RegisterPage() {
                 I agree to the{' '}
                 <button
                   type="button"
-                  onClick={() => openModal('https://www.Peace.ai/aeo-privacy-policy')}
+                  onClick={() => openModal('/privacy')}
                   className="text-brand-primary hover:text-brand-primary-dark underline"
                 >
                   Privacy Policy
