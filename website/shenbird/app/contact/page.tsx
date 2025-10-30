@@ -92,12 +92,6 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
-
-          <div className="mt-12 text-center">
-            <Link href="/" className="text-brand-primary hover:text-brand-primary-dark font-bold transition-colors">
-              ← Back to Home
-            </Link>
-          </div>
         </div>
       </main>
       <Footer />

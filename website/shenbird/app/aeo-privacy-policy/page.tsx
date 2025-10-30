@@ -107,7 +107,7 @@ export default function AEOPrivacyPolicy() {
               <li><strong>Objection:</strong> Object to processing based on legitimate interests</li>
             </ul>
             <p className="text-gray-700 mt-3">
-              To exercise these rights, contact us at <a href="mailto:privacy@shumbird.com" className="text-blue-600 hover:text-blue-800">privacy@shumbird.com</a>
+              To exercise these rights, contact us at <a href="mailto:contact@shumbird.com" className="text-blue-600 hover:text-blue-800">contact@shumbird.com</a>
             </p>
           </section>
 
@@ -174,7 +174,7 @@ export default function AEOPrivacyPolicy() {
             </p>
             <div className="text-gray-700 ml-4">
               <p><strong>Shumbird, Inc.</strong></p>
-              <p>Email: <a href="mailto:privacy@shumbird.com" className="text-blue-600 hover:text-blue-800">privacy@shumbird.com</a></p>
+              <p>Email: <a href="mailto:contact@shumbird.com" className="text-blue-600 hover:text-blue-800">contact@shumbird.com</a></p>
             </div>
           </section>
           </div>

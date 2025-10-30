@@ -19,7 +19,7 @@ const Header: React.FC = () => {
             <a className="flex items-center gap-3 flex-shrink-0" href="#">
               <PeaceLogo className="h-8 w-auto" />
               <span className="text-xl font-bold tracking-tight text-slate-900">
-                Peace Merchant Platform
+                Shumbird Merchant Platform
               </span>
             </a>
             <nav className="hidden md:flex items-center gap-6">
