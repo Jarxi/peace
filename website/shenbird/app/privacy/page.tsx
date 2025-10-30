@@ -14,175 +14,169 @@ export default function PrivacyPage() {
           <div className="space-y-8 text-brand-text-secondary prose prose-lg max-w-none">
           <section>
             <p className="text-sm text-gray-600 mb-6">
-              Effective Date: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              Last Updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
             </p>
           </section>
 
           <section>
             <p className="text-gray-700">
-              Shumbird, Inc. (&ldquo;Shumbird,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our conversational commerce platform and services.
+              At Shumbird, Inc. (&ldquo;Shumbird,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;), safeguarding your privacy is core to our mission. This policy outlines how we handle your personal data when you interact with our conversational commerce platform and associated services.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Information We Collect</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Data We Gather</h2>
 
-            <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-4">Personal Information You Provide</h3>
-            <p className="text-gray-700 mb-3">We collect information that you provide directly to us, including:</p>
+            <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-4">Information You Share With Us</h3>
+            <p className="text-gray-700 mb-3">When you use Shumbird, you may provide us with:</p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-              <li><strong>Contact Information:</strong> Name, email address, phone number, and company details</li>
-              <li><strong>Account Information:</strong> Email, phone, profile photos, and account credentials</li>
-              <li><strong>Business Information:</strong> Company name, business type, and product catalog data</li>
-              <li><strong>Communications:</strong> Messages sent through our platform, email interactions, and support requests</li>
-              <li><strong>Payment Information:</strong> Processed securely by third-party payment processors; we do not store full payment card details</li>
+              <li><strong>Identity Details:</strong> Your name, email, phone number, and business information</li>
+              <li><strong>Account Credentials:</strong> Login details, authentication tokens, and profile settings</li>
+              <li><strong>Business Data:</strong> Store name, product listings, inventory, and catalog information</li>
+              <li><strong>Correspondence:</strong> Support tickets, chat messages, and email communications</li>
+              <li><strong>Financial Data:</strong> Payment details handled by our certified payment partners; we never store complete card numbers</li>
             </ul>
 
-            <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-4">Information Collected Automatically</h3>
+            <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-4">Data We Collect Automatically</h3>
             <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-              <li><strong>Device & Location Information:</strong> IP addresses, browser type, operating system, and general location data</li>
-              <li><strong>Usage Data:</strong> Pages viewed, features used, timestamps, search queries, and purchase history</li>
-              <li><strong>Cookies & Tracking:</strong> We use cookies for functionality, analytics, and advertising purposes</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. How We Use Your Information</h2>
-            <p className="text-gray-700 mb-3">We use the collected information to:</p>
-            <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-              <li>Provide, maintain, and improve our conversational commerce platform</li>
-              <li>Process transactions and manage vendor accounts</li>
-              <li>Personalize your experience and deliver relevant content</li>
-              <li>Send service updates, technical notices, and support messages</li>
-              <li>Conduct marketing and promotional activities (with your consent)</li>
-              <li>Analyze usage patterns and improve product safety</li>
-              <li>Detect, prevent, and address fraud, security issues, and technical problems</li>
-              <li>Comply with legal obligations and enforce our Terms of Service</li>
+              <li><strong>Technical Information:</strong> IP address, device type, browser version, and approximate location</li>
+              <li><strong>Platform Activity:</strong> Feature usage, navigation patterns, session duration, and interaction logs</li>
+              <li><strong>Tracking Tools:</strong> Cookies and similar technologies for analytics, personalization, and advertising</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">3. Legal Basis for Processing (EEA/UK Users)</h2>
-            <p className="text-gray-700 mb-3">If you are located in the European Economic Area or United Kingdom, we process your personal information based on:</p>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Purpose of Data Processing</h2>
+            <p className="text-gray-700 mb-3">Your information enables us to:</p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-              <li><strong>Consent:</strong> You have given explicit consent for specific processing activities</li>
-              <li><strong>Contractual Necessity:</strong> Processing is necessary to provide our services to you</li>
-              <li><strong>Legal Compliance:</strong> We must process your data to comply with legal obligations</li>
-              <li><strong>Legitimate Interests:</strong> We have legitimate interests in product development, service improvement, and ensuring platform safety</li>
+              <li>Deliver and enhance our conversational commerce platform</li>
+              <li>Facilitate transactions and manage merchant relationships</li>
+              <li>Customize your platform experience based on preferences</li>
+              <li>Communicate service announcements, updates, and support responses</li>
+              <li>Execute marketing campaigns (only with your explicit permission)</li>
+              <li>Monitor and improve platform performance and security</li>
+              <li>Identify and prevent fraudulent activity or technical issues</li>
+              <li>Meet legal requirements and enforce platform policies</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">4. How We Share Your Information</h2>
-            <p className="text-gray-700 mb-3">We may share your information with:</p>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">3. Legal Framework (EEA/UK)</h2>
+            <p className="text-gray-700 mb-3">For users in the European Economic Area and United Kingdom, we process your data under these legal bases:</p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-              <li><strong>Service Providers:</strong> Vendors who perform services on our behalf (hosting, analytics, customer support)</li>
-              <li><strong>AI Service Providers:</strong> Partners that help power our conversational commerce features</li>
-              <li><strong>Analytics Partners:</strong> Services like Google Analytics to understand usage patterns</li>
-              <li><strong>Advertising Partners:</strong> Platforms that help us deliver relevant advertisements</li>
-              <li><strong>Legal Requirements:</strong> When required by law, court order, or to protect our rights and safety</li>
-              <li><strong>Business Transfers:</strong> In connection with a merger, acquisition, or sale of assets</li>
+              <li><strong>Your Consent:</strong> When you've provided clear permission for particular uses</li>
+              <li><strong>Service Delivery:</strong> When processing is essential to fulfill our contractual obligations</li>
+              <li><strong>Legal Requirements:</strong> When mandated by applicable laws and regulations</li>
+              <li><strong>Business Interests:</strong> When we have valid reasons for processing that don't override your rights</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">4. Information Sharing</h2>
+            <p className="text-gray-700 mb-3">We share your data only with trusted parties:</p>
+            <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+              <li><strong>Infrastructure Partners:</strong> Cloud hosting, database management, and technical support providers</li>
+              <li><strong>AI Technology Partners:</strong> Services powering our conversational shopping experience</li>
+              <li><strong>Analytics Platforms:</strong> Tools like Google Analytics for usage insights and optimization</li>
+              <li><strong>Marketing Services:</strong> Advertising networks for targeted campaign delivery</li>
+              <li><strong>Legal Authorities:</strong> When compelled by law enforcement, court orders, or legal processes</li>
+              <li><strong>Corporate Transactions:</strong> During mergers, acquisitions, or asset transfers</li>
             </ul>
             <p className="text-gray-700 mt-3">
-              We do not sell your personal information to third parties for their marketing purposes.
+              We never sell your personal data to third parties for marketing purposes.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Your Rights and Choices</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Your Privacy Rights</h2>
 
-            <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-4">All Users</h3>
+            <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-4">Universal Rights</h3>
             <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-              <li><strong>Email Communications:</strong> Unsubscribe from marketing emails using the link in each message</li>
-              <li><strong>Cookie Preferences:</strong> Adjust cookie settings through your browser preferences</li>
-              <li><strong>Account Information:</strong> Update your account details through your profile settings</li>
+              <li><strong>Marketing Opt-Out:</strong> Unsubscribe from promotional emails via the link provided</li>
+              <li><strong>Cookie Control:</strong> Manage tracking preferences through browser settings</li>
+              <li><strong>Profile Management:</strong> Access and modify your account information anytime</li>
             </ul>
 
-            <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-4">European Users (GDPR Rights)</h3>
+            <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-4">GDPR Rights (European Users)</h3>
             <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-              <li><strong>Access:</strong> Request a copy of your personal information</li>
-              <li><strong>Correction:</strong> Request correction of inaccurate or incomplete data</li>
-              <li><strong>Deletion:</strong> Request deletion of your personal information</li>
-              <li><strong>Data Portability:</strong> Receive your data in a structured, machine-readable format</li>
-              <li><strong>Restriction:</strong> Request restriction of processing in certain circumstances</li>
-              <li><strong>Objection:</strong> Object to processing based on legitimate interests</li>
-            </ul>
-            <p className="text-gray-700 mt-3">
-              To exercise these rights, contact us at <a href="mailto:privacy@shumbird.com" className="text-blue-600 hover:text-blue-800">privacy@shumbird.com</a>
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">6. Data Retention</h2>
-            <p className="text-gray-700">
-              We retain your personal information for as long as necessary to fulfill the purposes outlined in this Privacy Policy, unless a longer retention period is required or permitted by law. Upon request, we will delete your information unless we are legally required to retain it. We maintain secure backups for disaster recovery and security purposes.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">7. International Data Transfers</h2>
-            <p className="text-gray-700">
-              Shumbird is based in the United States. If you are accessing our services from outside the U.S., your information will be transferred to and processed in the United States and other countries where our service providers operate. We use Standard Contractual Clauses approved by the European Commission to protect data transfers from the EEA and UK.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">8. Cookies and Tracking Technologies</h2>
-            <p className="text-gray-700 mb-3">We use the following types of cookies:</p>
-            <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-              <li><strong>Strictly Necessary:</strong> Essential for the platform to function</li>
-              <li><strong>Functional:</strong> Remember your preferences and settings</li>
-              <li><strong>Analytical:</strong> Help us understand how users interact with our platform</li>
-              <li><strong>Advertising:</strong> Deliver relevant advertisements based on your interests</li>
+              <li><strong>Data Access:</strong> Obtain a copy of all personal data we hold about you</li>
+              <li><strong>Rectification:</strong> Correct any inaccurate or outdated information</li>
+              <li><strong>Erasure:</strong> Request permanent deletion of your personal data</li>
+              <li><strong>Portability:</strong> Export your data in a machine-readable format</li>
+              <li><strong>Processing Limits:</strong> Restrict how we use your information in specific cases</li>
+              <li><strong>Right to Object:</strong> Challenge processing based on legitimate interests</li>
             </ul>
             <p className="text-gray-700 mt-3">
-              You can manage cookie preferences through your browser settings. Note that disabling certain cookies may limit platform functionality.
+              To exercise any rights, reach out to <a href="mailto:contact@shumbird.com" className="text-blue-600 hover:text-blue-800">contact@shumbird.com</a>
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">9. Data Security</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">6. Data Retention Period</h2>
             <p className="text-gray-700">
-              We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. These include encryption, access controls, and regular security assessments. However, no method of transmission over the internet or electronic storage is 100% secure, and we cannot guarantee absolute security.
+              We keep your information only as long as needed to serve the purposes described here, or as required by law. When you request deletion, we'll remove your data promptly unless legal obligations require retention. Backup copies are maintained solely for disaster recovery and system integrity.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">10. Third-Party Services</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">7. Cross-Border Data Movement</h2>
             <p className="text-gray-700">
-              Our platform may integrate with or link to third-party services (such as AI chat interfaces, payment processors, and analytics providers). We are not responsible for the privacy practices of these third parties. We encourage you to review their privacy policies before providing them with any information.
+              Shumbird operates from the United States. Users accessing our platform from other countries acknowledge that their data will be transferred to, stored in, and processed within the U.S. and other jurisdictions where our partners operate. For EEA and UK transfers, we implement Standard Contractual Clauses endorsed by the European Commission.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">11. Children&apos;s Privacy</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">8. Cookie Policy</h2>
+            <p className="text-gray-700 mb-3">Our platform employs these cookie categories:</p>
+            <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+              <li><strong>Essential Cookies:</strong> Required for core platform functionality</li>
+              <li><strong>Preference Cookies:</strong> Store your settings and customizations</li>
+              <li><strong>Analytics Cookies:</strong> Track usage patterns to improve our service</li>
+              <li><strong>Marketing Cookies:</strong> Enable personalized advertising experiences</li>
+            </ul>
+            <p className="text-gray-700 mt-3">
+              You control cookie settings via your browser. Blocking certain cookies may impact platform features.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">9. Security Measures</h2>
             <p className="text-gray-700">
-              Our services are not directed to children under 13 (or the applicable age in your jurisdiction). We do not knowingly collect personal information from children. If you believe we have collected information from a child, please contact us immediately.
+              We deploy industry-standard security protocols to protect your data from unauthorized access, modification, disclosure, or destruction. Our safeguards include data encryption, access authentication, and regular security audits. While we implement robust protections, no internet transmission method is completely secure, so we cannot guarantee absolute safety.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">12. Changes to This Privacy Policy</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">10. External Service Integration</h2>
             <p className="text-gray-700">
-              We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. We will notify you of material changes by posting the updated policy on this page and updating the &ldquo;Effective Date.&rdquo; Your continued use of our services after changes are posted constitutes acceptance of the updated Privacy Policy.
+              Our platform connects with third-party services including AI providers, payment processors, and analytics tools. These external parties have their own privacy policies, and we're not liable for their practices. We recommend reviewing their policies before sharing information with them.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">13. Contact Us</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">11. Minors&apos; Data Protection</h2>
+            <p className="text-gray-700">
+              Shumbird is designed for business use and not intended for individuals under 13 years of age (or the minimum age in your region). We don't knowingly collect data from minors. If you suspect we've inadvertently gathered a child's information, contact us immediately for removal.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">12. Policy Updates</h2>
+            <p className="text-gray-700">
+              This Privacy Policy may evolve to reflect operational changes or legal developments. Significant modifications will be communicated through platform notifications and reflected in the &ldquo;Last Updated&rdquo; date above. Continued platform use after updates indicates your acceptance of the revised terms.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">13. Get in Touch</h2>
             <p className="text-gray-700 mb-3">
-              If you have any questions about this Privacy Policy or our data practices, please contact us:
+              Questions or concerns about this Privacy Policy? We're here to help:
             </p>
             <div className="text-gray-700 ml-4">
               <p><strong>Shumbird, Inc.</strong></p>
-              <p>Email: <a href="mailto:privacy@shumbird.com" className="text-blue-600 hover:text-blue-800">privacy@shumbird.com</a></p>
+              <p>Email: <a href="mailto:contact@shumbird.com" className="text-blue-600 hover:text-blue-800">contact@shumbird.com</a></p>
             </div>
           </section>
-          </div>
-
-          <div className="mt-8 text-center">
-            <Link href="/" className="text-brand-primary hover:text-brand-primary-dark font-bold transition-colors">
-              ← Back to Home
-            </Link>
           </div>
         </div>
       </main>
