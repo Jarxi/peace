@@ -1,6 +1,6 @@
 import { register } from "@shopify/web-pixels-extension";
 
-const REPORT_ENDPOINT = "https://api.Peace.ai/report-traffic/v0";
+const REPORT_ENDPOINT = "https://api.shumbird.com/report-traffic/v0";
 const SOURCE_ID = "shopify:rockrooster";
 
 register(({ analytics }) => {

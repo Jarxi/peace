@@ -1,0 +1,433 @@
+-- [vendor] store summary
+
+BEGIN;
+
+TRUNCATE TABLE vendor_store_traffic_summary;
+
+WITH params AS (
+  SELECT NOW() - INTERVAL '7 days' AS start_time
+),
+recent AS (
+  SELECT *
+  FROM traffic_events, params
+  WHERE occurred_at >= params.start_time
+),
+enriched AS (
+  SELECT
+    t.*,
+    NULLIF(TRIM(COALESCE(
+      t.metadata->>'client_id',
+      t.metadata->>'clientId',
+      t.metadata#>>'{data,client_id}',
+      t.metadata#>>'{data,clientId}'
+    )), '') AS client_id,
+    -- product for view/cart (checkout handled in checkout_lines)
+    COALESCE(
+      t.metadata#>>'{data,productVariant,product,id}',
+      t.metadata#>>'{data,cartLine,merchandise,product,id}',
+      t.metadata#>>'{data,product,id}'
+    ) AS product_id,
+    COALESCE(
+      t.metadata#>>'{data,productVariant,product,url}',
+      t.metadata#>>'{data,cartLine,merchandise,product,url}',
+      t.metadata#>>'{data,product,url}'
+    ) AS product_url,
+    COALESCE(
+      t.metadata#>>'{data,productVariant,product,title}',
+      t.metadata#>>'{data,cartLine,merchandise,product,title}',
+      t.metadata#>>'{data,product,title}'
+    ) AS product_title
+  FROM recent t
+),
+-- explode checkout line items (units)
+checkout_lines AS (
+  SELECT
+    e.store_platform,
+    e.store_id,
+    e.primary_source,
+    e.domain,
+    e.client_id,
+    (li->'variant'->'product'->>'id')    AS product_id,
+    (li->'variant'->'product'->>'url')   AS product_url,
+    (li->'variant'->'product'->>'title') AS product_title,
+    COALESCE((li->>'quantity')::int, 1)  AS qty
+  FROM enriched e
+  CROSS JOIN LATERAL jsonb_array_elements(
+    CASE
+      WHEN e.type = 'checkout_completed'
+      THEN COALESCE(e.metadata->'data'->'checkout'->'lineItems', '[]'::jsonb)
+      ELSE '[]'::jsonb
+    END
+  ) AS li
+),
+
+-- ========= per-source aggregates =========
+agg_source_base AS (
+  SELECT
+    store_platform, store_id, primary_source,
+    COUNT(*) FILTER (WHERE type='product_viewed')                         AS view_events,
+    COUNT(DISTINCT client_id) FILTER (WHERE type='product_viewed')        AS view_users,
+    COUNT(*) FILTER (WHERE type='product_added_to_cart')                  AS cart_events,
+    COUNT(DISTINCT client_id) FILTER (WHERE type='product_added_to_cart') AS cart_users
+  FROM enriched
+  GROUP BY store_platform, store_id, primary_source
+),
+sale_users_source AS (
+  SELECT store_platform, store_id, primary_source,
+         COUNT(DISTINCT client_id) AS sale_users
+  FROM enriched
+  WHERE type='checkout_completed'
+  GROUP BY store_platform, store_id, primary_source
+),
+sale_units_source AS (
+  SELECT store_platform, store_id, primary_source,
+         SUM(qty) AS sale_units
+  FROM checkout_lines
+  GROUP BY store_platform, store_id, primary_source
+),
+agg_source AS (
+  SELECT
+    b.store_platform, b.store_id, b.primary_source,
+    b.view_events, b.view_users,
+    b.cart_events, b.cart_users,
+    COALESCE(su.sale_users, 0) AS sale_users,
+    COALESCE(sq.sale_units, 0) AS sale_events   -- units sold
+  FROM agg_source_base b
+  LEFT JOIN sale_users_source su USING (store_platform, store_id, primary_source)
+  LEFT JOIN sale_units_source sq USING (store_platform, store_id, primary_source)
+),
+
+-- ========= top products per-source =========
+views_source AS (
+  SELECT store_platform, store_id, primary_source, product_id,
+         MIN(domain) AS domain, MIN(product_url) AS product_url,
+         MIN(product_title) AS product_title, COUNT(*) AS total_events
+  FROM enriched
+  WHERE type='product_viewed' AND product_id IS NOT NULL
+  GROUP BY store_platform, store_id, primary_source, product_id
+),
+views_top_source AS (
+  SELECT * FROM (
+    SELECT v.*, ROW_NUMBER() OVER (
+      PARTITION BY store_platform, store_id, primary_source
+      ORDER BY total_events DESC, product_id
+    ) AS rn
+    FROM views_source v
+  ) s WHERE rn=1
+),
+cart_source AS (
+  SELECT store_platform, store_id, primary_source, product_id,
+         MIN(domain) AS domain, MIN(product_url) AS product_url,
+         MIN(product_title) AS product_title, COUNT(*) AS total_events
+  FROM enriched
+  WHERE type='product_added_to_cart' AND product_id IS NOT NULL
+  GROUP BY store_platform, store_id, primary_source, product_id
+),
+cart_top_source AS (
+  SELECT * FROM (
+    SELECT c.*, ROW_NUMBER() OVER (
+      PARTITION BY store_platform, store_id, primary_source
+      ORDER BY total_events DESC, product_id
+    ) AS rn
+    FROM cart_source c
+  ) s WHERE rn=1
+),
+sale_source AS (
+  SELECT store_platform, store_id, primary_source, product_id,
+         MIN(domain) AS domain, MIN(product_url) AS product_url,
+         MIN(product_title) AS product_title, SUM(qty) AS total_units
+  FROM checkout_lines
+  WHERE product_id IS NOT NULL
+  GROUP BY store_platform, store_id, primary_source, product_id
+),
+sale_top_source AS (
+  SELECT * FROM (
+    SELECT s.*, ROW_NUMBER() OVER (
+      PARTITION BY store_platform, store_id, primary_source
+      ORDER BY total_units DESC, product_id
+    ) AS rn
+    FROM sale_source s
+  ) z WHERE rn=1
+),
+
+-- ========= per-source rows ready to insert =========
+per_source AS (
+  SELECT
+    a.store_platform AS platform_id,
+    a.store_id,
+    COALESCE(a.primary_source, 'all') AS primary_source,
+    jsonb_build_object(
+      'product_view', jsonb_build_object(
+        'total_events', a.view_events,
+        'unique_users', a.view_users,
+        'most_popular', CASE WHEN vs.product_id IS NULL THEN NULL ELSE jsonb_build_object(
+          'product_id', vs.product_id,
+          'url', CASE WHEN vs.product_url ~ '^https?://' THEN vs.product_url
+                      ELSE COALESCE(vs.domain, '') || COALESCE(vs.product_url, '') END,
+          'title', vs.product_title,
+          'total_events', vs.total_events
+        ) END
+      ),
+      'product_added_to_cart', jsonb_build_object(
+        'total_events', a.cart_events,
+        'unique_users', a.cart_users,
+        'most_popular', CASE WHEN cs.product_id IS NULL THEN NULL ELSE jsonb_build_object(
+          'product_id', cs.product_id,
+          'url', CASE WHEN cs.product_url ~ '^https?://' THEN cs.product_url
+                      ELSE COALESCE(cs.domain, '') || COALESCE(cs.product_url, '') END,
+          'title', cs.product_title,
+          'total_events', cs.total_events
+        ) END
+      ),
+      'sale', jsonb_build_object(
+        'total_events', a.sale_events,     -- units sold
+        'unique_users', a.sale_users,
+        'most_popular', CASE WHEN ss.product_id IS NULL THEN NULL ELSE jsonb_build_object(
+          'product_id', ss.product_id,
+          'url', CASE WHEN ss.product_url ~ '^https?://' THEN ss.product_url
+                      ELSE COALESCE(ss.domain, '') || COALESCE(ss.product_url, '') END,
+          'title', ss.product_title,
+          'total_events', ss.total_units
+        ) END
+      )
+    ) AS metrics
+  FROM agg_source a
+  LEFT JOIN views_top_source vs USING (store_platform, store_id, primary_source)
+  LEFT JOIN cart_top_source  cs USING (store_platform, store_id, primary_source)
+  LEFT JOIN sale_top_source  ss USING (store_platform, store_id, primary_source)
+),
+
+-- ========= build "all" rollup totals + top items =========
+-- totals across sources per store
+totals_all AS (
+  SELECT
+    store_platform AS platform_id,
+    store_id,
+    SUM(view_events) AS view_events,
+    SUM(view_users)  AS view_users,
+    SUM(cart_events) AS cart_events,
+    SUM(cart_users)  AS cart_users,
+    SUM(sale_events) AS sale_events,
+    SUM(sale_users)  AS sale_users
+  FROM agg_source
+  GROUP BY store_platform, store_id
+),
+-- top product across sources (sum over product_id)
+views_all_store AS (
+  SELECT
+    store_platform, store_id, product_id,
+    MIN(domain) AS domain, MIN(product_url) AS product_url, MIN(product_title) AS product_title,
+    SUM(total_events) AS total_events
+  FROM views_source
+  GROUP BY store_platform, store_id, product_id
+),
+views_top_all AS (
+  SELECT * FROM (
+    SELECT v.*, ROW_NUMBER() OVER (
+      PARTITION BY store_platform, store_id
+      ORDER BY total_events DESC, product_id
+    ) AS rn
+    FROM views_all_store v
+  ) s WHERE rn=1
+),
+cart_all_store AS (
+  SELECT
+    store_platform, store_id, product_id,
+    MIN(domain) AS domain, MIN(product_url) AS product_url, MIN(product_title) AS product_title,
+    SUM(total_events) AS total_events
+  FROM cart_source
+  GROUP BY store_platform, store_id, product_id
+),
+cart_top_all AS (
+  SELECT * FROM (
+    SELECT c.*, ROW_NUMBER() OVER (
+      PARTITION BY store_platform, store_id
+      ORDER BY total_events DESC, product_id
+    ) AS rn
+    FROM cart_all_store c
+  ) s WHERE rn=1
+),
+sale_all_store AS (
+  SELECT
+    store_platform, store_id, product_id,
+    MIN(domain) AS domain, MIN(product_url) AS product_url, MIN(product_title) AS product_title,
+    SUM(total_units) AS total_units
+  FROM sale_source
+  GROUP BY store_platform, store_id, product_id
+),
+sale_top_all AS (
+  SELECT * FROM (
+    SELECT s.*, ROW_NUMBER() OVER (
+      PARTITION BY store_platform, store_id
+      ORDER BY total_units DESC, product_id
+    ) AS rn
+    FROM sale_all_store s
+  ) z WHERE rn=1
+),
+rollup_all AS (
+  SELECT
+    t.platform_id,
+    t.store_id,
+    'all' AS primary_source,
+    jsonb_build_object(
+      'product_view', jsonb_build_object(
+        'total_events', t.view_events,
+        'unique_users', t.view_users,
+        'most_popular', CASE WHEN v.product_id IS NULL THEN NULL ELSE jsonb_build_object(
+          'product_id', v.product_id,
+          'url', CASE WHEN v.product_url ~ '^https?://' THEN v.product_url
+                      ELSE COALESCE(v.domain, '') || COALESCE(v.product_url, '') END,
+          'title', v.product_title,
+          'total_events', v.total_events
+        ) END
+      ),
+      'product_added_to_cart', jsonb_build_object(
+        'total_events', t.cart_events,
+        'unique_users', t.cart_users,
+        'most_popular', CASE WHEN c.product_id IS NULL THEN NULL ELSE jsonb_build_object(
+          'product_id', c.product_id,
+          'url', CASE WHEN c.product_url ~ '^https?://' THEN c.product_url
+                      ELSE COALESCE(c.domain, '') || COALESCE(c.product_url, '') END,
+          'title', c.product_title,
+          'total_events', c.total_events
+        ) END
+      ),
+      'sale', jsonb_build_object(
+        'total_events', t.sale_events,   -- units sold
+        'unique_users', t.sale_users,
+        'most_popular', CASE WHEN s.product_id IS NULL THEN NULL ELSE jsonb_build_object(
+          'product_id', s.product_id,
+          'url', CASE WHEN s.product_url ~ '^https?://' THEN s.product_url
+                      ELSE COALESCE(s.domain, '') || COALESCE(s.product_url, '') END,
+          'title', s.product_title,
+          'total_events', s.total_units
+        ) END
+      )
+    ) AS metrics
+  FROM totals_all t
+  LEFT JOIN views_top_all v ON v.store_platform = t.platform_id AND v.store_id = t.store_id
+  LEFT JOIN cart_top_all  c ON c.store_platform = t.platform_id AND c.store_id = t.store_id
+  LEFT JOIN sale_top_all  s ON s.store_platform = t.platform_id AND s.store_id = t.store_id
+)
+
+INSERT INTO vendor_store_traffic_summary (platform_id, store_id, primary_source, metrics)
+SELECT * FROM per_source
+UNION ALL
+SELECT * FROM rollup_all;
+
+COMMIT;
+
+
+
+-- [vendor] aggregated traffic
+
+BEGIN;
+
+-- 1️⃣ Clear previous data
+TRUNCATE TABLE traffic_aggregated;
+
+-- 2️⃣ Re-aggregate and export
+WITH params AS (
+  SELECT NOW() - INTERVAL '14 days' AS start_time
+),
+recent AS (
+  SELECT *
+  FROM traffic_events, params
+  WHERE occurred_at >= params.start_time
+),
+enriched AS (
+  SELECT
+    t.*,
+    NULLIF(TRIM(COALESCE(
+      t.metadata->>'client_id',
+      t.metadata->>'clientId',
+      t.metadata#>>'{data,client_id}',
+      t.metadata#>>'{data,clientId}'
+    )), '') AS client_id
+  FROM recent t
+),
+-- compute 6-hour buckets
+base AS (
+  SELECT
+    store_platform AS platform_id,
+    store_id,
+    primary_source,
+    date_trunc('hour', occurred_at)
+      - (EXTRACT(HOUR FROM occurred_at)::int % 6) * INTERVAL '1 hour' AS hour_bucket,
+    type,
+    client_id
+  FROM enriched
+),
+
+-- per-source per-bucket
+agg_hourly_source AS (
+  SELECT
+    platform_id,
+    store_id,
+    primary_source,
+    hour_bucket,
+    COUNT(*) FILTER (WHERE type = 'product_viewed') AS total_events,
+    COUNT(DISTINCT client_id) FILTER (WHERE type = 'product_viewed') AS unique_users
+  FROM base
+  GROUP BY platform_id, store_id, primary_source, hour_bucket
+),
+
+-- “all” rollup across sources
+agg_hourly_all AS (
+  SELECT
+    platform_id,
+    store_id,
+    'all'::text AS primary_source,
+    hour_bucket,
+    COUNT(*) FILTER (WHERE type = 'product_viewed') AS total_events,
+    COUNT(DISTINCT client_id) FILTER (WHERE type = 'product_viewed') AS unique_users
+  FROM base
+  GROUP BY platform_id, store_id, hour_bucket
+),
+
+-- combine and prepare final payload
+combined AS (
+  SELECT * FROM agg_hourly_source
+  UNION ALL
+  SELECT * FROM agg_hourly_all
+),
+final AS (
+  SELECT
+    md5(
+      platform_id || '|' ||
+      store_id || '|' ||
+      primary_source || '|' ||
+      hour_bucket::text
+    ) AS id,                  -- ✅ deterministic PK
+    platform_id,
+    store_id,
+    primary_source,
+    hour_bucket,
+    jsonb_build_object(
+      'product_view', jsonb_build_object(
+        'total_events', total_events,
+        'unique_users', unique_users
+      )
+    ) AS metrics
+  FROM combined
+)
+
+-- 3️⃣ Insert aggregated rows
+INSERT INTO traffic_aggregated (
+  id,
+  platform_id,
+  store_id,
+  primary_source,
+  hour_bucket,
+  metrics
+)
+SELECT
+  id,
+  platform_id,
+  store_id,
+  primary_source,
+  hour_bucket,
+  metrics
+FROM final;
+
+COMMIT;

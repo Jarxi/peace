@@ -2,7 +2,7 @@
 
 client_id = "6274c32ba98f2c8f1ac6f76abc2fb0b2"
 name = "aeo-tracking-private"
-application_url = "https://shopify.Peace.ai"
+application_url = "https://shopifyprivate.shumbird.com"
 embedded = true
 
 [build]
@@ -24,4 +24,4 @@ api_version = "2026-01"
 scopes = "write_pixels,read_customer_events"
 
 [auth]
-redirect_urls = [ "https://shopify.Peace.ai/auth/callback" ]
+redirect_urls = [ "https://shopifyprivate.shumbird.com/auth/callback" ]

@@ -2,7 +2,7 @@
 
 client_id = "89967332796a3b1ff52dc43ee55771f4"
 name = "aeo-tracking"
-application_url = "https://trackingsdk.Peace.ai"
+application_url = "https://trackingsdk.shumbird.com"
 embedded = true
 
 [build]
@@ -36,4 +36,4 @@ api_version = "2026-01"
 scopes = "write_pixels,read_customer_events,read_products,read_inventory,read_legal_policies,read_locations"
 
 [auth]
-redirect_urls = [ "https://trackingsdk.Peace.ai/auth/callback" ]
+redirect_urls = [ "https://trackingsdk.shumbird.com/auth/callback" ]

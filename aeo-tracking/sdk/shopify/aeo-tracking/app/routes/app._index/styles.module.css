@@ -6,38 +6,27 @@
   width: 100%;
   padding: 2.25rem 2.5rem;
   margin: 0 auto;
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  border: 1px solid rgba(13, 13, 13, 0.12);
 }
 
 .headerStrip {
   display: flex;
   align-items: center;
   font-size: 0.9rem;
-  color: #4338ca;
+  color: #5d5d5d;
   margin-bottom: 1.5rem;
-  gap: 0.6rem;
+  justify-content: flex-start;
 }
 
 .headerTag {
   font-weight: 600;
-  background: rgba(99, 102, 241, 0.15);
-  color: #312e81;
+  background: rgba(255, 158, 108, 0.2);
+  color: #e25507;
   padding: 0.35rem 0.85rem;
   border-radius: 999px;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-}
-
-.dividerDot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-}
-
-.headerCopy {
-  /* No specific styles needed */
 }
 
 .heroCard {
@@ -47,27 +36,37 @@
 .heroHeader h1 {
   font-size: 1.85rem;
   margin: 0;
-  color: #1e1b4b;
+  color: #0d0d0d;
+}
+
+.heroSubcopy {
+  margin: 0.45rem 0 0.9rem;
+  color: #5d5d5d;
+  font-size: 1rem;
 }
 
 .heroHeader p {
-  color: #4338ca;
+  color: #5d5d5d;
   margin: 0.6rem 0 1.1rem;
   font-weight: 500;
 }
 
 .stepCard {
-  background: rgba(99, 102, 241, 0.08);
+  background: rgba(243, 243, 243, 0.9);
   border-radius: 1rem;
   padding: 1.1rem 1.35rem;
   margin-top: 1rem;
-  border: 1px solid rgba(129, 140, 248, 0.2);
+  border: 1px solid rgba(13, 13, 13, 0.08);
 }
 
 .stepTitle {
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: #312e81;
+  color: #0d0d0d;
+}
+
+.stepCopy {
+  color: #5d5d5d;
 }
 
 .stepCopy li {
@@ -82,7 +81,7 @@
   display: block;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: #312e81;
+  color: #0d0d0d;
 }
 
 .codeRow {
@@ -92,25 +91,25 @@
 }
 
 .codeBox {
-  background: rgba(99, 102, 241, 0.1);
-  border: 1px solid rgba(79, 70, 229, 0.3);
+  background: rgba(243, 243, 243, 0.9);
+  border: 1px solid rgba(13, 13, 13, 0.08);
   border-radius: 0.75rem;
   padding: 0.85rem 1.1rem;
   flex: 1;
   overflow-x: auto;
-  color: #1e1b4b;
-  box-shadow: inset 0 0 0 1px rgba(129, 140, 248, 0.15);
+  color: #0d0d0d;
+  box-shadow: none;
 }
 
 .codeText {
   font-family: monospace;
   font-size: 0.875rem;
-  color: #1e1b4b;
+  color: #0d0d0d;
 }
 
 .copyButton {
   padding: 0.55rem 1.1rem;
-  background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
+  background: #e25507;
   color: #fff;
   border: none;
   border-radius: 0.6rem;
@@ -120,11 +119,16 @@
 
 .copyButton:hover {
   transform: translateY(-1px);
-  box-shadow: 0 12px 22px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 12px 22px rgba(226, 85, 7, 0.22);
+}
+
+.copyButton:focus-visible {
+  outline: 3px solid rgba(2, 133, 255, 0.35);
+  outline-offset: 2px;
 }
 
 .copyButton:disabled {
-  background: rgba(148, 163, 184, 0.6);
+  background: rgba(143, 143, 143, 0.6);
   cursor: not-allowed;
   box-shadow: none;
 }
@@ -132,7 +136,7 @@
 .refreshLink {
   background: none;
   border: none;
-  color: #5b21b6;
+  color: #0285ff;
   cursor: pointer;
   font: inherit;
   padding: 0;
@@ -141,7 +145,7 @@
 
 .primaryCta {
   display: inline-block;
-  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+  background: #e25507;
   color: white;
   text-decoration: none;
   text-align: center;
@@ -149,12 +153,21 @@
   border-radius: 0.65rem;
   padding: 0.85rem 1.6rem;
   margin-top: 1.65rem;
-  box-shadow: 0 18px 28px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 18px 28px rgba(226, 85, 7, 0.18);
+}
+
+.primaryCta:hover {
+  background: #ff9e6c;
+}
+
+.primaryCta:focus-visible {
+  outline: 3px solid rgba(2, 133, 255, 0.35);
+  outline-offset: 3px;
 }
 
 .heroCtaCaption {
   font-size: 0.9rem;
-  color: #4c1d95;
+  color: #5d5d5d;
   margin-top: 0.6rem;
 }
 
@@ -163,21 +176,22 @@
   padding: 2.1rem 2.4rem;
   background: #ffffff;
   border-radius: 1.1rem;
-  color: #1e1b4b;
+  color: #0d0d0d;
   text-align: center;
-  border: 1px solid rgba(148, 163, 184, 0.25);
-  box-shadow: 0 18px 32px rgba(15, 23, 42, 0.12);
+  border: 1px solid rgba(13, 13, 13, 0.12);
+  box-shadow: none;
 }
 
 .screenshotTitle {
   font-size: 1.55rem;
   font-weight: 600;
   margin-bottom: 0.55rem;
+  color: #0d0d0d;
 }
 
 .screenshotCaption {
   margin-bottom: 1.45rem;
-  color: #475569;
+  color: #5d5d5d;
 }
 
 .screenshotFrame {
@@ -186,9 +200,10 @@
   width: 100%;
   border-radius: 0.9rem;
   overflow: hidden;
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  border: none;
   background: #ffffff;
-  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.16);
+  position: relative;
+  min-height: 320px;
 }
 
 .screenshotFrame img {
@@ -197,15 +212,51 @@
   height: auto;
 }
 
+.screenshotImage,
+.screenshotImageActive {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #ffffff;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.screenshotImageActive {
+  opacity: 1;
+}
+
+.screenshotDots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.screenshotDot,
+.screenshotDotActive {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(13, 13, 13, 0.12);
+  display: inline-block;
+}
+
+.screenshotDotActive {
+  background: #e25507;
+}
+
 .helpStrip {
   text-align: center;
   margin-top: 2.2rem;
   font-size: 0.9rem;
-  color: #4338ca;
+  color: #5d5d5d;
 }
 
 .helpLink {
-  color: #5b21b6;
+  color: #0285ff;
   text-decoration: none;
   font-weight: 600;
 }
@@ -217,5 +268,9 @@
 
   .copyButton {
     width: 100%;
+  }
+
+  .screenshotFrame {
+    min-height: 220px;
   }
 }
