@@ -30,10 +30,10 @@ export default function ContactPage() {
                       Send us an email and we&apos;ll get back to you as soon as possible.
                     </p>
                     <a
-                      href="mailto:contact@Peace.ai"
+                      href="mailto:contact@shumbird.com"
                       className="inline-flex items-center gap-2 text-brand-primary hover:text-brand-primary-dark font-semibold transition-colors"
                     >
-                      contact@Peace.ai
+                      contact@shumbird.com
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                       </svg>
