@@ -9,13 +9,12 @@ export default function ContactPage() {
       <Header />
       <main className="min-h-screen bg-brand-bg py-24 sm:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-          <div className="bg-brand-surface rounded-2xl shadow-lg border border-brand-border p-8 sm:p-12">
-            <h1 className="text-4xl font-extrabold text-brand-text-primary mb-4">Get in Touch</h1>
-            <p className="text-lg text-brand-text-secondary mb-12">
-              Have questions about Shumbird? We&apos;d love to hear from you. Reach out to us through any of the channels below.
-            </p>
+          <h1 className="text-4xl font-extrabold text-brand-text-primary mb-4">Get in Touch</h1>
+          <p className="text-lg text-brand-text-secondary mb-12">
+            Have questions about Shumbird? We&apos;d love to hear from you. Reach out to us through any of the channels below.
+          </p>
 
-            <div className="space-y-8">
+          <div className="space-y-8">
               {/* Email Section */}
               <div className="bg-brand-bg rounded-xl p-6 border border-brand-border">
                 <div className="flex items-start gap-4">
@@ -94,11 +93,10 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="mt-12 text-center">
-              <Link href="/" className="text-brand-primary hover:text-brand-primary-dark font-bold transition-colors">
-                ← Back to Home
-              </Link>
-            </div>
+          <div className="mt-12 text-center">
+            <Link href="/" className="text-brand-primary hover:text-brand-primary-dark font-bold transition-colors">
+              ← Back to Home
+            </Link>
           </div>
         </div>
       </main>
