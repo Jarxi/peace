@@ -175,16 +175,10 @@ export default function AEOPrivacyPolicy() {
             <div className="text-gray-700 ml-4">
               <p><strong>Shumbird, Inc.</strong></p>
               <p>Email: <a href="mailto:privacy@shumbird.com" className="text-blue-600 hover:text-blue-800">privacy@shumbird.com</a></p>
-              <p>Address: [Your Business Address]</p>
             </div>
           </section>
           </div>
 
-          <div className="mt-8 text-center">
-            <Link href="/" className="text-brand-primary hover:text-brand-primary-dark font-bold transition-colors">
-              ← Back to Home
-            </Link>
-          </div>
         </div>
       </main>
       <Footer />
