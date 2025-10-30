@@ -54,7 +54,7 @@ export default function DashboardLayout({ children, vendorName = "Vendor", vendo
             </div>
             <div className="hidden md:flex items-center space-x-10">
               <NavLink href="/dashboard" active={pathname === "/dashboard"}>Connect</NavLink>
-              {/* <NavLink href="/dashboard/acp-report" active={pathname === "/dashboard/acp-report"}>ACP Report</NavLink> */}
+              <NavLink href="/dashboard/acp-report" active={pathname === "/dashboard/acp-report"}>ACP Report</NavLink>
             </div>
             <div className="hidden md:flex items-center space-x-4">
               <div className="relative" ref={profileRef}>
