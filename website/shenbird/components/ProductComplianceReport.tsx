@@ -267,7 +267,7 @@ export default function ProductComplianceReport({
   return (
     <div className="space-y-6">
       {/* Overall Status */}
-      <div className="bg-white shadow rounded-lg p-6">
+      {/* <div className="bg-white shadow rounded-lg p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold text-gray-900">Product Analysis Report</h2>
           {getOverallStatusBadge()}
@@ -276,7 +276,6 @@ export default function ProductComplianceReport({
           Analysis of {total_products} products for platform readiness
         </p>
 
-        {/* Score Summary */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="border border-gray-200 rounded-lg p-4 bg-blue-50">
             <div className="text-3xl font-bold text-blue-600 mb-1">{overall_score}%</div>
@@ -299,10 +298,10 @@ export default function ProductComplianceReport({
             <div className="text-xs text-gray-500">&lt; 50% coverage</div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Merchant Information Section */}
-      <div className="bg-white shadow rounded-lg p-6">
+      {/* <div className="bg-white shadow rounded-lg p-6">
         <h2 className="text-xl font-semibold text-gray-900 mb-4">Merchant Information</h2>
         <p className="text-gray-600 mb-4">
           Seller information required for product feed
@@ -322,10 +321,10 @@ export default function ProductComplianceReport({
             </tbody>
           </table>
         </div>
-      </div>
+      </div> */}
 
       {/* Fulfillment Information Section */}
-      <div className="bg-white shadow rounded-lg p-6">
+      {/* <div className="bg-white shadow rounded-lg p-6">
         <h2 className="text-xl font-semibold text-gray-900 mb-4">Fulfillment Information</h2>
         <p className="text-gray-600 mb-4">
           Shipping methods, costs, and estimated delivery times for product feed
@@ -346,10 +345,10 @@ export default function ProductComplianceReport({
             </tbody>
           </table>
         </div>
-      </div>
+      </div> */}
 
       {/* Returns Information Section */}
-      <div className="bg-white shadow rounded-lg p-6">
+      {/* <div className="bg-white shadow rounded-lg p-6">
         <h2 className="text-xl font-semibold text-gray-900 mb-4">Returns Information</h2>
         <p className="text-gray-600 mb-4">
           Return and refund policies required for product feed
@@ -369,7 +368,7 @@ export default function ProductComplianceReport({
             </tbody>
           </table>
         </div>
-      </div>
+      </div> */}
 
       {/* Product-Level Details */}
       <div className="bg-white shadow rounded-lg p-6">
