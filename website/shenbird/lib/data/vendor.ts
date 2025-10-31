@@ -515,6 +515,53 @@ export async function fetchComplianceReport(): Promise<{ report: ComplianceRepor
   }
 }
 
+type LoadState = {
+  store_id: string
+  version_id: string
+  version_time: string
+  state: 'success' | 'failed' | 'pending'
+  created_at: string
+  updated_at?: string
+  runtime_log?: string
+  metrics?: Record<string, unknown>
+}
+
+export async function fetchLoadStates(): Promise<{ states: LoadState[]; error?: string }> {
+  try {
+    const headers = await getAuthHeaders()
+
+    if (!("authorization" in headers)) {
+      console.log("[fetchLoadStates] Not authenticated")
+      return { states: [], error: "Not authenticated" }
+    }
+
+    console.log("[fetchLoadStates] Fetching from /vendors/load-states")
+    const response = await sdk.client.fetch<{ states: LoadState[] }>(
+      "/vendors/load-states",
+      {
+        method: "GET",
+        headers,
+      },
+    )
+
+    console.log("[fetchLoadStates] Response received:", JSON.stringify(response, null, 2))
+    console.log("[fetchLoadStates] Number of states:", response.states?.length || 0)
+
+    return { states: response.states || [] }
+  } catch (error) {
+    console.error("[fetchLoadStates] Failed to fetch load states:", error)
+    const errorMessage = error instanceof Error ? error.message : String(error)
+
+    // If it's a 404, that's expected (no data yet)
+    if (errorMessage.includes("404") || errorMessage.includes("Not Found")) {
+      console.log("[fetchLoadStates] 404 - No data yet")
+      return { states: [] }
+    }
+
+    return { states: [], error: errorMessage }
+  }
+}
+
 export async function changePassword(_currentState: unknown, formData: FormData) {
   const currentPassword = formData.get("currentPassword") as string
   const newPassword = formData.get("newPassword") as string

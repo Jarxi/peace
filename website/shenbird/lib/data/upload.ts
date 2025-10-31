@@ -129,8 +129,8 @@ export async function uploadCatalogFile(_currentState: unknown, formData: FormDa
       .from('vendor-catalogs')
       .getPublicUrl(filename)
 
-    // Analyze products for ACP compliance (vendors get compliance report, not actual import)
-    console.log("Analyzing products for ACP compliance...")
+    // Analyze products (vendors get analysis report, not actual import)
+    console.log("Analyzing products...")
     try {
       const headers = await getAuthHeaders()
 
@@ -143,7 +143,7 @@ export async function uploadCatalogFile(_currentState: unknown, formData: FormDa
         body: jsonData,
       })
 
-      console.log("Compliance analysis result:", analysisResult)
+      console.log("Analysis result:", analysisResult)
 
       return {
         success: true,
@@ -158,7 +158,7 @@ export async function uploadCatalogFile(_currentState: unknown, formData: FormDa
         success: true,
         filename: data.path,
         url: urlData?.publicUrl,
-        warning: `File uploaded but compliance analysis failed: ${analysisError instanceof Error ? analysisError.message : "Unknown error"}`
+        warning: `File uploaded but analysis failed: ${analysisError instanceof Error ? analysisError.message : "Unknown error"}`
       }
     }
   } catch (error) {

@@ -15,12 +15,12 @@ import type { ShopifyProduct, ShopifyShop } from "../../../lib/shopify-data-util
 
 /**
  * GET /vendors/compliance
- * Fetch compliance report for vendor's products from acp_export table
+ * Fetch compliance report for vendor's products from shopify export table
  *
  * This endpoint:
  * 1. Authenticates the vendor
  * 2. Gets the vendor's store_id
- * 3. Queries acp_export table for shop_info and products
+ * 3. Queries shopify export table for shop_info and products
  * 4. Generates and returns compliance report
  */
 export const GET = async (
@@ -89,7 +89,7 @@ export const GET = async (
         all_claim_states: claimStates,
     })
 
-    console.log('[Vendor Compliance] Querying acp_export for store:', {
+    console.log('[Vendor Compliance] Querying shopify export for store:', {
         store_id: storeId,
     })
 
@@ -98,7 +98,7 @@ export const GET = async (
         req.scope.resolve(SHOPIFY_SOURCE_FEED_MODULE)
 
     try {
-        // Query acp_export table using the module service
+        // Query shopify export table using the module service
         const exports = await shopifyFeedService.listShopifyAcpExports({
             store_id: storeId,
         })
@@ -118,7 +118,7 @@ export const GET = async (
 
             throw new MedusaError(
                 MedusaError.Types.NOT_FOUND,
-                `No compliance data found for store_id: ${storeId}. Please ensure ACP export has been generated.`
+                `No compliance data found for store_id: ${storeId}. Please ensure product export has been generated.`
             )
         }
 
