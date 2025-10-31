@@ -1,9 +1,9 @@
 import DashboardLayout from "@/components/DashboardLayout"
-import ACPReportContent from "@/components/ACPReportContent"
+import ProductAnalysisContent from "@/components/ProductAnalysisContent"
 import { retrieveVendor } from "@/lib/data/vendor"
 import { redirect } from "next/navigation"
 
-export default async function ACPReportPage() {
+export default async function ProductAnalysisPage() {
   const { vendor, error } = await retrieveVendor()
 
   if (!vendor || !vendor.admins || vendor.admins.length === 0) {
@@ -19,7 +19,7 @@ export default async function ACPReportPage() {
       vendorName={adminName}
       vendorEmail={admin.email}
     >
-      <ACPReportContent />
+      <ProductAnalysisContent />
     </DashboardLayout>
   )
 }
